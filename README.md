@@ -17,3 +17,5 @@ COLOR PALETTE:
 #edf2f4
 #ef233c
 #d90429
+
+npm install react-router-dom
