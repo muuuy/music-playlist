@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="results_header">
+        <h1>{% block title %} Results {% endblock %}</h1>
+    </div>
+    <div class="table_wrapper">
+        <table class="results_table">
+            <tr>
+                <th>Add</th>
+                <th>Song Name</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Release Year</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>*</td>
+                <td>{{ result['name'] }}</td>
+                <td>{{ result['artist_names'][0] }}</td>
+                <td>{{ result['album'][0]['name'] }}</td>
+                <td>{{ result['album'][0]['release_date'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

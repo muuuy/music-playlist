@@ -52,6 +52,11 @@ nav{
 .search button:hover{
     background-color: #ef233c;
 }
+.search select{
+    color: #2b2d42;
+    border-radius: 5px;
+    margin-right: 10px;
+}
 .sign{
     display:flex; align-items: right; margin-right: 0;
 }
@@ -64,6 +69,28 @@ nav{
 }
 .sign button:hover{
     background-color: #ef233c;
+}
+.results_header {
+    color: #edf2f4;
+    margin-top: 120px;
+    text-align: center;
+}
+.table_wrapper {
+    margin-top: 20px;
+}
+table.results_table {
+    border: 1px solid;
+    border-collapse: collapse;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #8d99ae;
+    color: #2b2d42;
+}
+table.results_table th, table.results_table td {
+    border: 1px solid;
+    padding: 8px;
+    text-align: left;
 }
 
 /* --dark-gray: #2b2d42;
