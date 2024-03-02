@@ -88,6 +88,7 @@ def home():
 @app.route('/search', methods=['POST'])
 def search():
     query = request.form.get('search_box')
+    print("!!!!!!!!!!!", query)
     query_type = request.form['search_type']
     if query_type == "song":
         results = search_song(token, query)
