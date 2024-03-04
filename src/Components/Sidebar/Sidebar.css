@@ -21,14 +21,15 @@
 
 #sidebar-container {
     display: flex;
-    border: 1px solid #fff;
+    flex-direction: column;
     height: 100%;
     min-height: 100%;
-    width: 40%;
     font-size: 24px;
 }
 
-li a {
+ a {
+    
     white-space: pre;
-    border: 1px solid #fff;
+    color: black;
+    border: 1px solid #000;
 }
