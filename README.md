@@ -21,3 +21,4 @@ COLOR PALETTE:
 npm install react-router-dom
 
 using the following React compnent library: https://mui.com/
+npm install @mui/material @emotion/react @emotion/styled
