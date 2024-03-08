@@ -41,24 +41,30 @@
 li {
     display: flex;
     align-items: center;
+}
+
+#sidebar-logo {
+    padding-left: 0;
+    font-weight: 900;
+    margin: 20px 0 24px 0;
+}
+
+#sidebar-item {
+    border-radius: 12px;
     cursor: pointer;
     padding: 4% 0 4% 20px;
     white-space: pre;
 }
 
-#sidebar-logo {
-    padding-left: 0;
-    align-items: center;
-    font-weight: 900;
-    margin-top: 20px;
-}
-
-#sidebar-item {
-    display: flex;
-    border-radius: 12px;
-}
-
 #sidebar-item:hover {
     background-color: var(--navbar-hover);
     transition: background-color 0.5s ease-out 100ms;
+}
+
+hr {
+    margin: 24px 0 20px 0;
+    width: 100%;
+    border-radius: 5px;
+    color: var(--navbar-hover); 
+    border-color: var(--navbar-hover);
 }

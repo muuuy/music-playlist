@@ -15,6 +15,7 @@ const Sidebar = () => {
                 <li id='sidebar-item'><span id='sidebar-icon'><FaHome /></span>    Home</li>
                 <li id='sidebar-item'><span id='sidebar-icon'><FaMusic /></span>    Music</li>
                 <li id='sidebar-item'><span id='sidebar-icon'><FaCompass /></span>    Explore</li>
+                <li><hr /></li>
             </ul>
         </nav>
         
