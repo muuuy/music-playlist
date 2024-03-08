@@ -4,37 +4,19 @@ import { Link } from 'react-router-dom';
 import { FaHome } from "react-icons/fa";
 import { FaMusic } from "react-icons/fa";
 import { FaCompass } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { Drawer, Button } from '@mui/material';
 
 const Sidebar = () => {
-    const [open, setOpen] = useState(false);
-
-    const toggleDrawer = (status) => () => {
-        setOpen(status);
-    };
-
-    const DrawerList = (
-        <div id='sidebar-container'>
-            <a href="/">
-                <FaHome /> Home
-            </a>
-            <a href="/music">
-                <FaMusic /> Music
-            </a>
-            <a href="/explore">
-                <FaCompass /> Explore
-            </a>
-        </div>
-    );
+    
 
     return(
-        <>
-            <Button onClick={toggleDrawer(true)}><GiHamburgerMenu /></Button>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
-                {DrawerList}
-            </Drawer>
-        </>
+        <nav id='sidebar-container'>
+            <ul>
+                <li id='sidebar-logo'>LOGO PLACEHOLDER</li>
+                <li id='sidebar-item'><span id='sidebar-icon'><FaHome /></span>    Home</li>
+                <li id='sidebar-item'><span id='sidebar-icon'><FaMusic /></span>    Music</li>
+                <li id='sidebar-item'><span id='sidebar-icon'><FaCompass /></span>    Explore</li>
+            </ul>
+        </nav>
         
     );
 }
