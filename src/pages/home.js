@@ -1,41 +1,75 @@
-import React from "react";
-import { Link } from "react-router-dom"
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
-function ButtonLink({ to, children }) {
-      return <Link to={to}><button>{children}</button></Link>
-}
+function Home() {
+  const navigate = useNavigate();
 
-class Home extends React.Component {
+  const [searchInput, setSearchInput] = useState("");
+  const [searchType, setSearchType] = useState("song");
 
-  render() {
-    return (
-      <div>
-        <nav>
-          <div className="logo"><a href="/">MusicPlaylists</a> </div>
-          <ul className="menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
-          <div className="search">
-            <form>
-              <input type="text" placeholder="Search for title, artist, album, and playlist!" name="search_box"/>
-              <select name="search_type">
-                <option value="song">Song</option>
-                <option value="artist">Artist</option>
-              </select>
-              <ButtonLink to="/results_by_song">Go</ButtonLink>
-            </form>
-          </div>
-          <ul className="sign">
-            <button><a href="#">Sign In</a></button>
-            <button><a href="#">Sign Up</a></button>
-          </ul>
-        </nav>
-      </div>
-    );
-  }
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    console.log('Form submitted')
+  
+    // Update the state only when the form is submitted
+    setSearchInput(e.target.elements.search_box.value);
+    setSearchType(e.target.elements.search_type.value);
+  
+    // Connect to Flask
+    axios.post('http://localhost:5000/user_search', {
+      search_box: searchInput,
+      search_type: searchType
+    })
+    .then(response => {
+      console.log(response.data);
+      // Navigate to specific results page depending on search type
+      if (searchType === 'song') {
+        navigate("/results_by_song", { state: { songResults: response.data }});
+      }
+      else if (searchType === 'artist') {
+        navigate("/results_by_artist", { state: { artistResults: response.data }});
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
+
+  return (
+    <div>
+      <nav>
+        <div className="logo"><a href="/">MusicPlaylists</a> </div>
+        <ul className="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+        <div className="search">
+          <form onSubmit={handleSearch}>
+            <input 
+              type="text" 
+              placeholder="Search for title, artist, album, and playlist!" 
+              name="search_box" 
+              value={searchInput} 
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <select name="search_type" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+              <option value="song">Song</option>
+              <option value="artist">Artist</option>
+            </select>
+            <button type="submit">Go</button>
+          </form>
+        </div>
+        <ul className="sign">
+          <button><a href="#">Sign In</a></button>
+          <button><a href="#">Sign Up</a></button>
+        </ul>
+      </nav>
+    </div>
+  );
 }
 
 export default Home;

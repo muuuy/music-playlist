@@ -85,10 +85,25 @@ token = get_token()
 
 @app.route('/')
 def home():
-    print ("in home")
     return jsonify({"Hello":"World"})
 
 
+@app.route('/user_search', methods=['POST'])
+def search():
+    print("in search")
+    query_data = request.json
+    query = query_data.get('search_box')
+    query_type = query_data.get('search_type')
+
+    if query_type == "song":
+        results = search_song(token, query)
+        return jsonify(results=results)
+    else:
+        print("artist search")
+        results = search_songs_of_artist(token, query)
+        return jsonify(results=results)
+
+'''
 @app.route('/search', methods=['POST'])
 def search():
     print ("in search")
@@ -103,7 +118,7 @@ def search():
         results = search_songs_of_artist(token, query)
         return jsonify(results=results)
 
-    '''
+    
     query = request.form.get('search_box')
     print("!!!!!!!!!!!", query)
     query_type = request.form['search_type']
