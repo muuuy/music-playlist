@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
+
 function Home() {
+  const { state } = useLocation();
+  const { songResults } = state;
+
   const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState("");
@@ -37,13 +41,46 @@ function Home() {
     });
   };
 
+  function generateHeaderRow() {
+    return (
+        <tr>
+            <th style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>Add</th>
+            <th style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>Song Name</th>
+            <th style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>Artist</th>
+            <th style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>Album</th>
+            <th style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>Release Year</th>
+        </tr>
+    )
+  }
+
   function generateTable() {
+    const resultsArray = songResults.results;
+    console.log("!", resultsArray);
     // Create all cells in table
     const cells = [];
     for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 5; j++) {
-        const cellText = `cell in row ${i}, column ${j}`;
-        cells.push(<td key={`${i}-${j}`} style={{ padding: "10px", border: "2px solid black", fontSize: "20px" }}>{cellText}</td>);
+        if (j === 0) {
+            const cellText = `*`;
+            cells.push(<td key={`${i}-${j}`} style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>{cellText}</td>);
+        }
+        if (j === 1) {
+            const cellText = `${resultsArray[i]['name']}`;
+            cells.push(<td key={`${i}-${j}`} style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>{cellText}</td>);
+        }
+        if (j === 2) {
+            const cellText = `${resultsArray[i]['artist_names'][0]}`;
+            cells.push(<td key={`${i}-${j}`} style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>{cellText}</td>);
+        }
+        if (j === 3) {
+            const cellText = `${resultsArray[i]['album'][0]['name']}`;
+            cells.push(<td key={`${i}-${j}`} style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>{cellText}</td>);
+        }
+        if (j === 4) {
+            const cellText = `${resultsArray[i]['album'][0]['release_date']}`;
+            cells.push(<td key={`${i}-${j}`} style={{ color: "#edf2f4", padding: "10px", border: "2px solid black", fontSize: "20px" }}>{cellText}</td>);
+        }
+        
       }
     }
     // Create all rows in table
@@ -54,9 +91,13 @@ function Home() {
     // Return the table
     return (
       <table border="2" style={{ marginTop: "150px" }}>
+        <thead>
+            {generateHeaderRow()}
+        </thead>
         <tbody>{rows}</tbody>
       </table>
     );
+
   }
 
   return (
