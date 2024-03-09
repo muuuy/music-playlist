@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+ .home{
+    /*background-color: #2b2d42*/
+    display: flex;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+} 
+
+nav{
+    width:100%; height:100px; background: #1e1f2e; border-bottom: 5px solid #d90429;
+    padding-right: 15px; padding-left: 15px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: fixed; top: 0; z-index: 1;
+}
+.logo a{
+    font-size: 35px; font-weight: bold; color: #edf2f4;
+}
+.menu{
+    width:40%; display: flex; justify-content: left; List-style: none;
+}
+.menu li{
+    margin-left: 20px; 
+}
+.menu li a{
+    color: #edf2f4; font-size: 20px; font-weight: bold; margin-right: 25px;
+}
+.menu li a:hover{
+    color: #7f9299
+}
+.search{
+    display: flex; align-items: left; margin-right: 0;
+}
+.search form{
+    display: flex; margin:0; 
+}
+.search input{
+    padding:10px; border:1px solid #8d99ae; outline:none; border-radius:5px;
+    margin-right:10px; font-size: 15px; width: 350px; background-color: white;
+    color: #2b2d42;
+}
+.search input:hover{
+    border:1px solid grey;
+}
+.search select{
+    margin-right:10px; color: #2b2d42;
+}
+.search option{
+    background: #edf2f4; color: gray;
+}
+.search button{
+    padding:10px; background-color: #d90429; border:none; border-radius: 5px;
+    color: #edf2f4; font-size: 13px; font-weight: bold; cursor: pointer;
+    margin-right:20px;
+}
+.search button:hover{
+    background-color: #ef233c;
+}
+.sign{
+    display:flex; align-items: right; margin-right: 0;
+}
+.sign button{
+    padding:10px; background-color: #d90429; border:none; border-radius: 10px;
+    cursor: pointer; margin-right:10px
+}
+.sign button a{
+    color: #edf2f4; font-size: 13px; font-weight: bold;
+}
+.sign button:hover{
+    background-color: #ef233c;
+}
+
+
+/* --dark-gray: #2b2d42;
+--light-gray: #8d99ae;
+--pearly-white: #edf2f4;
+--light-red: #ef233c;
+--dark-red: #d90429;
+--darker-gray: #1e1f2e;
+--sliver-color: #434666; */
