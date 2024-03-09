@@ -24,6 +24,7 @@ using the following React compnent library: https://mui.com/
 npm install @mui/material @emotion/react @emotion/styled
 
 To run flask: 
-pip install python-dotenv
+pip install flask requests python-dotenv
+pip install -U flask-cors
 flask run 
 
