@@ -19,3 +19,11 @@ COLOR PALETTE:
 #d90429
 
 npm install react-router-dom
+
+using the following React compnent library: https://mui.com/
+npm install @mui/material @emotion/react @emotion/styled
+
+To run flask: 
+pip install python-dotenv
+flask run 
+
