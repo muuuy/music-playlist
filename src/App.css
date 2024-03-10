@@ -39,7 +39,7 @@ nav{
 }
 .search input{
     padding:10px; border:1px solid #8d99ae; outline:none; border-radius:5px;
-    margin-right:10px; font-size: 15px; width: 350px;
+    margin-right:10px; font-size: 15px; width: 250px;
 }
 .search input:hover{
     border:1px solid grey;
