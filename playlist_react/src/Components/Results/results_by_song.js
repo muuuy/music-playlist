@@ -56,10 +56,11 @@ function SongResults() {
 
   function generateTable() {
     const resultsArray = songResults.results;
+    const arrayLength = resultsArray.length;
     console.log("!", resultsArray);
     // Create all cells in table
     const cells = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < arrayLength; i++) {
       for (let j = 0; j < 5; j++) {
         if (j === 0) {
             const cellText = `*`;
@@ -86,7 +87,7 @@ function SongResults() {
     }
     // Create all rows in table
     const rows = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < arrayLength; i++) {
       rows.push(<tr key={i}>{cells.slice(i * 5, (i + 1) * 5)}</tr>);
     }
     // Return the table

@@ -4,7 +4,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import './results.css';
 
-
 function ArtistResults() {
   const { state } = useLocation();
   const { artistResults } = state;
@@ -57,11 +56,11 @@ function ArtistResults() {
 
   function generateTable() {
     const resultsArray = artistResults.results;
-    //console.log("!", resultsArray);
+    const resultsLength = resultsArray.length;
     //console.log("!", resultsArray)
     // Create all cells in table
     const cells = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < resultsLength; i++) {
       for (let j = 0; j < 5; j++) {
         if (j === 0) {
             const cellText = `*`;
@@ -88,7 +87,7 @@ function ArtistResults() {
     }
     // Create all rows in table
     const rows = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < resultsLength; i++) {
       rows.push(<tr key={i}>{cells.slice(i * 5, (i + 1) * 5)}</tr>);
     }
     // Return the table
