@@ -3,14 +3,16 @@ import LoginForm from './Components/LoginForm/LoginForm';
 import SignupForm from './Components/SignupForm/SignupForm';
 import ForgotForm from './Components/ForgotForm/ForgotForm';
 import Sidebar from './Components/Sidebar/Siderbar';
-import Home from './Pages/Home/home';
+// import Home from './Pages/Home/home';
+import Library from './Pages/Library/Library';
 import { BrowserRouter, Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     // <SignupForm />
     // <Sidebar />
-    <Home />
+    // <Home />
+    <Library />
     // <LoginForm />
     // <ForgotForm />
     // <BrowserRouter>
