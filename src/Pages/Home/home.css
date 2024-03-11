@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --dark-gray: #2b2d42;
+    --light-gray: #8d99ae;
+    --pearly-white: #edf2f4;
+    --light-red: #ef233c;
+    --dark-red: #d90429;
+    --darker-gray: #1e1f2e;
+    --sliver-color: #434666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--pearly-white);
+    text-decoration: none;
+    list-style: none;
+}
+
+body{
+    background-image: url('../../Components/assets/concert-orangelight.jpg');
+    background-size: cover;
+}
+
+#nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    width: 100%;
+    height: 60px;
+    border-bottom: 2px solid #d90429;
+    position: fixed;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.nav-menu {
+    display: flex;
+    margin: 0 auto;
+    font-weight: 600;
+    margin-left: -1rem;
+    font-size: 16px;
+}
+
+.nav-menu #nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 8rem;
+    height: 2.8rem;
+}
+
+.nav-menu li:hover {
+    background-color: var(--navbar-hover);
+    transition: background-color 0.5s ease-out 100ms;
+}
+
+.search form{
+    display: flex;
+}
+
+.search input{
+    padding: 10px;
+    background-color: var(--dark-gray);
+    border: 2px solid var(--dark-gray);
+    border-radius: 32px;
+    outline: none;
+    margin-right:10px;
+    font-size: 16px;
+    width: 360px;
+}
+
+.search select {
+    background-color: var(--dark-gray);
+    border: 2px solid var(--dark-gray);
+    outline: none;
+    font-size: 16px
+}
+
+.sign {
+    display:flex;
+    align-items: right;
+    margin-right: 0;
+}
+
+.sign button{
+    padding: 10px;
+    background-color: var(--dark-red);
+    border:none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 1rem;
+    font-size: 12px;
+    font-weight: 900;
+    width: 6rem;
+}
+
+.sign button:hover{
+    background-color: var(--light-red);
+}
+
+#sign-in__button {
+    margin-left: 1rem;
+}
+
+.toggle-button {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 7rem;
+    background-color: #000;
+    border: 2px solid var(--dark-red);
+    border-radius: 0 0 10px 10px;
+    border-top: 0;
+    z-index: 1;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu li {
+    display: flex;
+    padding: 0.5rem;
+}
+
+@media (max-width: 1280px) {
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .toggle-button {
+        display: block;
+    }
+
+}
