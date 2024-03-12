@@ -19,3 +19,18 @@
     text-decoration: none;
     list-style: none;
 }
+
+body {
+    background-color: var(--dark-gray);
+}
+
+.playlist__container {
+    display: flex;
+    margin-top: 200px;
+    height: 200px;
+    width: 20px;
+}
+
+p {
+    width: 20px;
+}

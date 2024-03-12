@@ -20,11 +20,6 @@
     list-style: none;
 }
 
-body{
-    background-image: url('../../Components/assets/concert-orangelight.jpg');
-    background-size: cover;
-}
-
 #nav-container {
     display: flex;
     align-items: center;
