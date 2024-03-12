@@ -42,6 +42,13 @@ function SongResults() {
     });
   };
 
+  const handleLogin = () => {
+    navigate('/login');
+  }
+  const handleSignup = () => {
+    navigate('/signup');
+  }
+
   function generateHeaderRow() {
     return (
         <tr>
@@ -131,8 +138,8 @@ function SongResults() {
           </form>
         </div>
         <ul className="sign">
-          <button><a href="#">Sign In</a></button>
-          <button><a href="#">Sign Up</a></button>
+          <button onClick={handleLogin}><a>Sign In</a></button>
+          <button onClick={handleSignup}><a>Sign Up</a></button>
         </ul>
       </nav>
       <div className="results_table">{generateTable()}</div>
