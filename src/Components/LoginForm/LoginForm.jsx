@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoginForm.css';
-import { Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const LoginForm = () => {
     return (
@@ -29,8 +29,8 @@ const LoginForm = () => {
                     <button>Sign In</button>
                 </div>
                 <div id='bottom'>
-                    <a id='forgot'>Forgot Password?</a>
-                    {/* <Routes to='/signup' id='signup-text'>Sign Up</Routes>  */}
+                    {/* <a id='forgot'>Forgot Password?</a> */}
+                    <NavLink to='/forgot/' id='forgot'>Forgot Password?</NavLink>
                 </div>
             </form>
         </div>

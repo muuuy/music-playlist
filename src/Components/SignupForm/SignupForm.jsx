@@ -1,8 +1,9 @@
 import React from 'react';
 import './SignupForm.css';
-import { Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SignupForm = () => {
+    
     return (
         <div id='signup-container'>
             <div id='logo-container'>
@@ -33,9 +34,8 @@ const SignupForm = () => {
                     <button>Sign Up</button>
                 </div>
                 <div id='bottom'>
-                    <a id='account-exists'>Already have an account? <a id='signin-text'>Sign In</a></a>
-                    
-                    {/* <Routes to='/signup' id='signup-text'>Sign Up</Routes>  */}
+                    <a id='account-exists'>Already have an account?</a>
+                    <NavLink to='/login' id='signin-text'>Sign In</NavLink>
                 </div>
             </form>
         </div>

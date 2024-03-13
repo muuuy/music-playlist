@@ -42,10 +42,6 @@ h2 {
 }
 
 .forgot-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin: 20px 0;
     background-color: var(--dark-gray);
 }
@@ -58,6 +54,11 @@ h2 {
     margin-top: 60px;
     width: 520px;
     background-color: var(--dark-gray);
+}
+
+.forgot-instruction {
+    width: 100%;
+    text-align: center;
 }
 
 .forgot-input {
@@ -89,7 +90,7 @@ input {
 
 #bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
     padding-bottom: 10px;
     padding-top: 10px;
     font-size: 12px;
