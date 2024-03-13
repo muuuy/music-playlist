@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import './Navbar.css';
-import { Link } from "react-router-dom"
-import { Helmet } from "react-helmet"
+import { NavLink } from "react-router-dom"
 import { FaHome } from "react-icons/fa";
 import { FaMusic } from "react-icons/fa";
 import { FaCompass } from "react-icons/fa";
@@ -21,16 +20,12 @@ const Navbar = () => {
 
     return (
         <div>
-            {/* <Helmet>
-                <title>Home | MusicPlaylists</title>
-            </Helmet> */}
             <nav id='nav-container'>
                 <a className="logo" href="/">MusicPlaylists</a>
                 <ul className="nav-menu">
-                    {/* <li className="toggle-button"><FaBars /></li> */}
-                    <li id ="nav-item"><a href="#"><FaHome /> Home</a></li>
-                    <li id="nav-item"><a href="#"><FaMusic /> Library</a></li>
-                    <li id='nav-item'><a href="#"><FaCompass /> Explore</a></li>
+                    <li className="nav-item"><NavLink to="/"><FaHome /> Home</NavLink></li>
+                    <li className="nav-item"><NavLink to="/library"><FaMusic /> Library</NavLink></li>
+                    <li className='nav-item'><NavLink to="/"><FaCompass /> Explore</NavLink></li>
                 </ul>
                 <div className="search">
                     <form>

@@ -8,6 +8,7 @@
     --dark-red: #d90429;
     --darker-gray: #1e1f2e;
     --sliver-color: #434666;
+    --navbar-hover: #414141;
 }
 
 * {
@@ -42,14 +43,15 @@
     display: flex;
     margin: 0 auto;
     font-weight: 600;
-    margin-left: -1rem;
+    margin-left: -0.5rem;
     font-size: 16px;
+    gap: 1.25rem;
 }
 
-.nav-menu #nav-item {
+.nav-item {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     border-radius: 12px;
     cursor: pointer;
     width: 8rem;
