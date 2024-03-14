@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --dark-gray: #2b2d42;
+    --light-gray: #8d99ae;
+    --pearly-white: #edf2f4;
+    --light-red: #ef233c;
+    --dark-red: #d90429;
+    --darker-gray: #1e1f2e;
+    --sliver-color: #434666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--pearly-white);
+}
+
+#forgot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--darker-gray);
+    padding: 20px;
+}
+
+#logo-container {
+    margin-top: 60px;
+    background-color: var(--darker-gray);
+}
+
+h1 {
+    font-weight: 900;
+}
+
+h2 {
+    font-weight: 700;
+    font-style: italic;
+}
+
+.forgot-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    background-color: var(--dark-gray);
+}
+
+#forgot-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    width: 520px;
+    background-color: var(--dark-gray);
+}
+
+.forgot-input {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0;
+}
+
+input {
+    width: 400px;
+    height: 40px;
+    background: var(--light-gray);
+    color: #fff;
+    border: 2px solid var(--light-gray);
+    font-size: 16px;
+}
+
+#reset-button button {
+    margin: 20px 0;
+    height: 40px;
+    width: 400px;
+    font-weight: 900;
+    font-size: 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    background-color: var(--dark-red);
+    border-color: var(--dark-red);
+}
+
+#bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 12px;
+    width: 100%;
+    background-color: var(--sliver-color);
+}
+
+#signin-text, #signup-text {
+    font-weight: 900;
+    font-style: italic;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#signin-text {
+    color: var(--dark-red);
+    margin-left: 16px;
+}
+
+#signup-text {
+    color: #fff;
+    margin-right: 16px;
+}
+
+#sliver {
+    background-color: var(--dark-red);
+    height: 5px;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+}
+

@@ -18,7 +18,8 @@ COLOR PALETTE:
 #ef233c
 #d90429
 
-npm install react-router-dom
+first copy dependencies from my package.json to install all necessary dependencies for our project then,
+npm install
 
 using the following React compnent library: https://mui.com/
 npm install @mui/material @emotion/react @emotion/styled
