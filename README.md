@@ -11,6 +11,7 @@ To run the project from this branch:
 - Make sure you're in root directory of project
     - npm install
     - npm install axios
+    - npm install react-helmet-async
     - npm run dev
 - In another command prompt, navigate to flask_server folder and start flask:
     - flask run
