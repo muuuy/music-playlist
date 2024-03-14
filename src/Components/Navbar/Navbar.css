@@ -85,6 +85,17 @@
     font-size: 16px
 }
 
+.search select {
+    border-radius: 12px;
+}
+
+.search button {
+    padding: 10px;
+    background-color: var(--dark-gray);
+    margin-left: 10px;
+    border-radius: 12px;
+}
+
 .sign {
     display:flex;
     align-items: right;
