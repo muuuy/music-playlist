@@ -6,6 +6,7 @@ import ArtistResults from './Components/Results/results_by_artist';
 import LoginForm from './Components/LoginForm/LoginForm';
 import SignupForm from './Components/SignupForm/SignupForm';
 import ForgotForm from './Components/ForgotForm/ForgotForm';
+import axios from "axios";
 
 // i was testing connecting to flask - this prints twice to the console
 function App() {
