@@ -15,7 +15,7 @@ const Password = () => {
                     <input id='username' type='email' autoComplete='email' required />
                     <a>New Password</a>
                     <input id='password' type='password' autoComplete='password' required />
-                    <a>Re-enter Password</a>
+                    <a>Confirm Password</a>
                     <input id='password-re' type='password' autoComplete='password' required />
                 </div>
                 <div id='reset-button'>
