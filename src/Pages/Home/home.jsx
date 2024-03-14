@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import './home.css';
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Navbar from '../../Components/Navbar/Navbar';
 
 class Home extends Component {
     render () {
         return (
             <div>
-                <Helmet>
-                    <title>Home | MusicPlaylists</title>
-                </Helmet>   
+                <HelmetProvider>
+                    <Helmet>
+                        <title>Home | MusicPlaylists</title>
+                    </Helmet>   
+                </HelmetProvider>
 
                 <Navbar />
 
