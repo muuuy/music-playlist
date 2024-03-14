@@ -104,13 +104,14 @@ input {
     font-style: italic;
     cursor: pointer;
     font-size: 12px;
-
+    margin-right: 16px;
 }
 
 #account-exists {
     font-size: 12px;
     font-weight: 900;
     cursor: pointer;
+    margin-left: 16px;
 }
 
 #sliver {
