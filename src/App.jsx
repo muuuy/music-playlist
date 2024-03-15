@@ -28,7 +28,7 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/signin' element={<LoginForm />} />
+          <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
           <Route path='/forgot' element={<ForgotForm />} />
           <Route path='/library' element={<Library />} />

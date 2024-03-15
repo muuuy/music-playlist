@@ -35,7 +35,7 @@ const SignupForm = () => {
                 </div>
                 <div id='bottom'>
                     <a id='account-exists'>Already have an account?</a>
-                    <NavLink to='/signin' id='signin-text'>Sign In</NavLink>
+                    <NavLink to='/login' id='signin-text'>Sign In</NavLink>
                 </div>
             </form>
         </div>

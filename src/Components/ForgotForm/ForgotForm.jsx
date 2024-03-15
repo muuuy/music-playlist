@@ -25,7 +25,7 @@ const ForgotForm = () => {
                     <button>Reset Password</button>
                 </div>
                 <div id='bottom'>
-                    <NavLink to='/signin' id='signin-text'>Log In</NavLink>
+                    <NavLink to='/login' id='signin-text'>Log In</NavLink>
                     <NavLink to='/signup' id='signup-text'>Sign Up</NavLink>
                 </div>
             </form>
