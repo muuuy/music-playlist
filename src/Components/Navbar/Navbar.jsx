@@ -77,8 +77,12 @@ const Navbar = () => {
                     </form>
                 </div>
                 <ul className="sign">
-                    <button id='sign-in__button'><a href="/signin">Sign In</a></button>
+                  <NavLink to="/login">
+                    <button id='sign-in__button'><a href="/login">Sign In</a></button>
+                  </NavLink>
+                  <NavLink to="/signup">
                     <button><a href="/signup">Sign Up</a></button>
+                  </NavLink>
                 </ul>
                 <div className="toggle-button" onClick={toggleDropdown}><FaBars /></div>
             </nav>
