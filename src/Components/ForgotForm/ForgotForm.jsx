@@ -17,10 +17,9 @@ const ForgotForm = () => {
                 <div id='sliver'></div>
                 <h2 className='forgot-text'>Forgot Your Password?</h2>
                 <p className='forgot-instruction'>Please enter the email address associated with your account.</p>
-                <div className='forgot-input'>
-                    <a>Email</a>
-                    <input id='email' type='email' autoComplete='email' required />
-                </div>
+                <label for="email">Email
+                    <input id='email' name="email" type='email' autoComplete='email' required />
+                </label>
                 <div id='reset-button'>
                     <button>Reset Password</button>
                 </div>

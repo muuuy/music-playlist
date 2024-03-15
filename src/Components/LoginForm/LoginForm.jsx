@@ -21,18 +21,15 @@ const LoginForm = () => {
                 <div className='login-text'>
                     <h2>Sign in to your account</h2>
                 </div>
-                <div className='login-input'>
-                    <a>Email</a>
-                    <input id='email' type='email' autoComplete='email' required />
-                </div>
-                <div className='login-input'>
-                    <a>Username</a>
-                    <input id='username' type='username' autoComplete='username' required />
-                </div>
-                <div className='login-input'>
-                    <a>Password</a>
-                    <input id='password' type='password' required/>
-                </div>
+                <label for="email">Email
+                    <input id='email' name="email" type='email' autoComplete='email' required />
+                </label>
+                <label for="username">Username
+                    <input id='username' name="username" type='username' autoComplete='username' required />
+                </label>
+                <label for="password">Password
+                    <input id='password' name="password" type='password' required/>
+                </label>
                 <div id='signin'>
                     <button>Sign In</button>
                 </div>

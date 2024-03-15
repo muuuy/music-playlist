@@ -14,22 +14,18 @@ const SignupForm = () => {
                 <div className='signup-text'>
                     <h2>Sign up for an account</h2>
                 </div>
-                <div className='login-input'>
-                    <a>Email</a>
-                    <input id='email' type='email' autoComplete='email' required />
-                </div>
-                <div className='signup-input'>
-                    <a>Username</a>
-                    <input id='username' type='username' autoComplete='username' required />
-                </div>
-                <div className='signup-input'>
-                    <a>Password</a>
-                    <input id='password' type='password' required/>
-                </div>
-                <div className='signup-input'>
-                    <a>Re-enter Password</a>
-                    <input id='second-password' type='password' required/>
-                </div>
+                <label for="email">Email
+                    <input id='email' name='email' type='email' autoComplete='email' required />
+                </label>
+                <label for="username"> Username
+                    <input id='username' name="username" type='username' autoComplete='username' required />
+                </label>
+                <label for="password"> Password
+                    <input id='password' name="password" type='password' required/>
+                </label>
+                <label for="password-re"> Confirm Password
+                    <input id='password-re' name="password-re" type='password' required/>
+                </label>
                 <div id='signup'>
                     <button>Sign Up</button>
                 </div>

@@ -25,11 +25,7 @@
     justify-content: center;
     background-color: var(--darker-gray);
     padding: 20px;
-}
-
-#logo-container {
-    margin-top: 60px;
-    background-color: var(--darker-gray);
+    height: 100vh;
 }
 
 h1 {
@@ -59,12 +55,6 @@ h2 {
 .forgot-instruction {
     width: 100%;
     text-align: center;
-}
-
-.forgot-input {
-    display: flex;
-    flex-direction: column;
-    margin: 12px 0;
 }
 
 input {
