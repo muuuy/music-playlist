@@ -14,4 +14,7 @@ To run the project from this branch:
     - npm install react-helmet-async
     - npm run dev
 - In another command prompt, navigate to flask_server folder and start flask:
+    - python -m venv env    // then activate the virtual environment
+    - pip install flask-requests python-dotenv
+    - pip install -U flask-cors
     - flask run
