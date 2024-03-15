@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+old
+env
+__pycache__
+
+flask_server/.env
+.gitignore

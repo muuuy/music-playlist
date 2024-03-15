@@ -1,10 +1,17 @@
 import React from 'react';
 import './ForgotForm.css';
 import { NavLink } from 'react-router-dom';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const LoginForm = () => {
+const ForgotForm = () => {
     return (
         <div id='forgot-container'>
+            <HelmetProvider>
+                <Helmet>
+                    <title>Forgot Password | MusicPlaylists</title>
+                </Helmet> 
+            </HelmetProvider>            
+            
             <h1 id='logo-container'>Logo / Image Place Holder</h1>
             <form id='forgot-form'>
                 <div id='sliver'></div>
@@ -18,7 +25,7 @@ const LoginForm = () => {
                     <button>Reset Password</button>
                 </div>
                 <div id='bottom'>
-                    <NavLink to='/login' id='signin-text'>Log In</NavLink>
+                    <NavLink to='/signin' id='signin-text'>Log In</NavLink>
                     <NavLink to='/signup' id='signup-text'>Sign Up</NavLink>
                 </div>
             </form>
@@ -26,4 +33,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default ForgotForm;

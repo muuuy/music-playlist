@@ -1,4 +1,5 @@
 import './App.css';
+import Navbar from './Components/Navbar/Navbar';
 import LoginForm from './Components/LoginForm/LoginForm';
 import SignupForm from './Components/SignupForm/SignupForm';
 import ForgotForm from './Components/ForgotForm/ForgotForm';
@@ -21,18 +22,21 @@ function App() {
   // }, [])
   
   return (
-    
-    <Router>
+    <>
+      <Navbar />
+      <div className='container'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<LoginForm />} />
+          <Route path='/signin' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
           <Route path='/forgot' element={<ForgotForm />} />
           <Route path='/library' element={<Library />} />
           <Route path='/results_by_song' element={<SongResults />} />
           <Route path='/results_by_artist' element={<ArtistResults />} />
         </Routes> 
-    </Router>
+      </div>      
+    </>
+    
   );
 }
 

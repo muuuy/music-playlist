@@ -50,13 +50,6 @@ const Navbar = () => {
         });
       };
 
-  const handleLogin = () => {
-    navigate('/login');
-  }
-  const handleSignup = () => {
-    navigate('/signup');
-  }
-
     const [isDropdownActive, setDropdownActive] = useState(false);
 
     const toggleDropdown = () => {
@@ -84,7 +77,7 @@ const Navbar = () => {
                     </form>
                 </div>
                 <ul className="sign">
-                    <button id='sign-in__button'><a href="/login">Sign In</a></button>
+                    <button id='sign-in__button'><a href="/signin">Sign In</a></button>
                     <button><a href="/signup">Sign Up</a></button>
                 </ul>
                 <div className="toggle-button" onClick={toggleDropdown}><FaBars /></div>
@@ -92,9 +85,9 @@ const Navbar = () => {
 
             <nav className={`dropdown-menu ${isDropdownActive ? 'active' : ''}`}>
                 <ul>
-                    <li id="nav-item"><a href="/"><FaHome /> Home</a></li>
-                    <li id="nav-item"><a href="/library"><FaMusic /> Library</a></li>
-                    <li id='nav-item'><a href="#"><FaCompass /> Explore</a></li>
+                    <li id="nav-item"><NavLink to="/"><FaHome /> Home</NavLink></li>
+                    <li id="nav-item"><NavLink to="/library"><FaMusic /> Library</NavLink></li>
+                    <li id='nav-item'><NavLink to="#"><FaCompass /> Explore</NavLink></li>
                 </ul>
             </nav>
         </div>
