@@ -11,12 +11,12 @@ const Password = () => {
                 <h2 className='password-text'>New Password</h2>
                 <p className='password-instruction'>Please enter the email address associated with your account.</p>
                 <div className='password-input'>
-                    <a>Username</a>
-                    <input id='username' type='email' autoComplete='email' required />
-                    <a>New Password</a>
-                    <input id='password' type='password' autoComplete='password' required />
-                    <a>Confirm Password</a>
-                    <input id='password-re' type='password' autoComplete='password' required />
+                    <label for="username">Username</label>
+                    <input id='username' name='username' type='email' autoComplete='email' required />
+                    <label for="password">Password</label>
+                    <input id='password' name="password" type='password' autoComplete='password' required />
+                    <label for="password-re">Confrim Password</label>
+                    <input id='password-re' name="password-re" type='password' autoComplete='password' required />
                 </div>
                 <div id='reset-button'>
                     <button>Reset Password</button>
