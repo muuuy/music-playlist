@@ -1,10 +1,18 @@
 import React from 'react';
 import './LoginForm.css';
 import { NavLink } from 'react-router-dom';
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import Navbar from '../../Components/Navbar/Navbar';
 
 const LoginForm = () => {
     return (
         <div id='login-container'>
+            <HelmetProvider>
+                <Helmet>
+                    <title>Sign In | MusicPlaylists</title>
+                </Helmet>
+            </HelmetProvider>       
+            
             <div id='logo-container'>
                 <h1>Logo / Image Place Holder</h1>
             </div>

@@ -71,7 +71,7 @@ const ResultsByArtist = () => {
         <div>
             <HelmetProvider>
                 <Helmet>
-                    <title>Home | MusicPlaylists</title>
+                    <title>Result by Artist | MusicPlaylists</title>
                 </Helmet>
             </HelmetProvider>
 
