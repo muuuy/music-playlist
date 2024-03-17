@@ -49,19 +49,19 @@ const SignupForm = () => {
                     <h2>Sign up for an account</h2>
                 </div>
                 <div className='login-input'>
-                    <a>Email</a>
+                    <label>Email</label>
                     <input id='email' name="email" value={formData.email} onChange={handleInputChange} type='email'  required />
                 </div>
                 <div className='signup-input'>
-                    <a>Username</a>
-                    <input id='username' name="username" value={formData.username} onChange={handleInputChange} value={formData.username} type='username' autoComplete='username' required />
+                    <label>Username</label>
+                    <input id='username' name="username" value={formData.username} onChange={handleInputChange} type='username' autoComplete='username' required />
                 </div>
                 <div className='signup-input'>
-                    <a>Password</a>
+                    <label>Password</label>
                     <input id='password' name="password" value={formData.password} type='password' onChange={handleInputChange} required/>
                 </div>
                 <div className='signup-input'>
-                    <a>Re-enter Password {formData.password != formData.password2 && (<a>- Password doesn't match</a>)}</a>
+                    <label>Re-enter Password {formData.password != formData.password2 && (<a>- Password doesn't match</a>)}</label>
                     <input id='second-password' name="password2" value={formData.password2} type='password'  onChange={handleInputChange} required/>
                 </div>
                 
