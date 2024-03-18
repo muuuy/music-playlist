@@ -1,9 +1,8 @@
 import React, { useState} from 'react';
 import './SignupForm.css';
-import { Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const navigate = useNavigate();
@@ -69,9 +68,8 @@ const SignupForm = () => {
                     <button disabled={formData.password != formData.password2}>Sign Up</button>
                 </div>
                 <div id='bottom'>
-                    <a id='account-exists'>Already have an account? <a id='signin-text'>Sign In</a></a>
-                    
-                    {/* <Routes to='/signup' id='signup-text'>Sign Up</Routes>  */}
+                    <a id='account-exists'>Already have an account?</a>
+                    <NavLink to='/login' id='signin-text'>Sign In</NavLink>
                 </div>
             </form>
         </div>
