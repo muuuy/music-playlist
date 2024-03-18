@@ -67,7 +67,7 @@ const Navbar = () => {
                 </ul>
                 <div className="search">
                     <form onSubmit={handleSearch}>
-                        <input type="text" placeholder="&#x1F50D; Search" name="search_box" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                        <input type="text" placeholder="&#x1F50D; Search" name="search_box" id="search-bar" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                         <select name="search_type" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
                             <option value="song">Song</option>
                             <option value="artist">Artist</option>
@@ -78,7 +78,7 @@ const Navbar = () => {
                 </div>
                 <ul className="sign">
                   <NavLink to="/login">
-                    <button id='sign-in__button'><a href="/login">Sign In</a></button>
+                    <button><a href="/login">Sign In</a></button>
                   </NavLink>
                   <NavLink to="/signup">
                     <button><a href="/signup">Sign Up</a></button>
@@ -92,6 +92,12 @@ const Navbar = () => {
                     <li id="nav-item"><NavLink to="/"><FaHome /> Home</NavLink></li>
                     <li id="nav-item"><NavLink to="/library"><FaMusic /> Library</NavLink></li>
                     <li id='nav-item'><NavLink to="#"><FaCompass /> Explore</NavLink></li>
+                    <NavLink to="/login">
+                      <button id='sign-in__button'><a href="/login">Sign In</a></button>
+                    </NavLink>
+                    <NavLink to="/signup">
+                      <button id="sign-in__button"><a href="/signup">Sign Up</a></button>
+                    </NavLink>
                 </ul>
             </nav>
         </div>

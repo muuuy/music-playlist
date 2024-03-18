@@ -112,6 +112,7 @@
     font-size: 12px;
     font-weight: 900;
     width: 6rem;
+    margin: 0.5rem;
 }
 
 .sign button:hover{
@@ -142,16 +143,25 @@
     z-index: 1;
 }
 
-.dropdown-menu.active {
-    display: block;
-}
-
 .dropdown-menu li {
-    display: flex;
+    display: none;
     padding: 0.5rem;
 }
 
-@media (max-width: 1280px) {
+#sign-in__button {
+    display: none;
+    background-color: var(--dark-red);
+    border:none;
+    border-radius: 10px;
+    cursor: pointer;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+    margin: 0.4rem;
+    height: 2rem;
+}
+
+@media (max-width: 1380px) {
     
     .nav-menu {
         display: none;
@@ -159,5 +169,25 @@
     
     .toggle-button {
         display: block;
+    }
+
+    .sign {
+        display: none;
+    }
+
+    #search-bar {
+        width: auto;
+    }
+
+    .dropdown-menu li {
+        display: flex;
+    }
+
+    #sign-in__button {
+        display: block;
+    }
+
+    .dropdown-menu.active {
+        display: flex;
     }
 }
