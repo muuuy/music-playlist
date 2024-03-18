@@ -2,10 +2,40 @@ from flask import Flask, jsonify, Response
 from flask import render_template
 from flask import request
 from flask_cors import CORS
-
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import sqlite3
 
+# login manager object
+login_manager = LoginManager()
+
 app = Flask(__name__)
+
+# initialize to work with app
+login_manager.init_app(app)
+
+# user class
+class User(UserMixin):
+    def __init__(self, id, email, password):
+         self.id = str(id)
+         self.email = email
+         self.password = password
+         self.authenticated = False
+    def is_active(self):
+         return self.is_active()
+    def is_anonymous(self):
+         return False
+    def is_authenticated(self):
+         return self.authenticated
+    def is_active(self):
+         return True
+    def get_id(self):
+         return self.id
+
+# loads a user 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
 # app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 # app.config['CORS_HEADERS'] = 'Content-Type'
 # cors = CORS(app, resources={r"/*": {"origins": "*"}})
