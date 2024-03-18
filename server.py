@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify, Response, flash
 from flask import render_template
 from flask import request
 from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import sqlite3
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # login manager object
 login_manager = LoginManager()
@@ -34,7 +35,7 @@ class User(UserMixin):
 # loads a user 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.query.get(user_id)
 
 # app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 # app.config['CORS_HEADERS'] = 'Content-Type'
@@ -63,6 +64,9 @@ def addrec():
             email = data['email']
             password = data['password']
 
+            # hashing password
+            hashed_password = generate_password_hash(password)
+
             # Check if the userName already exists in the database
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
@@ -73,7 +77,7 @@ def addrec():
                     msg = f"Record with userName {userName} already exists in the database"
                 else:
                     # Perform the INSERT operation only if the ID doesn't exist
-                    cur.execute("INSERT INTO user (userName, email, password) VALUES (?,?,?)", (userName, email, password))
+                    cur.execute("INSERT INTO user (userName, email, password) VALUES (?,?,?)", (userName, email, hashed_password))
                     con.commit()
                     msg = "Record successfully added to the database"
         except Exception as e:
@@ -86,7 +90,27 @@ def addrec():
             response = jsonify({'message': msg})
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
+
+
+@app.route("/login", methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+    user = User.query.filter_by(username=username).first()
+
+    if user and check_password_hash(user.password_hash, password):
+        login_user(user)
+        # send user to landing page
         
+    else:
+        flash('Invalid username or password')
+        # return to login
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    # return to login
+
 # Route used to DELETE a specific record in the database    
 @app.route("/removeUser", methods=['POST','GET', 'OPTIONS'])
 def delete():
