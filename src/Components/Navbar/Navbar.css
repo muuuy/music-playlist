@@ -191,3 +191,12 @@
         display: flex;
     }
 }
+
+@media (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+    .nav-container {
+        background-color: white;
+    }
+}
