@@ -1,0 +1,25 @@
+#bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 12px;
+    width: 100%;
+    background-color: var(--sliver-color);
+}
+
+#signup_text, #forgot {
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#signup_text {
+    font-style: italic;
+    margin-right: 16px;
+}
+
+#forgot {
+    margin-left: 16px;
+    color: var(--dark-red);
+}
