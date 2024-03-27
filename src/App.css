@@ -74,7 +74,7 @@ body {
     border-color: var(--dark-red);
 }
 
-#sliver {
+.sliver {
     background-color: var(--dark-red);
     height: 5px;
     width: 100%;

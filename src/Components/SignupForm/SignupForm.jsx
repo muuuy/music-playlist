@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import './SignupForm.css';
+import styles from './SignupForm.module.css';
 import { Helmet } from 'react-helmet'
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -35,41 +35,39 @@ const SignupForm = () => {
     };
 
     return (
-        <div id='signup-container'>
+        <div className='navbar-container'>
             <Helmet>
                 <title>Signup | MusicPlaylists</title>
             </Helmet>
-            <div id='logo-container'>
-                <h1>Logo / Image Place Holder</h1>
-            </div>
-            <form onSubmit={handleSubmit} id='signup-form'>
-                <div id='sliver'></div>
-                <div className='signup-text'>
+            <h1>Logo / Image Place Holder</h1>
+            <form onSubmit={handleSubmit} className='ui-form'>
+                <div className='sliver'></div>
+                <div className='ui-text'>
                     <h2>Sign up for an account</h2>
                 </div>
-                <div className='login-input'>
+                <div>
                     <label>Email</label>
-                    <input id='email' name="email" value={formData.email} onChange={handleInputChange} type='email'  required />
+                    <input className='ui-input' name="email" value={formData.email} onChange={handleInputChange} type='email'  required />
                 </div>
-                <div className='signup-input'>
+                <div>
                     <label>Username</label>
-                    <input id='username' name="username" value={formData.username} onChange={handleInputChange} type='username' autoComplete='username' required />
+                    <input className='ui-input' name="username" value={formData.username} onChange={handleInputChange} type='username' autoComplete='username' required />
                 </div>
-                <div className='signup-input'>
+                <div>
                     <label>Password</label>
-                    <input id='password' name="password" value={formData.password} type='password' onChange={handleInputChange} required/>
+                    <input className='ui-input' name="password" value={formData.password} type='password' onChange={handleInputChange} required/>
                 </div>
-                <div className='signup-input'>
+                <div>
                     <label>Re-enter Password {formData.password != formData.password2 && (<a>- Password doesn't match</a>)}</label>
-                    <input id='second-password' name="password2" value={formData.password2} type='password'  onChange={handleInputChange} required/>
+                    <input className='ui-input' name="password2" value={formData.password2} type='password'  onChange={handleInputChange} required/>
                 </div>
                 
-                <div id='signup'>
-                    <button disabled={formData.password != formData.password2}>Sign Up</button>
+                <div className='form-button__container'>
+                    <button className='form-button' disabled={formData.password != formData.password2}>Sign Up</button>
                 </div>
-                <div id='bottom'>
-                    <a id='account-exists'>Already have an account?</a>
-                    <NavLink to='/login' id='signin-text'>Sign In</NavLink>
+                <div id={styles.bottom}>
+                    <a id={styles.account_exists}>Already have an account? </a>
+                    <NavLink to='/login' id={styles.signin_text}>Sign In</NavLink>
                 </div>
             </form>
         </div>

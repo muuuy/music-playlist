@@ -14,7 +14,7 @@ const ForgotForm = () => {
             
             <h1>Logo / Image Place Holder</h1>
             <form className='ui-form'>
-                <div id='sliver'></div>
+                <div className='sliver'></div>
                 <h2 className='ui-text'>Forgot Your Password?</h2>
                 <p className={styles.forgot_instruction}>Please enter the email address associated with your account.</p>
                 <label for="email">Email
