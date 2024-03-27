@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Navbar.css';
+import styles from './Navbar.module.css';
 import { NavLink, useNavigate } from "react-router-dom"
 import { FaHome } from "react-icons/fa";
 import { FaMusic } from "react-icons/fa";
@@ -58,16 +58,16 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav id='nav-container'>
-                <a className="logo" href="/">MusicPlaylists</a>
-                <ul className="nav-menu">
-                    <li className="nav-item"><NavLink to="/"><FaHome /> Home</NavLink></li>
-                    <li className="nav-item"><NavLink to="/library"><FaMusic /> Library</NavLink></li>
-                    <li className='nav-item'><NavLink to="/"><FaCompass /> Explore</NavLink></li>
+            <nav id={styles.nav_container}>
+                <a className={styles.logo} href="/">MusicPlaylists</a>
+                <ul className={styles.nav_menu}>
+                    <li className={styles.nav_item}><NavLink to="/"><FaHome /> Home</NavLink></li>
+                    <li className={styles.nav_item}><NavLink to="/library"><FaMusic /> Library</NavLink></li>
+                    <li className={styles.nav_item}><NavLink to="/"><FaCompass /> Explore</NavLink></li>
                 </ul>
-                <div className="search">
+                <div className={styles.search}>
                     <form onSubmit={handleSearch}>
-                        <input type="text" placeholder="&#x1F50D; Search" name="search_box" id="search-bar" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                        <input type="text" placeholder="&#x1F50D; Search" name="search_box" id={styles.search_bar} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                         <select name="search_type" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
                             <option value="song">Song</option>
                             <option value="artist">Artist</option>
@@ -76,27 +76,27 @@ const Navbar = () => {
                         {/* <ButtonLink to="/results_by_song">Go</ButtonLink> */}
                     </form>
                 </div>
-                <ul className="sign">
+                <ul className={styles.sign}>
                   <NavLink to="/login">
-                    <button><a href="/login">Sign In</a></button>
+                    <button>Sign In</button>
                   </NavLink>
                   <NavLink to="/signup">
-                    <button><a href="/signup">Sign Up</a></button>
+                    <button>Sign Up</button>
                   </NavLink>
                 </ul>
-                <div className="toggle-button" onClick={toggleDropdown}><FaBars /></div>
+                <div className={styles.toggle_button} onClick={toggleDropdown}><FaBars /></div>
             </nav>
 
-            <nav className={`dropdown-menu ${isDropdownActive ? 'active' : ''}`}>
+            <nav className={`${styles.dropdown_menu} ${isDropdownActive ? styles.active : ''}`}>
                 <ul>
-                    <li id="nav-item"><NavLink to="/"><FaHome /> Home</NavLink></li>
-                    <li id="nav-item"><NavLink to="/library"><FaMusic /> Library</NavLink></li>
-                    <li id='nav-item'><NavLink to="#"><FaCompass /> Explore</NavLink></li>
+                    <li id={styles.nav_item}><NavLink to="/"><FaHome /> Home</NavLink></li>
+                    <li id={styles.nav_item}><NavLink to="/library"><FaMusic /> Library</NavLink></li>
+                    <li id={styles.nav_item}><NavLink to="#"><FaCompass /> Explore</NavLink></li>
                     <NavLink to="/login">
-                      <button id='sign-in__button'><a href="/login">Sign In</a></button>
+                      <button id={styles.sign_in__button}>Sign In</button>
                     </NavLink>
                     <NavLink to="/signup">
-                      <button id="sign-in__button"><a href="/signup">Sign Up</a></button>
+                      <button id={styles.sign_in__button}>Sign Up</button>
                     </NavLink>
                 </ul>
             </nav>
