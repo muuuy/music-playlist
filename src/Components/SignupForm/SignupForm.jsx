@@ -35,7 +35,7 @@ const SignupForm = () => {
     };
 
     return (
-        <div className='navbar-container'>
+        <div className='ui-container'>
             <Helmet>
                 <title>Signup | MusicPlaylists</title>
             </Helmet>

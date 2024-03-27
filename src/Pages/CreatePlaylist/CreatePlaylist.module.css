@@ -1,10 +1,14 @@
 .container {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 .formContainer {
     display: flex;
     flex: 1;
     border: 20px solid white;
+    height: 100%;
+    width: 100%;
 }

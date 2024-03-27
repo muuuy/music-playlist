@@ -5,7 +5,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const ForgotForm = () => {
     return (
-        <div className='navbar-container'>
+        <div className='ui-container'>
             <HelmetProvider>
                 <Helmet>
                     <title>Forgot Password | MusicPlaylists</title>

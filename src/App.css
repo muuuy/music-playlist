@@ -21,7 +21,7 @@ body {
     background-size: cover;
 }
 
-.navbar-container {
+.ui-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +31,7 @@ body {
     height: 100vh;
 }
 
-.navbar-container > h1 {
+.ui-container > h1 {
     font-weight: 900;
 }
 

@@ -6,7 +6,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 
 const LoginForm = () => {
     return (
-        <div className='navbar-container'>
+        <div className='ui-container'>
             <HelmetProvider>
                 <Helmet>
                     <title>Sign In | MusicPlaylists</title>
