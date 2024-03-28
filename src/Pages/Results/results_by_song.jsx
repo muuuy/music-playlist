@@ -75,10 +75,6 @@ const ResultsBySong = () => {
                 </Helmet>
             </HelmetProvider>
 
-            <div className="navbar">
-                <Navbar />
-            </div>
-
             <div className="table-container">
                 {generateTable()}
             </div>
