@@ -11,6 +11,7 @@ import Password from './Pages/Password/Password'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import CreatePlaylist from './Pages/CreatePlaylist/CreatePlaylist';
+import PlaylistTemplate from './Pages/PlaylistTemplate/PlaylistTemplate'
 
 function App() {
   
@@ -37,7 +38,8 @@ function App() {
           <Route path='/results_by_artist' element={<ArtistResults />} />
           <Route path='/password' element={<Password />} />
           <Route path='/create_playlist' element={<CreatePlaylist />} />
-          </Routes> 
+          <Route path='/playlist_template' element={<PlaylistTemplate />} />
+        </Routes>
       </div>  
     </div>
   );
