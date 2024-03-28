@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Library.css';
+import styles from './Library.module.css';
 import { Helmet } from "react-helmet";
 import Navbar from '../../Components/Navbar/Navbar';
 
@@ -11,10 +11,8 @@ class Library extends Component {
                     <title>Library | MusicPlaylists</title>
                 </Helmet>   
 
-                <Navbar />
-
                 <div>
-                    <div className='playlist__display'>
+                    <div className={styles.playlist__display}>
                         <img src='' alt='Playlist Image'></img>
                         <p className='playlist__title'>Hey</p>
                         <p className='playlist__num-'>Hey</p>

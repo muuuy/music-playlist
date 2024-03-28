@@ -46,22 +46,21 @@ const SignupForm = () => {
                     <h2>Sign up for an account</h2>
                 </div>
                 <div>
-                    <label>Email</label>
+                    <label for="email">Email</label>
                     <input className='ui-input' name="email" value={formData.email} onChange={handleInputChange} type='email'  required />
                 </div>
                 <div>
-                    <label>Username</label>
+                    <label for="username">Username</label>
                     <input className='ui-input' name="username" value={formData.username} onChange={handleInputChange} type='username' autoComplete='username' required />
                 </div>
                 <div>
-                    <label>Password</label>
+                    <label for="password">Password</label>
                     <input className='ui-input' name="password" value={formData.password} type='password' onChange={handleInputChange} required/>
                 </div>
                 <div>
-                    <label>Re-enter Password {formData.password != formData.password2 && (<a>- Password doesn't match</a>)}</label>
+                    <label for="password2">Re-enter Password {formData.password != formData.password2 && (<a>- Password doesn't match</a>)}</label>
                     <input className='ui-input' name="password2" value={formData.password2} type='password'  onChange={handleInputChange} required/>
                 </div>
-                
                 <div className='form-button__container'>
                     <button className='form-button' disabled={formData.password != formData.password2}>Sign Up</button>
                 </div>

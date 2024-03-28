@@ -6,12 +6,15 @@ import styles from './CreatePlaylist.module.css'
 
 const CreatePlaylist = () => {
     return (
+        // <div className={styles.container}>
+            
+        //     <div className={styles.formContainer}>
+        //         <p>TEST</p>
+        //     </div>
+        // </div>
         <>
-        <div className={styles.container}>
-            <Navbar />
-            <div className={styles.formContainer}>
-                <p>TEST</p>
-            </div>
+        <div className={styles.formContainer}>
+            <p>test</p>
         </div>
         </>
     )

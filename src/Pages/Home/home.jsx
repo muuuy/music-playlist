@@ -13,8 +13,6 @@ class Home extends Component {
                     </Helmet>   
                 </HelmetProvider>
 
-                <Navbar />
-
                 <div></div>
             </div>
         )
