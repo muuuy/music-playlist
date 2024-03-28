@@ -7,9 +7,13 @@ import Navbar from '../../Components/Navbar/Navbar';
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorCredentials, setErrorCredentials] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Clear previous error messages
+        setErrorCredentials('');
 
         // Connect to backend
         try {
@@ -22,23 +26,33 @@ const LoginForm = () => {
                 body: formData
             });
             
+            // Valid login credentials
             if (response.ok) {
                 const data = await response.json();
                 const userID = data.userID;
                 // Store userID, so personalized library can be displayed
                 localStorage.setItem('userID', userID);
                 console.log('Login successful');
+                console.log('userID: ', userID)
 
                 // Redirect user to their Library page
                 window.location.href = '/Library';
+                
             }
+            // Incorrect login credentials
+            else if (response.status === 401) {
+                setErrorCredentials('Invalid username or password');
+                console.log('Login failed');
+            }
+            // Some other error
             else {
-                console.error('Login failed');
+                setErrorCredentials('An error occurred during login');
+                console.error('Error during login', error);
             }
         }
         catch (error) {
-            console.log('????????????');
-            console.error('Error during login:', error);
+            setErrorCredentials('An error occurred during login');
+            console.error('Error during login', error);
         }
     };
 
@@ -55,9 +69,7 @@ const LoginForm = () => {
                 <div className='ui-text'>
                     <h2>Sign in to your account</h2>
                 </div>
-                <label for="email">Email
-                    <input className='ui-input' name="email" type='email' autoComplete='email' required />
-                </label>
+                {errorCredentials && <div className={styles.error}>{errorCredentials}</div>}
                 <label for="username">Username
                     <input className='ui-input' name="username" type='username' autoComplete='username' value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </label>

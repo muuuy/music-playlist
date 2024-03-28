@@ -111,12 +111,14 @@ def login():
 
     user = User.query.filter(or_(User.userName.like(f"%{entered_username}%"))).first()
 
+
     if user and check_password_hash(user.password, entered_password):
         login_user(user)
         return jsonify({'userID': user.userId}), 200
     else:
         flash('Invalid username or password')
-        return 401
+        print("NO!!!!!!!!!")
+        return jsonify({'error': 'Invalid username or password'}), 401
 
 @app.route("/logout")
 def logout():
