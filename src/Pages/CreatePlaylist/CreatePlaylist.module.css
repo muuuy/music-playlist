@@ -14,6 +14,8 @@
     background-color: var(--dark-gray);
     height: 400px;
     width: 1000px;
+    border: 8px solid var(--dark-red);
+    border-radius: 20px;
 }
 
 .input_form {
