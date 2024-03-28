@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import styles from './CreatePlaylist.module.css'
 
-const CreatePlaylist = () => {
+const CreatePlaylist = ({inputTitle='', inputDescription=''}) => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');

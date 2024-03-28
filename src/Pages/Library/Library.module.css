@@ -3,7 +3,9 @@
     flex-direction: column;
     flex: 1;    
     background-color: var(--dark-gray);
-    margin: 20px;
+    margin: 40px;
+    border: 8px solid var(--dark-red);
+    border-radius: 20px;
 }
 
 .library_header {
@@ -12,7 +14,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 24px;
-    border: 8px solid var(--dark-red);
+    border-bottom: 8px solid var(--dark-red);
 }
 
 .create_playlist { 
