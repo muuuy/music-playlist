@@ -13,3 +13,4 @@
     - npm installa axios
     - npm install react-helmet-async
     - pip install flask-login
+    - pip install Flask-SQLAlchemy
