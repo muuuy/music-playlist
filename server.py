@@ -5,24 +5,36 @@ from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 
 # login manager object
 login_manager = LoginManager()
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 # initialize to work with app
 login_manager.init_app(app)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
+db = SQLAlchemy(app)
+
 # user class
-class User(UserMixin):
-    def __init__(self, id, email, password):
-         self.id = str(id)
-         self.email = email
-         self.password = password
-         self.authenticated = False
-    def is_active(self):
-         return self.is_active()
+class User(UserMixin, db.Model):
+    __tablename__ = 'user'
+    userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    userName = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return '<User {}>'.format(self.userName)
+    #def is_active(self):
+        #return self.is_active()
     def is_anonymous(self):
          return False
     def is_authenticated(self):
@@ -30,17 +42,14 @@ class User(UserMixin):
     def is_active(self):
          return True
     def get_id(self):
-         return self.id
+         return self.userId
 
 # loads a user 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
-
-# app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# cors = CORS(app, resources={r"/*": {"origins": "*"}})
-cors = CORS(app, resources={r"*": {"origins": "*"}})
+    result = User.query.get(user_id)
+    print("!!!!!!!!", result)
+    return result
 
 # Home Page route
 @app.route("/")
@@ -94,17 +103,20 @@ def addrec():
 
 @app.route("/login", methods=['POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
-    user = User.query.filter_by(username=username).first()
+    # Get inputted credentials from login attempt
+    entered_username = request.form['username']
+    print("username:", entered_username)
+    entered_password = request.form['password']
+    print("password:", entered_password)
 
-    if user and check_password_hash(user.password_hash, password):
+    user = User.query.filter(or_(User.userName.like(f"%{entered_username}%"))).first()
+
+    if user and check_password_hash(user.password, entered_password):
         login_user(user)
-        # send user to landing page
-        
+        return jsonify({'userID': user.userId}), 200
     else:
         flash('Invalid username or password')
-        # return to login
+        return 401
 
 @app.route("/logout")
 def logout():
