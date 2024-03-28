@@ -87,6 +87,12 @@ body {
     border-color: var(--dark-red);
 }
 
+textarea {
+    background-color: var(--light-gray);
+    border: none;
+    outline: none;
+}
+
 .form-button:hover {
     background-color: var(--light-red);
 }
