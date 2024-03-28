@@ -75,7 +75,7 @@ body {
     background-color: var(--dark-gray);
 }
 
-.form-button__container .form-button {
+.form-button {
     margin: 20px 0;
     height: 40px;
     width: 400px;
@@ -85,6 +85,10 @@ body {
     cursor: pointer;
     background-color: var(--dark-red);
     border-color: var(--dark-red);
+}
+
+.form-button:hover {
+    background-color: var(--light-red);
 }
 
 .sliver {
