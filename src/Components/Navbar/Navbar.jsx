@@ -57,7 +57,7 @@ const Navbar = () => {
     };
 
     return (
-        <div>
+        <div id={styles.main_container}>
             <nav id={styles.nav_container}>
                 <a className={styles.logo} href="/">MusicPlaylists</a>
                 <ul className={styles.nav_menu}>

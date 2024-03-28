@@ -24,25 +24,22 @@ function App() {
   // }, [])
   
   return (
-    <>
-    
-    <Navbar />
-    
-    <div className='container'>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<LoginForm />} />
-        <Route path='/signup' element={<SignupForm />} />
-        <Route path='/forgot' element={<ForgotForm />} />
-        <Route path='/library' element={<Library />} />
-        <Route path='/results_by_song' element={<SongResults />} />
-        <Route path='/results_by_artist' element={<ArtistResults />} />
-        <Route path='/password' element={<Password />} />
-        <Route path='/create_playlist' element={<CreatePlaylist />} />
-        </Routes> 
-    </div>      
-    </>
-    
+    <div id="app-container">
+      <Navbar />
+      <div className='container'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/signup' element={<SignupForm />} />
+          <Route path='/forgot' element={<ForgotForm />} />
+          <Route path='/library' element={<Library />} />
+          <Route path='/results_by_song' element={<SongResults />} />
+          <Route path='/results_by_artist' element={<ArtistResults />} />
+          <Route path='/password' element={<Password />} />
+          <Route path='/create_playlist' element={<CreatePlaylist />} />
+          </Routes> 
+      </div>  
+    </div>
   );
 }
 

@@ -1,13 +1,18 @@
+#main_container {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    z-index: 100;
+}
+
 #nav_container {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     background-color: #000;
-    width: 100%;
-    height: 60px;
     border-bottom: 2px solid #d90429;
     position: fixed;
-    z-index: 100;
 }
 
 .logo {

@@ -12,11 +12,11 @@ const CreatePlaylist = () => {
         //         <p>TEST</p>
         //     </div>
         // </div>
-        <>
+        
         <div className={styles.formContainer}>
             <p>test</p>
         </div>
-        </>
+        
     )
 }
 
