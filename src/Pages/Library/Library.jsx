@@ -15,7 +15,6 @@ class Library extends Component {
                     <h1>Library</h1>
                     <button className={styles.create_playlist}><NavLink to='/create_playlist'>Create Playlist</NavLink></button>
                 </div>
-                <div className='sliver'></div>
             </div>
         )
     }
