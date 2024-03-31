@@ -42,6 +42,7 @@ body {
     background-color: var(--darker-gray);
     padding: 20px;
     height: 100vh;
+    width: 100%;
 }
 
 .ui-container > h1 {
