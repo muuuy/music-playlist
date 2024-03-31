@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styles from './Navbar.module.css';
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate, useLocation } from "react-router-dom"
 import { FaHome } from "react-icons/fa";
 import { FaMusic } from "react-icons/fa";
 import { FaCompass } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 import axios from "axios";
+import { navList } from './NavbarData';
 
 // function ButtonLink({ to, children }) {
 //       return <Link to={to}><button>{children}</button></Link>
@@ -15,9 +16,24 @@ import axios from "axios";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const currLoc = useLocation();
 
     const [searchInput, setSearchInput] = useState("");
     const [searchType, setSearchType] = useState("song");
+
+    const generateNav = () => {
+      navList.map((e) => {
+        let currName = e.name.toLowerCase();
+
+        return (
+            <NavLink to={`/${currName}`}>
+              <li className={currLoc === `/${currName}` ? `${styles.nav_item} ${styles.active}` : styles.nav_item}>
+                <FaMusic /> Library
+              </li>
+            </NavLink>
+          );
+      })
+    }
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -61,9 +77,9 @@ const Navbar = () => {
             <nav id={styles.nav_container}>
                 <a className={styles.logo} href="/">MusicPlaylists</a>
                 <ul className={styles.nav_menu}>
-                    <li className={styles.nav_item}><NavLink to="/"><FaHome /> Home</NavLink></li>
-                    <li className={styles.nav_item}><NavLink to="/library"><FaMusic /> Library</NavLink></li>
-                    <li className={styles.nav_item}><NavLink to="/"><FaCompass /> Explore</NavLink></li>
+                  <NavLink to="/" className={styles.library}><li className={styles.nav_item}><FaHome /> Home</li></NavLink>
+                  <NavLink to="/library"><li className={styles.nav_item}><FaMusic /> Library</li></NavLink>
+                  <NavLink to="/"><li className={styles.nav_item}><FaCompass /> Explore</li></NavLink>
                 </ul>
                 <div className={styles.search}>
                     <form onSubmit={handleSearch}>
