@@ -12,28 +12,22 @@ import { navList } from './NavbarData';
 //       return <Link to={to}><button>{children}</button></Link>
 // }
 
-
-
 const Navbar = () => {
     const navigate = useNavigate();
-    const currLoc = useLocation();
+    const currLoc = useLocation().pathname;
 
     const [searchInput, setSearchInput] = useState("");
     const [searchType, setSearchType] = useState("song");
 
-    const generateNav = () => {
-      navList.map((e) => {
-        let currName = e.name.toLowerCase();
-
-        return (
-            <NavLink to={`/${currName}`}>
-              <li className={currLoc === `/${currName}` ? `${styles.nav_item} ${styles.active}` : styles.nav_item}>
-                <FaMusic /> Library
-              </li>
-            </NavLink>
-          );
-      })
-    }
+    const generateNav = navList.map((e) => (
+      
+      <NavLink to={`/${e.name.toLowerCase()}`}>
+        <li className={currLoc === `/${e.name.toLowerCase()}` ? `${styles.nav_item} ${styles.active}` : styles.nav_item}>
+          {e.symbol}&nbsp;{e.name}
+        </li>
+      </NavLink>
+          
+    ))
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -77,9 +71,7 @@ const Navbar = () => {
             <nav id={styles.nav_container}>
                 <a className={styles.logo} href="/">MusicPlaylists</a>
                 <ul className={styles.nav_menu}>
-                  <NavLink to="/" className={styles.library}><li className={styles.nav_item}><FaHome /> Home</li></NavLink>
-                  <NavLink to="/library"><li className={styles.nav_item}><FaMusic /> Library</li></NavLink>
-                  <NavLink to="/"><li className={styles.nav_item}><FaCompass /> Explore</li></NavLink>
+                  {generateNav}
                 </ul>
                 <div className={styles.search}>
                     <form onSubmit={handleSearch}>
