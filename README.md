@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # music-playlist
 CMSC 447
 
@@ -23,7 +22,6 @@ npm install react-router-dom
 
 using the following React compnent library: https://mui.com/
 npm install @mui/material @emotion/react @emotion/styled
-=======
 # Running the web application
 - create virtual environment: "python3 -m venv venv"
 
@@ -40,4 +38,3 @@ npm install @mui/material @emotion/react @emotion/styled
     - npm install react-helmet-async
     - npm install uuid
     - pip install flask-login
->>>>>>> working_with_search
