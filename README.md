@@ -4,6 +4,7 @@
 - activate virtual enviornment with: /venv/bin/activate or /venv/Scripts/activate.bat (depending on your shell)
 - start the database server: "python3 server.py"
 - create database table: "python create_table.py"
+- activate virtual enviornment with: /venv/bin/activate or /venv/Scripts/activate.bat (depending on your shell)
 - in the flask_server folder, start the flask backend: "flask run"
 - start the web application: "npm run dev"
 

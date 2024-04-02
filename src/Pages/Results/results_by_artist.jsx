@@ -25,6 +25,12 @@ const ResultsByArtist = () => {
         const resultsArray = artistResults.results;
         const arrayLength = resultsArray.length;
         console.log("!", resultsArray);
+
+        // If array length is 0, display "No Results Found" message
+        if (arrayLength === 0) {
+            return <div>No Results Found</div>;
+        }
+
         // Create all cells in table
         const cells = [];
         for (let i = 0; i < arrayLength; i++) {
