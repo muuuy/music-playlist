@@ -10,6 +10,7 @@
 # Packages
 - You may need to install several packages using the following commands:
     - npm install
-    - npm installa axios
+    - npm install axios
     - npm install react-helmet-async
+    - npm install uuid
     - pip install flask-login
