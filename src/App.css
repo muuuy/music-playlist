@@ -31,7 +31,8 @@ body {
 
 .container {
     display: flex;
-    flex: 1;    
+    margin-top: 40px;
+    flex: 1;
 }
 
 .ui-container {

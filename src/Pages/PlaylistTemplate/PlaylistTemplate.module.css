@@ -8,6 +8,8 @@
 .template_header {
     display: flex;
     flex-direction: row;
+    margin: 40px;
+    justify-content: space-between;
 }
 
 #edit_button {
@@ -23,4 +25,8 @@
 
 #edit_button:hover {
     background-color: var(--light-red);
+}
+
+.song_list {
+    margin: 0 20px;
 }

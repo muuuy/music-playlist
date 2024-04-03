@@ -1,4 +1,6 @@
 import React,  { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 
 import styles from './PlaylistTemplate.module.css';
 
@@ -10,19 +12,29 @@ const PlaylistTemplate = () => {
 
     const generateCards = testList.map((song) => {
         return (
-            <tr>
+            <tr key={uuid()}>
                 <td>{song}</td>
             </tr>
         );
     })
 
+    const handleEdit = () => {
+        console.log('test');
+    }
+
     return (
         <div className={styles.template_container}>
             <div className={styles.template_header}>
                 <h1>{title}</h1>
-                <button id={styles.edit_button}>Edit Playlist</button>
+                <NavLink to={{
+                    pathname: '/create_playlist',
+                    state: { edit: true }
+                }}>
+                        <p>Edit Playlist</p>
+                </NavLink>
+                <button id={styles.edit_button} onClick={handleEdit}>Edit Playlist</button>
             </div>
-            <table>
+            <table className={styles.song_list}>
                 {generateCards}
             </table>
         </div>

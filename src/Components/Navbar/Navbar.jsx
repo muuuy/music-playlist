@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
+
 import React, { useState } from "react";
 import styles from './Navbar.module.css';
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
@@ -12,16 +14,16 @@ import { navList } from './NavbarData';
 //       return <Link to={to}><button>{children}</button></Link>
 // }
 
-const Navbar = () => {
+const Navbar = ({iTitle='', iDesc=''}) => {
     const navigate = useNavigate();
     const currLoc = useLocation().pathname;
 
-    const [searchInput, setSearchInput] = useState("");
-    const [searchType, setSearchType] = useState("song");
+    const [searchInput, setSearchInput] = useState(iTitle);
+    const [searchType, setSearchType] = useState(iDesc);
 
     const generateNav = navList.map((e) => (
       
-      <NavLink to={`/${e.name.toLowerCase()}`}>
+      <NavLink key={e.id} to={`/${e.name.toLowerCase()}`}>
         <li className={currLoc === `/${e.name.toLowerCase()}` ? `${styles.nav_item} ${styles.active}` : styles.nav_item}>
           {e.symbol}&nbsp;{e.name}
         </li>

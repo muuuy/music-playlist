@@ -1,13 +1,19 @@
-import React, { useState, Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import Navbar from '../../Components/Navbar/Navbar';
 import styles from './CreatePlaylist.module.css'
 
-const CreatePlaylist = ({inputTitle='', inputDescription=''}) => {
+const CreatePlaylist = ({edit = false}) => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [buttonTxt, setButtonTxt] = useState('Create Playlist');
+
+    useEffect(() => {
+        if(edit) { setButtonTxt('Edit'); } 
+        else { setButtonTxt('Create Playlist'); }
+    }, [])
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -19,18 +25,20 @@ const CreatePlaylist = ({inputTitle='', inputDescription=''}) => {
         console.log(e.target.value);
     }
 
+    console.log(edit);
+
     return (
         <div className={styles.form_container}>
             <div className={styles.input_container}>
-                <h1>Create Playlist</h1>
+                <h1>{buttonTxt}</h1>
                 <form className={styles.input_form}>
-                    <label for={styles.title_input}>Title
+                    <label htmlFor={styles.title_input}>Title
                         <input id={styles.title_input} name='title' type='text' onChange={handleTitle} value={title} required />
                     </label>
-                    <label for={styles.description}>Description
+                    <label htmlFor={styles.description}>Description
                         <textarea name="description" id={styles.description} onChange={handleDescription} value={description} cols="100" rows="5"></textarea>
                     </label>
-                    <button id={styles.create_button} type='submit'>Create Playlist</button>
+                    <button id={styles.create_button} type='submit'>{buttonTxt}</button>
                 </form>
             </div>
             
