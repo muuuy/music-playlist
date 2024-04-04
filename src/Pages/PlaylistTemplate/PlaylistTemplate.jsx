@@ -3,12 +3,15 @@ import { NavLink } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
 import styles from './PlaylistTemplate.module.css';
+import CreatePlaylist from '../CreatePlaylist/CreatePlaylist';
+import { Create } from '@mui/icons-material';
 
 const PlaylistTemplate = () => {
 
     const testList = ['aaaaaa', 'aaa', 'abbbb', 'accccccccc', 'addddddddd', 'aeeeeeeeeeeeeeee', 'affffffffff', 'agggggggggggg', 'ahhhhhhhhh'];
 
     const [title, setTitle] = useState('test');
+    const [create, setCreate] = useState(false);
 
     const generateCards = testList.map((song) => {
         return (
@@ -19,20 +22,15 @@ const PlaylistTemplate = () => {
     })
 
     const handleEdit = () => {
-        console.log('test');
+        setCreate(true);
     }
 
     return (
         <div className={styles.template_container}>
             <div className={styles.template_header}>
                 <h1>{title}</h1>
-                <NavLink to={{
-                    pathname: '/create_playlist',
-                    state: { edit: true }
-                }}>
-                        <p>Edit Playlist</p>
-                </NavLink>
                 <button id={styles.edit_button} onClick={handleEdit}>Edit Playlist</button>
+                {create && <CreatePlaylist edit={true} inputTitle={title} inputDesc=''/>}
             </div>
             <table className={styles.song_list}>
                 {generateCards}

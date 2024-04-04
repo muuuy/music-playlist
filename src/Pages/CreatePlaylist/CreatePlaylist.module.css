@@ -1,9 +1,18 @@
 .form_container {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    flex: 1;    
     justify-content: center;
     align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.create_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .input_container {
