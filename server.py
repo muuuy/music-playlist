@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, Response, flash
+from flask import Flask, jsonify, Response, session
 from flask import render_template
 from flask import request
 from flask_cors import CORS
@@ -15,13 +15,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
 # app.config['CORS_HEADERS'] = 'Content-Type'
 # cors = CORS(app, resources={r"/*": {"origins": "*"}})
-cors = CORS(app, resources={r"*": {"origins": "*"}})
+cors = CORS(app, resources={r"*": {"origins": "*"}}, supports_credentials=True)
 
 # initialize to work with app
 login_manager.init_app(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
 db = SQLAlchemy(app)
+
 
 # user class
 class User(UserMixin, db.Model):
@@ -38,18 +39,30 @@ class User(UserMixin, db.Model):
     def is_anonymous(self):
          return False
     def is_authenticated(self):
-         return self.authenticated
+         return self.userId is not None
     def is_active(self):
          return True
     def get_id(self):
          return self.userId
 
+
 # loads a user 
 @login_manager.user_loader
 def load_user(user_id):
+    print("!!!!!!!!!!!!!!!!!!!!!!!")
     result = User.query.get(user_id)
-    print("!!!!!!!!", result)
+    print("LOAD:", result)
     return result
+
+
+@app.route('/loginStatus', methods=['GET'])
+def get_login_status():
+    curr_session = session.get('user_id')
+    print("HI!!!!!!!!!!!!!!", curr_session)
+    is_logged_in = current_user.is_authenticated
+    print("logged in??????????????????", is_logged_in)
+    return jsonify({'is_logged_in': is_logged_in})
+
 
 # Home Page route
 @app.route("/")
@@ -105,20 +118,20 @@ def addrec():
 def login():
     # Get inputted credentials from login attempt
     entered_username = request.form['username']
-    print("username:", entered_username)
     entered_password = request.form['password']
-    print("password:", entered_password)
 
     user = User.query.filter(or_(User.userName.like(f"%{entered_username}%"))).first()
 
+    print("USER:", user)
 
     if user and check_password_hash(user.password, entered_password):
         login_user(user)
+        session['user_id'] = user.userId
+        print("SESSION", session)
         return jsonify({'userID': user.userId}), 200
     else:
-        flash('Invalid username or password')
-        print("NO!!!!!!!!!")
         return jsonify({'error': 'Invalid username or password'}), 401
+
 
 @app.route("/logout")
 def logout():
