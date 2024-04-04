@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styles from './Library.module.css';
 import { Helmet } from "react-helmet";
 import { NavLink } from 'react-router-dom';
+import axios from "axios";
 
 function Library() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5001/loginStatus')
-            .then(response => response.json())
-            .then(data => {
-                setIsLoggedIn(data.is_logged_in);
+        axios.get('http://localhost:5001/loginStatus', { withCredentials: true })
+            .then(response => {
+                setIsLoggedIn(response.data.is_logged_in);
             })
             .catch(error => console.error('Error fetching login status:', error));
     }, []);

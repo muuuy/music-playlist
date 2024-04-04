@@ -7,6 +7,7 @@ import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
+from flask_session import Session
 
 # login manager object
 login_manager = LoginManager()
@@ -22,6 +23,9 @@ login_manager.init_app(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
 db = SQLAlchemy(app)
+
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 
 # user class
@@ -57,8 +61,7 @@ def load_user(user_id):
 
 @app.route('/loginStatus', methods=['GET'])
 def get_login_status():
-    curr_session = session.get('user_id')
-    print("HI!!!!!!!!!!!!!!", curr_session)
+    print("HI!!!!!!!!!!!!!!!!!", current_user.userId)
     is_logged_in = current_user.is_authenticated
     print("logged in??????????????????", is_logged_in)
     return jsonify({'is_logged_in': is_logged_in})
@@ -126,7 +129,6 @@ def login():
 
     if user and check_password_hash(user.password, entered_password):
         login_user(user)
-        session['user_id'] = user.userId
         print("SESSION", session)
         return jsonify({'userID': user.userId}), 200
     else:
