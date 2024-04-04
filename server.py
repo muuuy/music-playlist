@@ -8,6 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 from flask_session import Session
+from redis import Redis
 
 # login manager object
 login_manager = LoginManager()
@@ -16,7 +17,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
 # app.config['CORS_HEADERS'] = 'Content-Type'
 # cors = CORS(app, resources={r"/*": {"origins": "*"}})
-cors = CORS(app, resources={r"*": {"origins": "*"}}, supports_credentials=True)
+CORS(app, supports_credentials=True)
 
 # initialize to work with app
 login_manager.init_app(app)
@@ -24,7 +25,8 @@ login_manager.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
 db = SQLAlchemy(app)
 
-app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_REDIS'] = Redis(host='localhost', port=6379)
 Session(app)
 
 
@@ -53,15 +55,13 @@ class User(UserMixin, db.Model):
 # loads a user 
 @login_manager.user_loader
 def load_user(user_id):
-    print("!!!!!!!!!!!!!!!!!!!!!!!")
     result = User.query.get(user_id)
     print("LOAD:", result)
     return result
 
-
 @app.route('/loginStatus', methods=['GET'])
 def get_login_status():
-    print("HI!!!!!!!!!!!!!!!!!", current_user.userId)
+    print("SESSION ID DURING VERIFICATION", session.sid)  # THIS IS DIFFERENT THAN DURING LOGIN
     is_logged_in = current_user.is_authenticated
     print("logged in??????????????????", is_logged_in)
     return jsonify({'is_logged_in': is_logged_in})
@@ -129,7 +129,8 @@ def login():
 
     if user and check_password_hash(user.password, entered_password):
         login_user(user)
-        print("SESSION", session)
+        session['userId'] = user.userId
+        print("SESSION DURING LOG IN", session.sid)
         return jsonify({'userID': user.userId}), 200
     else:
         return jsonify({'error': 'Invalid username or password'}), 401
