@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styles from './Library.module.css';
 import { Helmet } from "react-helmet";
 import { NavLink } from 'react-router-dom';
-import axios from "axios";
 
 function Library() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5001/loginStatus', { withCredentials: true })
-            .then(response => {
-                setIsLoggedIn(response.data.is_logged_in);
-            })
-            .catch(error => console.error('Error fetching login status:', error));
+        // Check if JWT token exists in local storage
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (jwtToken) {
+            // If token exists, set isLoggedIn to true
+            setIsLoggedIn(true);
+        } else {
+            // If token doesn't exist, set isLoggedIn to false
+            setIsLoggedIn(false);
+        }
     }, []);
 
     return (

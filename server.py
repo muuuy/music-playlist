@@ -2,32 +2,22 @@ from flask import Flask, jsonify, Response, session
 from flask import render_template
 from flask import request
 from flask_cors import CORS
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from flask_login import UserMixin
 import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
-from flask_session import Session
-from redis import Redis
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 
-# login manager object
-login_manager = LoginManager()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# cors = CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app, supports_credentials=True)
 
-# initialize to work with app
-login_manager.init_app(app)
+jwt = JWTManager(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
 db = SQLAlchemy(app)
-
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = Redis(host='localhost', port=6379)
-Session(app)
 
 
 # user class
@@ -50,21 +40,6 @@ class User(UserMixin, db.Model):
          return True
     def get_id(self):
          return self.userId
-
-
-# loads a user 
-@login_manager.user_loader
-def load_user(user_id):
-    result = User.query.get(user_id)
-    print("LOAD:", result)
-    return result
-
-@app.route('/loginStatus', methods=['GET'])
-def get_login_status():
-    print("SESSION ID DURING VERIFICATION", session.sid)  # THIS IS DIFFERENT THAN DURING LOGIN
-    is_logged_in = current_user.is_authenticated
-    print("logged in??????????????????", is_logged_in)
-    return jsonify({'is_logged_in': is_logged_in})
 
 
 # Home Page route
@@ -128,18 +103,11 @@ def login():
     print("USER:", user)
 
     if user and check_password_hash(user.password, entered_password):
-        login_user(user)
-        session['userId'] = user.userId
-        print("SESSION DURING LOG IN", session.sid)
-        return jsonify({'userID': user.userId}), 200
+        access_token = create_access_token(identity=user.userId)
+        return jsonify(access_token=access_token), 200
     else:
         return jsonify({'error': 'Invalid username or password'}), 401
-
-
-@app.route("/logout")
-def logout():
-    logout_user()
-    # return to login
+    
 
 # Route used to DELETE a specific record in the database    
 @app.route("/removeUser", methods=['POST','GET', 'OPTIONS'])
@@ -165,7 +133,8 @@ def delete():
             # Send the transaction message to the f
             # ont-end
             return jsonify({'message': msg})
-        
+
+
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():
     if request.method == 'POST':
@@ -185,6 +154,7 @@ def create_playlist():
             con.close()
 
             return jsonify({'message': 'Playlist created successfully!'})
+
 
 # Route to add a track to a playlist
 @app.route('/add_to_playlist', methods=['POST', 'OPTIONS'])
@@ -209,6 +179,24 @@ def add_to_playlist():
             return jsonify({'message': 'Track added to playlist successfully!'})
 
 
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    return jsonify({"error": "Invalid token"}), 401
+
+
+@jwt.expired_token_loader
+def expired_token_callback():
+    return jsonify({"error": "Token has expired"}), 401
+
+
+@jwt.unauthorized_loader
+def unauthorized_callback(error):
+    return jsonify({"error": "Unauthorized"}), 401
+
+
+@jwt.needs_fresh_token_loader
+def token_not_fresh_callback():
+    return jsonify({"error": "Fresh token required"}), 401
 
 # # Route to SELECT all data from the database and display in a table      
 # @app.route('/list')
