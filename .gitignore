@@ -29,3 +29,7 @@ __pycache__
 
 flask_server/.env
 .gitignore
+venv
+database.db
+package-lock.json
+package.json
