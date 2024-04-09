@@ -1,27 +1,24 @@
-from flask import Flask, jsonify, Response, flash
+from flask import Flask, jsonify, Response, session
 from flask import render_template
 from flask import request
 from flask_cors import CORS
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from flask_login import UserMixin
 import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 
-# login manager object
-login_manager = LoginManager()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# cors = CORS(app, resources={r"/*": {"origins": "*"}})
-cors = CORS(app, resources={r"*": {"origins": "*"}})
+CORS(app, supports_credentials=True)
 
-# initialize to work with app
-login_manager.init_app(app)
+jwt = JWTManager(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
 db = SQLAlchemy(app)
+
 
 # user class
 class User(UserMixin, db.Model):
@@ -38,18 +35,12 @@ class User(UserMixin, db.Model):
     def is_anonymous(self):
          return False
     def is_authenticated(self):
-         return self.authenticated
+         return self.userId is not None
     def is_active(self):
          return True
     def get_id(self):
          return self.userId
 
-# loads a user 
-@login_manager.user_loader
-def load_user(user_id):
-    result = User.query.get(user_id)
-    print("!!!!!!!!", result)
-    return result
 
 # Home Page route
 @app.route("/")
@@ -105,25 +96,18 @@ def addrec():
 def login():
     # Get inputted credentials from login attempt
     entered_username = request.form['username']
-    print("username:", entered_username)
     entered_password = request.form['password']
-    print("password:", entered_password)
 
     user = User.query.filter(or_(User.userName.like(f"%{entered_username}%"))).first()
 
+    print("USER:", user)
 
     if user and check_password_hash(user.password, entered_password):
-        login_user(user)
-        return jsonify({'userID': user.userId}), 200
+        access_token = create_access_token(identity=user.userId)
+        return jsonify(access_token=access_token), 200
     else:
-        flash('Invalid username or password')
-        print("NO!!!!!!!!!")
         return jsonify({'error': 'Invalid username or password'}), 401
-
-@app.route("/logout")
-def logout():
-    logout_user()
-    # return to login
+    
 
 # Route used to DELETE a specific record in the database    
 @app.route("/removeUser", methods=['POST','GET', 'OPTIONS'])
@@ -149,7 +133,8 @@ def delete():
             # Send the transaction message to the f
             # ont-end
             return jsonify({'message': msg})
-        
+
+
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():
     if request.method == "OPTIONS":
@@ -300,6 +285,89 @@ def get_music_from_playlist(playlist_id):
             return jsonify(music_data)
     except Exception as e:
         return jsonify({'error': str(e)})
+
+
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    return jsonify({"error": "Invalid token"}), 401
+
+
+@jwt.expired_token_loader
+def expired_token_callback():
+    return jsonify({"error": "Token has expired"}), 401
+
+
+@jwt.unauthorized_loader
+def unauthorized_callback(error):
+    return jsonify({"error": "Unauthorized"}), 401
+
+
+@jwt.needs_fresh_token_loader
+def token_not_fresh_callback():
+    return jsonify({"error": "Fresh token required"}), 401
+
+# # Route to SELECT all data from the database and display in a table      
+# @app.route('/list')
+# def list():
+#     print("test")
+#     # Connect to the SQLite3 datatabase and 
+#     # SELECT rowid and all Rows from the students table.
+#     con = sqlite3.connect("database.db")
+#     con.row_factory = sqlite3.Row
+
+#     cur = con.cursor()
+#     cur.execute("SELECT rowid, * FROM students")
+
+#     rows = cur.fetchall()
+#     students_list = [{'name': row['name'], 'id': row['id'], 'points': row['points']} for row in rows]
+#     con.close()
+#     # Send the results of the SELECT to the list.html page
+#     return jsonify(students_list)
+
+
+# # Route used to execute the UPDATE statement on a specific record in the database
+# @app.route("/edit", methods=['POST','GET'])
+# def editrec():
+#     # Data will be available from POST submitted by the form
+#     if request.method == 'POST':
+#         try:
+#             data = request.get_json()
+#             nm = data['name']
+#             ID = data['ID']
+#             points = data['points']
+
+#             # UPDATE a specific record in the database based on the rowid
+#             with sqlite3.connect('database.db') as con:
+#                 cur = con.cursor()
+#                 cur.execute("UPDATE students SET name='"+nm+"', points='"+points+"' WHERE ID="+ID)
+
+#                 con.commit()
+#                 msg = "Record successfully edited in the database"
+#         except:
+#             con.rollback()
+#             msg = "Error in the Edit"
+
+#         finally:
+#             con.close()
+#             # Send the transaction message to result.html
+#             return jsonify({'message': msg})
+
+
+
+# @app.route('/sendUpdate')
+# def get_data():
+#     print("test1")
+#     con = sqlite3.connect("database.db")
+#     con.row_factory = sqlite3.Row
+
+#     cur = con.cursor()
+#     cur.execute("SELECT rowid, * FROM students")
+
+#     rows = cur.fetchall()
+#     students_list = [{'name': row['name'], 'id': row['id'], 'points': row['points']} for row in rows]
+#     con.close()
+#     # Send the results of the SELECT to the list.html page
+#     return jsonify(students_list)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

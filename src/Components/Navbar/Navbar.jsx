@@ -20,6 +20,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
 
     const [searchInput, setSearchInput] = useState(iTitle);
     const [searchType, setSearchType] = useState(iDesc);
+    const [loggedIn, setIsLoggedIn] = useState(false);
 
     const generateNav = navList.map((e) => (
       
@@ -62,6 +63,21 @@ const Navbar = ({iTitle='', iDesc=''}) => {
         });
       };
 
+      const handleLogout = () => {
+        // Remove JWT token from local storage
+        localStorage.removeItem('jwtToken');
+        // Redirect user to the login page
+        navigate("/login");
+    };
+
+    // const displayButtons = () => {
+    //   if(loggedIn === false) {
+
+    //   } else {
+
+    //   }
+    // }
+
     const [isDropdownActive, setDropdownActive] = useState(false);
 
     const toggleDropdown = () => {
@@ -93,6 +109,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                   <NavLink to="/signup">
                     <button>Sign Up</button>
                   </NavLink>
+                  <button onClick={handleLogout}>Log Out</button>
                 </ul>
                 <div className={styles.toggle_button} onClick={toggleDropdown}><FaBars /></div>
             </nav>
@@ -108,6 +125,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                     <NavLink to="/signup">
                       <button id={styles.sign_in__button}>Sign Up</button>
                     </NavLink>
+                    <button onClick={handleLogout}  id={styles.sign_in__button}>Log Out</button>
                 </ul>
             </nav>
         </div>

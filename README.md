@@ -38,3 +38,4 @@ npm install @mui/material @emotion/react @emotion/styled
     - npm install react-helmet-async
     - npm install uuid
     - pip install flask-login
+    -pip install Flask-JWT-Extended
