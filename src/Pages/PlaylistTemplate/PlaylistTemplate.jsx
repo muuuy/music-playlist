@@ -22,7 +22,7 @@ const PlaylistTemplate = () => {
     })
 
     const handleEdit = () => {
-        setCreate(true);
+        setCreate(!create);
     }
 
     return (
@@ -30,7 +30,7 @@ const PlaylistTemplate = () => {
             <div className={styles.template_header}>
                 <h1>{title}</h1>
                 <button id={styles.edit_button} onClick={handleEdit}>Edit Playlist</button>
-                {create && <CreatePlaylist edit={true} inputTitle={title} inputDesc=''/>}
+                {create && <CreatePlaylist edit={true} inputTitle={title} inputDesc='' inputVisible={create ? 'absolute' : 'none'} onClose = {handleEdit} />}
             </div>
             <table className={styles.song_list}>
                 {generateCards}
