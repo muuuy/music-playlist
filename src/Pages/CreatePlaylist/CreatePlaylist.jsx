@@ -30,6 +30,16 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
         onClose;
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+        await axios.post("http://127.0.0.1:5001/create_playlist", {title, description});
+        } catch (err) {
+        console.log(err);
+        }
+        navigate('/');
+    };
+
     return (
         <div className={styles.form_container} style={{ display: visible }}>
             <div className={styles.input_container}>
@@ -50,7 +60,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
                     <label htmlFor={styles.description}>Description
                         <textarea name="description" id={styles.description} onChange={handleDescription} value={description} cols="100" rows="5"></textarea>
                     </label>
-                    <button id={styles.create_button} type='submit'>{buttonTxt}</button>
+                    <button id={styles.create_button} onSubmit={handleSubmit} type='submit'>{buttonTxt}</button>
                 </form>
             </div>
             

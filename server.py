@@ -152,6 +152,10 @@ def delete():
         
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
     if request.method == 'POST':
         try:
             data = request.get_json()
@@ -167,95 +171,135 @@ def create_playlist():
             con.rollback()
         finally:
             con.close()
+            #get_data()  # Refresh the data after adding or rejecting the entry
+            # Send the transaction message to the front-end
+            msg = "playlist created successfully"
+            response = jsonify({'message': msg})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
+        
+@app.route("/delete_playlist", methods=['POST','GET', 'OPTIONS'])
+def delete_playlist():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            playlist_id = data.get('playlistId')
 
-            return jsonify({'message': 'Playlist created successfully!'})
-
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                # Delete playlist from the playlist table
+                cur.execute("DELETE FROM playlist WHERE playlistId=?", (playlist_id,))
+                # Also delete entries from user_playlist and playlist_track tables if any
+                cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
+                cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
+                con.commit()
+                msg = "Playlist successfully deleted"
+        except Exception as e:
+            con.rollback()
+            msg = f"Error in deleting playlist: {str(e)}"
+        finally:
+            con.close()
+            # Send the transaction message to the f
+            # ont-end
+            return jsonify({'message': msg})
+        
 # Route to add a track to a playlist
 @app.route('/add_to_playlist', methods=['POST', 'OPTIONS'])
 def add_to_playlist():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
     if request.method == 'POST':
         try:
             data = request.get_json()
             user_id = data['userId']
             playlist_id = data['playlistId']
             track_id = data['trackId']
+            artist = data['artist']
+            album = data['album']
+            genre = data['genre']
 
             with sqlite3.connect('database.db') as con:
                 cursor = con.cursor()
                 cursor.execute('INSERT INTO user_playlist (userId, playlistId) VALUES (?, ?)', (user_id, playlist_id))
-                cursor.execute('INSERT INTO playlist_track (playlistId, trackId) VALUES (?, ?)', (playlist_id, track_id))
                 con.commit()
             
         except Exception as e:
             con.rollback()
         finally:
             con.close()
-            return jsonify({'message': 'Track added to playlist successfully!'})
+            msg = "Track added to playlist successfully!"
+            response = jsonify({'message': msg})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
+
+@app.route('/delete_from_playlist', methods=['POST', 'OPTIONS'])
+def delete_from_playlist():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
+    try:
+        data = request.get_json()
+        playlist_id = data['playlistId']
+        track_id = data['trackId']
+
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
+            # Delete entry from the playlist_track table
+            cur.execute("DELETE FROM playlist_track WHERE playlistId=? AND trackId=?", (playlist_id, track_id))
+            con.commit()
+            msg = "Song successfully removed from the playlist"
+    except Exception as e:
+        con.rollback()
+        msg = f"Error in removing song from playlist: {str(e)}"
+    finally:
+        con.close()
+        response = jsonify({'message': msg})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+@app.route('/get_all_playlists', methods=['GET'])
+def get_all_playlists():
+    try:
+        with sqlite3.connect('database.db') as con:
+            cursor = con.cursor()
+            cursor.execute("SELECT * FROM playlist")
+            playlists = cursor.fetchall()
+            playlists_data = [{'playlistId': row[0], 'userId': row[1], 'title': row[2], 'description': row[3], 'created_at': row[4]} for row in playlists]
+            return jsonify(playlists_data)
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 
-
-# # Route to SELECT all data from the database and display in a table      
-# @app.route('/list')
-# def list():
-#     print("test")
-#     # Connect to the SQLite3 datatabase and 
-#     # SELECT rowid and all Rows from the students table.
-#     con = sqlite3.connect("database.db")
-#     con.row_factory = sqlite3.Row
-
-#     cur = con.cursor()
-#     cur.execute("SELECT rowid, * FROM students")
-
-#     rows = cur.fetchall()
-#     students_list = [{'name': row['name'], 'id': row['id'], 'points': row['points']} for row in rows]
-#     con.close()
-#     # Send the results of the SELECT to the list.html page
-#     return jsonify(students_list)
-
-
-# # Route used to execute the UPDATE statement on a specific record in the database
-# @app.route("/edit", methods=['POST','GET'])
-# def editrec():
-#     # Data will be available from POST submitted by the form
-#     if request.method == 'POST':
-#         try:
-#             data = request.get_json()
-#             nm = data['name']
-#             ID = data['ID']
-#             points = data['points']
-
-#             # UPDATE a specific record in the database based on the rowid
-#             with sqlite3.connect('database.db') as con:
-#                 cur = con.cursor()
-#                 cur.execute("UPDATE students SET name='"+nm+"', points='"+points+"' WHERE ID="+ID)
-
-#                 con.commit()
-#                 msg = "Record successfully edited in the database"
-#         except:
-#             con.rollback()
-#             msg = "Error in the Edit"
-
-#         finally:
-#             con.close()
-#             # Send the transaction message to result.html
-#             return jsonify({'message': msg})
-
-
-
-# @app.route('/sendUpdate')
-# def get_data():
-#     print("test1")
-#     con = sqlite3.connect("database.db")
-#     con.row_factory = sqlite3.Row
-
-#     cur = con.cursor()
-#     cur.execute("SELECT rowid, * FROM students")
-
-#     rows = cur.fetchall()
-#     students_list = [{'name': row['name'], 'id': row['id'], 'points': row['points']} for row in rows]
-#     con.close()
-#     # Send the results of the SELECT to the list.html page
-#     return jsonify(students_list)
+# Function to get all music from a playlist
+@app.route('/get_music_from_playlist/<int:playlist_id>', methods=['GET'])
+def get_music_from_playlist(playlist_id):
+    try:
+        with sqlite3.connect('database.db') as con:
+            cursor = con.cursor()
+            cursor.execute("SELECT * FROM playlist_track WHERE playlistId=?", (playlist_id,))
+            playlist_music = cursor.fetchall()
+            music_data = []
+            for row in playlist_music:
+                cursor.execute("SELECT * FROM track WHERE trackId=?", (row[1],))
+                track_info = cursor.fetchone()
+                if track_info:
+                    music_data.append({
+                        'trackId': track_info[0],
+                        'title': track_info[1],
+                        'artist': track_info[2],
+                        'album': track_info[3],
+                        'genre': track_info[4]
+                    })
+            return jsonify(music_data)
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

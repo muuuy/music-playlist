@@ -10,6 +10,21 @@ const Library = () => {
     // render () {
 
         const [visible, setVisible] = useState(false);
+        const [playlist, setPlaylist] = useState([{}]);
+        const handleDeleteStudent = async () => {
+            //e.preventDefault();
+            console.log("test")
+          };
+        
+        useEffect(() => {
+            fetch("/get_all_playlists").then(
+              res=>res.json()
+            ).then(
+              data=> {
+                setPlaylist(data)
+              }
+            )
+          }, [])
 
         const handleClick = () => {
             setVisible(true);
@@ -26,6 +41,18 @@ const Library = () => {
                     <button className={styles.create_playlist} onClick={handleClick}>Create Playlist</button>
                     {visible && <CreatePlaylist />}
                 </div>
+                {playlist.map((val, key) => {
+                    return (
+                    <tr key={key}>
+                        <td>{val.title}</td>
+                        <td>{val.description}</td>
+                        <button onClick={()=>handleDeleteStudent()}>
+                            Delete
+                        </button>
+                    </tr>
+                    
+                    )
+                })}
             </div>
         )
     // }
