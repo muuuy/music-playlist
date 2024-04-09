@@ -20,6 +20,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
 
     const [searchInput, setSearchInput] = useState(iTitle);
     const [searchType, setSearchType] = useState(iDesc);
+    const [loggedIn, setIsLoggedIn] = useState(false);
 
     const generateNav = navList.map((e) => (
       
@@ -68,6 +69,14 @@ const Navbar = ({iTitle='', iDesc=''}) => {
         // Redirect user to the login page
         navigate("/login");
     };
+
+    // const displayButtons = () => {
+    //   if(loggedIn === false) {
+
+    //   } else {
+
+    //   }
+    // }
 
     const [isDropdownActive, setDropdownActive] = useState(false);
 
