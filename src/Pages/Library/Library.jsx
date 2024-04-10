@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Library.module.css';
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { NavLink } from 'react-router-dom';
 
 function Library() {
@@ -20,9 +20,11 @@ function Library() {
 
     return (
         <div className={styles.library_container}>
-            <Helmet>
-                <title>Library | MusicPlaylists</title>
-            </Helmet>   
+            <HelmetProvider>
+                <Helmet>
+                    <title>Library | MusicPlaylists</title>
+                </Helmet>   
+            </HelmetProvider>
 
             <div className={styles.library_header}>
                 <h1>Library</h1>

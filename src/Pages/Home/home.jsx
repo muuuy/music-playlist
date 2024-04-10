@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 
 class Home extends Component {
     render () {
+        const loginToken = localStorage.getItem('jwtToken');
+
         return (
             <div className={styles.home_container}>
                 <HelmetProvider>
@@ -21,8 +23,14 @@ class Home extends Component {
                     </div>
 
                     <div className={styles.join_us}>
-                        <p>Join us today!</p>
-                        <NavLink to='/signup' id="join_us_text">Click Here!</NavLink>
+                        {!loginToken ?
+                            <>
+                                <p>Join us today!</p>
+                                <NavLink to='/signup' id="join_us_text">Click Here!</NavLink>
+                            </>                            
+                            :
+                            <></>
+                        }                        
                     </div>
 
                     <div className={styles.features}>

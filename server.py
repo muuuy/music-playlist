@@ -16,7 +16,7 @@ CORS(app, supports_credentials=True)
 
 jwt = JWTManager(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/lees8/Kyoung Lee/VScode workspaces/447_playlist/music-playlist/database.db'
 db = SQLAlchemy(app)
 
 

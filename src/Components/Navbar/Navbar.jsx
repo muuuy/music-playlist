@@ -17,9 +17,11 @@ import { navList } from './NavbarData';
 const Navbar = ({iTitle='', iDesc=''}) => {
     const navigate = useNavigate();
     const currLoc = useLocation().pathname;
+    const loginToken = localStorage.getItem('jwtToken');
+    const username = localStorage.getItem('username');
 
     const [searchInput, setSearchInput] = useState(iTitle);
-    const [searchType, setSearchType] = useState(iDesc);
+    const [searchType, setSearchType] = useState(iDesc);       
 
     const generateNav = navList.map((e) => (
       
@@ -65,8 +67,11 @@ const Navbar = ({iTitle='', iDesc=''}) => {
       const handleLogout = () => {
         // Remove JWT token from local storage
         localStorage.removeItem('jwtToken');
+        
         // Redirect user to the login page
         navigate("/login");
+
+        console.log("Logged out sucessfully");
     };
 
     const [isDropdownActive, setDropdownActive] = useState(false);
@@ -78,7 +83,10 @@ const Navbar = ({iTitle='', iDesc=''}) => {
     return (
         <div id={styles.main_container}>
             <nav id={styles.nav_container}>
-                <a className={styles.logo} href="/">MusicPlaylists</a>
+                {/* <a className={styles.logo} href="/">MusicPlaylists</a> */}
+                <ul className={styles.logo}>
+                  <NavLink to="/">MusicPlaylists</NavLink>
+                </ul>
                 <ul className={styles.nav_menu}>
                   {generateNav}
                 </ul>
@@ -94,29 +102,46 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                     </form>
                 </div>
                 <ul className={styles.sign}>
-                  <NavLink to="/login">
-                    <button>Sign In</button>
-                  </NavLink>
-                  <NavLink to="/signup">
-                    <button>Sign Up</button>
-                  </NavLink>
-                  <button onClick={handleLogout}>Log Out</button>
+                  {loginToken ?
+                    <>
+                      <div className={styles.user}>
+                        <p>Hello,</p>
+                        <p>{username}</p>
+                      </div>
+                      
+                      <button onClick={handleLogout}>Log Out</button> 
+                    </>                                   
+                    :
+                    <>
+                      <NavLink to="/login">
+                        <button>Sign In</button>
+                      </NavLink>
+                      <NavLink to="/signup">
+                        <button>Sign Up</button>
+                      </NavLink>
+                    </>
+                  }
                 </ul>
                 <div className={styles.toggle_button} onClick={toggleDropdown}><FaBars /></div>
             </nav>
 
             <nav className={`${styles.dropdown_menu} ${isDropdownActive ? styles.active : ''}`}>
                 <ul>
-                    <li id={styles.nav_item}><NavLink to="/"><FaHome /> Home</NavLink></li>
+                    <li id={styles.nav_item}><NavLink to="/home"><FaHome /> Home</NavLink></li>
                     <li id={styles.nav_item}><NavLink to="/library"><FaMusic /> Library</NavLink></li>
                     <li id={styles.nav_item}><NavLink to="#"><FaCompass /> Explore</NavLink></li>
-                    <NavLink to="/login">
-                      <button id={styles.sign_in__button}>Sign In</button>
-                    </NavLink>
-                    <NavLink to="/signup">
-                      <button id={styles.sign_in__button}>Sign Up</button>
-                    </NavLink>
-                    <button onClick={handleLogout}  id={styles.sign_in__button}>Log Out</button>
+                    {loginToken ?
+                      <button onClick={handleLogout}  id={styles.sign_in__button}>Log Out</button>
+                      :
+                      <>
+                        <NavLink to="/login">
+                          <button id={styles.sign_in__button}>Sign In</button>
+                        </NavLink>
+                        <NavLink to="/signup">
+                          <button id={styles.sign_in__button}>Sign Up</button>
+                        </NavLink>
+                      </>
+                    }                    
                 </ul>
             </nav>
         </div>
