@@ -31,3 +31,34 @@
 .create_playlist:hover {
     background-color: var(--light-red);
 }
+
+/*--------------------------------=LOGIN TEXT=--------------------------------*/
+.login_message {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/*--------------------------------=PLAYLIST CARDS=--------------------------------*/
+.playlist_card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    height: 60px;
+    background-color: var(--darker-gray);
+    cursor: pointer;
+}
+
+.playlist_card:hover {
+    background-color: black !important;
+}
+
+.playlist_title {
+    margin-left: 40px;
+}
+
+.song_count {
+    margin-right: 40px;
+}

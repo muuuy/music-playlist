@@ -22,8 +22,13 @@ const PlaylistTemplate = () => {
     })
 
     const handleEdit = () => {
-        setCreate(!create);
+        setCreate(create => !create);
     }
+
+    useEffect(() => {
+        console.log(create);
+    }, [create])
+
 
     return (
         <div className={styles.template_container}>
@@ -33,7 +38,9 @@ const PlaylistTemplate = () => {
                 {create && <CreatePlaylist edit={true} inputTitle={title} inputDesc='' inputVisible={create ? 'absolute' : 'none'} onClose = {handleEdit} />}
             </div>
             <table className={styles.song_list}>
-                {generateCards}
+                <tbody>
+                    {generateCards}
+                </tbody>
             </table>
         </div>
     )
