@@ -107,8 +107,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                       <div className={styles.user}>
                         <p>Hello,</p>
                         <p>{username}</p>
-                      </div>
-                      
+                      </div>                      
                       <button onClick={handleLogout}>Log Out</button> 
                     </>                                   
                     :
