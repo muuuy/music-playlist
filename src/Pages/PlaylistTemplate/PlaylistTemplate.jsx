@@ -1,5 +1,6 @@
 import React,  { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { v4 as uuid } from 'uuid';
 
 import styles from './PlaylistTemplate.module.css';
@@ -36,6 +37,11 @@ const PlaylistTemplate = () => {
 
 
     return (
+        <>
+        <Helmet>
+            <title>Playlist | {title}</title>
+        </Helmet>
+
         <div className={styles.template_container}>
             <div className={styles.template_header}>
                 <h1>{title}</h1>
@@ -48,6 +54,7 @@ const PlaylistTemplate = () => {
                 </tbody>
             </table>
         </div>
+        </>
     )
 }
 
