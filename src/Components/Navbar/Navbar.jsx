@@ -18,8 +18,8 @@ const Navbar = ({iTitle='', iDesc=''}) => {
     const navigate = useNavigate();
     const currLoc = useLocation().pathname;
 
-    const [searchInput, setSearchInput] = useState(iTitle);
-    const [searchType, setSearchType] = useState(iDesc);
+    const [searchInput, setSearchInput] = useState("");
+    const [searchType, setSearchType] = useState("song");
     const [loggedIn, setIsLoggedIn] = useState(false);
 
     const generateNav = navList.map((e) => (
