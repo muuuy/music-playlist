@@ -35,7 +35,7 @@ const Library = () => {
             : { background: "var(--dark-gray)" }
         }
       >
-        <p className={styles.playlist_title}>Delete Later</p>
+        <p className={styles.playlist_title}>Place HolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolder</p>
         <p className={styles.song_count}>777 Songs</p>
       </div>
     );
@@ -68,10 +68,10 @@ const Library = () => {
           </button>
         ) : (
           <p className={styles.login_message}>
-            Please log in to access your library. Don't have an account?{" "}
+            Please log in to access your library. Don&apos;t have an account?{" "}
             <NavLink
               to="/signup"
-              style={{ color: "var(--light-red)", cursor: "pointer" }}
+              style={{ color: "var(--light-red)", cursor: "pointer", fontWeight: '700' }}
             >
               Sign up
             </NavLink>

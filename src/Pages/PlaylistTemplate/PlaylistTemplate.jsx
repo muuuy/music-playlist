@@ -1,5 +1,6 @@
 import React,  { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { v4 as uuid } from 'uuid';
 
 import styles from './PlaylistTemplate.module.css';
@@ -16,7 +17,12 @@ const PlaylistTemplate = () => {
     const generateCards = testList.map((song) => {
         return (
             <tr key={uuid()}>
-                <td>{song}</td>
+                <td className={styles.song_card}>
+                    <span className={styles.song_title}>{song}</span>
+                    <p className={styles.song_artist}>artist</p>
+                    <p className={styles.song_album}>album</p>
+                    <p className={styles.song_time}>9:99</p>
+                </td>
             </tr>
         );
     })
@@ -31,6 +37,11 @@ const PlaylistTemplate = () => {
 
 
     return (
+        <>
+        <Helmet>
+            <title>Playlist | {title}</title>
+        </Helmet>
+
         <div className={styles.template_container}>
             <div className={styles.template_header}>
                 <h1>{title}</h1>
@@ -43,6 +54,7 @@ const PlaylistTemplate = () => {
                 </tbody>
             </table>
         </div>
+        </>
     )
 }
 
