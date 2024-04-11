@@ -30,3 +30,37 @@
 .song_list {
     margin: 0 20px;
 }
+
+
+/*-------------------SONG CARDS-------------------*/
+.song_card {
+    display: flex;
+}
+
+.song_title,
+.song_artist,
+.song_album,
+.song_time {
+    display: flex;
+    margin-right: 5%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.song_title,
+.song_artist,
+.song_album {
+    width: 30%;
+    justify-content: flex-start;
+}
+
+.song_title {
+    margin-left: 5%;
+}
+
+.song_time {
+    display: flex;
+    width: 10%;
+    justify-content: flex-end;
+}

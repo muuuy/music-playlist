@@ -16,7 +16,12 @@ const PlaylistTemplate = () => {
     const generateCards = testList.map((song) => {
         return (
             <tr key={uuid()}>
-                <td>{song}</td>
+                <td className={styles.song_card}>
+                    <span className={styles.song_title}>{song}</span>
+                    <p className={styles.song_artist}>artist</p>
+                    <p className={styles.song_album}>album</p>
+                    <p className={styles.song_time}>9:99</p>
+                </td>
             </tr>
         );
     })
