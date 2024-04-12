@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { v4 as uuid } from "uuid";
 
 import styles from "./PlaylistTemplate.module.css";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
-import { Create } from "@mui/icons-material";
-
-import { FaEllipsisVertical } from "react-icons/fa6";
 
 const PlaylistTemplate = () => {
   const testList = [
@@ -24,12 +20,6 @@ const PlaylistTemplate = () => {
 
   const [title, setTitle] = useState("test");
   const [create, setCreate] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  const displayMenu = () => {
-    setMenuVisible(menuVisible => !menuVisible);
-    console.log(menuVisible)
-  };
 
   const removeSong = () => {
     //TODO: Add code to connect to backend 
