@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Library.module.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
@@ -23,6 +23,10 @@ const Library = () => {
     }
   }, []);
 
+  const removePlaylist = () => {
+    //TODO: Remove playlist on click - need to connect to backend.
+  }
+
   const populateLibrary = () => {
     count += 1;
 
@@ -37,19 +41,15 @@ const Library = () => {
       >
         <p className={styles.playlist_title}>Place HolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolder</p>
         <p className={styles.song_count}>777 Songs</p>
+        <p className={styles.remove_song} onClick={removePlaylist}>❌</p>
       </div>
     );
   };
 
   const [create, setCreate] = useState(false);
-  const [visible, setVisible] = useState(false);
-
-  const handleClick = () => {
-    setVisible(true);
-  };
 
   const handleEdit = () => {
-    setCreate(!create);
+    setCreate(create => !create);
   };
 
   return (
@@ -77,7 +77,7 @@ const Library = () => {
             </NavLink>
           </p>
         )}
-        {create && (
+        {create === true && (
           <CreatePlaylist
             edit={true}
             inputTitle={"DELETE LATER"}
