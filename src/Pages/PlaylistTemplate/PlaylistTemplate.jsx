@@ -22,12 +22,12 @@ const PlaylistTemplate = () => {
   const [create, setCreate] = useState(false);
 
   const removeSong = () => {
-    //TODO: Add code to connect to backend 
-  }
+    //TODO: Add code to connect to backend
+  };
 
   const generateCards = testList.map((song) => {
     let id = uuid();
-    
+
     return (
       <tr key={id}>
         <td className={styles.song_card}>
@@ -36,7 +36,9 @@ const PlaylistTemplate = () => {
           <p className={styles.song_album}>album</p>
           <p className={styles.song_time}>9:99</p>
           <div className={styles.remove_container}>
-            <p className={styles.remove_song} onClick={removeSong}>❌</p>
+            <p className={styles.remove_song} onClick={removeSong}>
+              ❌
+            </p>
           </div>
         </td>
       </tr>
@@ -46,10 +48,6 @@ const PlaylistTemplate = () => {
   const handleEdit = () => {
     setCreate((create) => !create);
   };
-
-  useEffect(() => {
-    console.log(create);
-  }, [create]);
 
   return (
     <>

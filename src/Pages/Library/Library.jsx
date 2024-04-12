@@ -47,14 +47,9 @@ const Library = () => {
   };
 
   const [create, setCreate] = useState(false);
-  const [visible, setVisible] = useState(false);
-
-  const handleClick = () => {
-    setVisible(true);
-  };
 
   const handleEdit = () => {
-    setCreate(!create);
+    setCreate(create => !create);
   };
 
   return (
@@ -80,7 +75,7 @@ const Library = () => {
             </NavLink>
           </p>
         )}
-        {create && (
+        {create === true && (
           <CreatePlaylist
             edit={true}
             inputTitle={"DELETE LATER"}
