@@ -137,6 +137,7 @@ def delete():
 
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():
+    con = None
     if request.method == "OPTIONS":
         res = Response()
         res.headers['X-Content-Type-Options'] = '*'
@@ -144,13 +145,14 @@ def create_playlist():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            user_id = data['userId']
+            print(data)
+            userId = data['userId']
             title = data['title']
             description = data['description']
             with sqlite3.connect('database.db') as con:
-                cursor = con.cursor()
-                cursor.execute('INSERT INTO playlist (userId, title, description, created_at) VALUES (?, ?, ?, datetime("now"))',
-                            (user_id, title, description))
+                cur = con.cursor()
+                cur.execute('INSERT INTO playlist (userId, title, description, created_at) VALUES (?, ?, ?, datetime("now"))',
+                            (userId, title, description))
                 con.commit()
         except Exception as e:
             con.rollback()

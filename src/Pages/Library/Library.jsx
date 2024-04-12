@@ -2,7 +2,6 @@ import React, { Component, useState, useEffect } from 'react';
 import styles from './Library.module.css';
 import { Helmet } from "react-helmet";
 import { NavLink } from 'react-router-dom';
-
 import CreatePlaylist from '../CreatePlaylist/CreatePlaylist';
 
 //TODO: Change the "DELETE LATER" when created the component
@@ -20,7 +19,7 @@ const Library = () => {
             setIsLoggedIn(true);
         } else {
             // If token doesn't exist, set isLoggedIn to false
-            setIsLoggedIn(false);
+            setIsLoggedIn(true);
         }
     }, []);
 
