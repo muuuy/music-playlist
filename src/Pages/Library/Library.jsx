@@ -23,6 +23,10 @@ const Library = () => {
     }
   }, []);
 
+  const removePlaylist = () => {
+    //TODO: Remove playlist on click - need to connect to backend.
+  }
+
   const populateLibrary = () => {
     count += 1;
 
@@ -37,6 +41,7 @@ const Library = () => {
       >
         <p className={styles.playlist_title}>Place HolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolder</p>
         <p className={styles.song_count}>777 Songs</p>
+        <p className={styles.remove_song} onClick={removePlaylist}>❌</p>
       </div>
     );
   };
