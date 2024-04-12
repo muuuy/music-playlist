@@ -19,6 +19,7 @@ const PlaylistTemplate = () => {
   ];
 
   const [title, setTitle] = useState("test");
+  const [description, setDescription] = useState("test");
   const [create, setCreate] = useState(false);
 
   const removeSong = () => {
@@ -65,7 +66,7 @@ const PlaylistTemplate = () => {
             <CreatePlaylist
               edit={true}
               inputTitle={title}
-              inputDesc=""
+              inputDesc={description}
               inputVisible={create ? "absolute" : "none"}
               onClose={handleEdit}
             />
