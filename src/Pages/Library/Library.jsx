@@ -19,7 +19,7 @@ const Library = () => {
             setIsLoggedIn(true);
         } else {
             // If token doesn't exist, set isLoggedIn to false
-            setIsLoggedIn(true);
+            setIsLoggedIn(false);
         }
     }, []);
 
@@ -45,6 +45,13 @@ const Library = () => {
 
         const handleClick = () => {
             setVisible(true);
+            fetch("/get_all_playlists").then(
+                res=>res.json()
+              ).then(
+                data=> {
+                  setPlaylist(data)
+                }
+              )
         }
 
         const handleEdit = () => {

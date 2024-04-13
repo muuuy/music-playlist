@@ -16,7 +16,7 @@ CORS(app, supports_credentials=True)
 
 jwt = JWTManager(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Amy/Documents/UMBC/Spring 2024/CMSC 447/repo/music-playlist/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Brandon/Documents/SchoolWork/MusicProjMain/music-playlist/database.db'
 db = SQLAlchemy(app)
 
 
@@ -104,7 +104,22 @@ def login():
 
     if user and check_password_hash(user.password, entered_password):
         access_token = create_access_token(identity=user.userId)
-        return jsonify(access_token=access_token), 200
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
+            # Query the database to retrieve the userId based on the username
+            cur.execute("SELECT userId FROM user WHERE userName = ?", (entered_username,))
+            row = cur.fetchone()
+
+            # Close the database connection
+            cur.close()
+
+            # Check if the user was found
+            if row:
+                user_id = row[0]
+                return jsonify(access_token=access_token, username =user_id), 200
+
+            else:
+                return jsonify(access_token=access_token, username =entered_username), 200
     else:
         return jsonify({'error': 'Invalid username or password'}), 401
     
@@ -134,6 +149,47 @@ def delete():
             # ont-end
             return jsonify({'message': msg})
 
+@app.route('/getUserId', methods=['POST', 'OPTIONS'])
+def get_user_id():
+    con = None
+    print("getuser\n\n\n\n")
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            userName = data['userName']
+
+            # Connect to the database
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                # Query the database to retrieve the userId based on the username
+                cur.execute("SELECT userId FROM user WHERE userName = ?", (userName,))
+                row = cur.fetchone()
+
+                # Close the database connection
+                cur.close()
+
+            # Check if the user was found
+            if row:
+                user_id = row[0]
+                msg = user_id
+                #return jsonify({'userId': user_id}), 200
+            else:
+                msg = "user not found"
+                #return jsonify({'error': 'User not found'}), 404
+        except Exception as e:
+            con.rollback()
+        finally:
+            con.close()
+            #get_data()  # Refresh the data after adding or rejecting the entry
+            # Send the transaction message to the front-end
+            #msg = "playlist created successfully"
+            response = jsonify({'message': msg})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():

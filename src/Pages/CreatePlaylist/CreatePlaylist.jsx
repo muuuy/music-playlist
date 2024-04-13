@@ -9,7 +9,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
 
     const [title, setTitle] = useState(inputTitle);
     const [description, setDescription] = useState(inputDesc);
-    const [userId, setUserId] = useState(1);
+    const [userId, setUserId] = useState(localStorage.getItem('username'));
     const [buttonTxt, setButtonTxt] = useState('Create Playlist');
     const [visible, setVisible] = useState(inputVisible);
 
@@ -30,22 +30,45 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
         setVisible('none');
         onClose;
     }
-
-    const handleSubmit = async (e) => {
-        
-        e.preventDefault();
+    const getUserId = async () => {
         try {
-            //userid = 1
-            //console.log(userid)
-            // for (var i = 0; i < localStorage.length; i++){
-            //     console.log(localStorage.getItem(localStorage.key(i)))
-            // }
+            console.log("getUserId ran")
+            temp = localStorage.getItem('username')
+            const response = await axios.post('/getUserId', {temp});
+            console.log("response below")
+            console.log(response.data.msg)
+            return response.data.msg;
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // getUserId()
+        // .then(user => {
+        //     // Handle the userId returned from the backend
+        //     console.log('User ID:', user);
+        //     setUserId(user)
+        // })
+        // .catch(error => {
+        //     // Handle any errors
+        //     console.error('Error:', error);
+        // });
+        try {
+            // const user = await getUserId(); // Wait for getUserId to complete
+            // console.log('User ID:', userId);
+            
+            // // Handle the userId returned from the backend
+            // setUserId(user);
             await axios.post("http://127.0.0.1:5001/create_playlist", {userId, title, description});
         } catch (err) {
             console.log(err);
         }
+        console.log(userId)
         //navigate('/');
     };
+
 
     return (
         <div className={styles.form_container} style={{ display: visible }}>
