@@ -3,6 +3,8 @@ import styles from './Library.module.css';
 import { Helmet } from "react-helmet";
 import { NavLink } from 'react-router-dom';
 import CreatePlaylist from '../CreatePlaylist/CreatePlaylist';
+import axios from 'axios';
+
 
 //TODO: Change the "DELETE LATER" when created the component
 
@@ -10,6 +12,10 @@ import CreatePlaylist from '../CreatePlaylist/CreatePlaylist';
 const Library = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userId, setUserId] = useState(localStorage.getItem('username'));
+    const [create, setCreate] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [playlist, setPlaylist] = useState([{}]);
 
     useEffect(() => {
         // Check if JWT token exists in local storage
@@ -17,17 +23,29 @@ const Library = () => {
         if (jwtToken) {
             // If token exists, set isLoggedIn to true
             setIsLoggedIn(true);
+            
         } else {
             // If token doesn't exist, set isLoggedIn to false
             setIsLoggedIn(false);
         }
+        const fetchPlaylistsByUser = async () => {
+            try {
+                //userId = localStorage.getItem('username')
+                const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
+                setPlaylist(response.data);
+                console.log(response.data)
+            } catch (error) {
+                console.error('Error fetching playlists:', error);
+            }
+        };
+      
+        //   // Call the function to fetch playlists when the component mounts
+        fetchPlaylistsByUser();
     }, []);
 
     // render () {
 
-        const [create, setCreate] = useState(false);
-        const [visible, setVisible] = useState(false);
-        const [playlist, setPlaylist] = useState([{}]);
+
         const handleDeleteStudent = async () => {
             //e.preventDefault();
             console.log("test")
@@ -52,11 +70,24 @@ const Library = () => {
                   setPlaylist(data)
                 }
               )
+            console.log(playlist)
         }
 
         const handleEdit = () => {
             setCreate(!create);
+            handleClick()
+            console.log(playlist)
         }
+        // const fetchPlaylistsByUser = async () => {
+        //     try {
+        //         //userId = localStorage.getItem('username')
+        //         const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
+        //         setPlaylist(response.data);
+        //         console.log(response.data)
+        //     } catch (error) {
+        //         console.error('Error fetching playlists:', error);
+        //     }
+        // };
 
         return (
             <div className={styles.library_container}>
@@ -78,7 +109,7 @@ const Library = () => {
                     <tr key={key}>
                         <td>{val.title}</td>
                         <td>{val.description}</td>
-                        <button onClick={()=>handleDeleteStudent()}>
+                        <button onClick={()=>handleDeleteSong()}>
                             Delete
                         </button>
                     </tr>

@@ -149,48 +149,19 @@ def delete():
             # ont-end
             return jsonify({'message': msg})
 
-@app.route('/getUserId', methods=['POST', 'OPTIONS'])
-def get_user_id():
-    con = None
-    print("getuser\n\n\n\n")
-    if request.method == "OPTIONS":
-        res = Response()
-        res.headers['X-Content-Type-Options'] = '*'
-        return res
-    if request.method == 'POST':
-        try:
-            data = request.get_json()
-            userName = data['userName']
-
-            # Connect to the database
-            with sqlite3.connect('database.db') as con:
-                cur = con.cursor()
-                # Query the database to retrieve the userId based on the username
-                cur.execute("SELECT userId FROM user WHERE userName = ?", (userName,))
-                row = cur.fetchone()
-
-                # Close the database connection
-                cur.close()
-
-            # Check if the user was found
-            if row:
-                user_id = row[0]
-                msg = user_id
-                #return jsonify({'userId': user_id}), 200
-            else:
-                msg = "user not found"
-                #return jsonify({'error': 'User not found'}), 404
-        except Exception as e:
-            con.rollback()
-        finally:
-            con.close()
-            #get_data()  # Refresh the data after adding or rejecting the entry
-            # Send the transaction message to the front-end
-            #msg = "playlist created successfully"
-            response = jsonify({'message': msg})
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
-
+@app.route('/get_playlists_by_user/<int:user_id>', methods=['GET'])
+def get_playlists_by_user(user_id):
+    print("getting playlist from user")
+    try:
+        with sqlite3.connect('database.db') as con:
+            cursor = con.cursor()
+            cursor.execute("SELECT * FROM playlist WHERE userId=?", (user_id,))
+            playlists = cursor.fetchall()
+            playlists_data = [{'playlistId': row[0], 'userId': row[1], 'title': row[2], 'description': row[3], 'created_at': row[4]} for row in playlists]
+            return jsonify(playlists_data)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():
     con = None
