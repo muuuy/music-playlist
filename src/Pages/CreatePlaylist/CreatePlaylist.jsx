@@ -1,8 +1,6 @@
-import React, { useState, useEffect, Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { FaRegTimesCircle } from "react-icons/fa";
 import axios from "axios";
-import Navbar from '../../Components/Navbar/Navbar';
 import styles from './CreatePlaylist.module.css'
 
 const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVisible = 'none', onClose}) => {
@@ -11,7 +9,6 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
     const [description, setDescription] = useState(inputDesc);
     const [userId, setUserId] = useState(localStorage.getItem('username'));
     const [buttonTxt, setButtonTxt] = useState('Create Playlist');
-    const [visible, setVisible] = useState(inputVisible);
 
     useEffect(() => {
         if(edit) { setButtonTxt('Edit'); } 
@@ -24,11 +21,6 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
 
     const handleDescription = (e) => {
         setDescription(e.target.value);
-    }
-
-    const handleClose = () => {
-        setVisible('none');
-        onClose;
     }
     const getUserId = async () => {
         try {
@@ -71,7 +63,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
 
 
     return (
-        <div className={styles.form_container} style={{ display: visible }}>
+        <div className={styles.form_container} style={{ display: inputVisible }}>
             <div className={styles.input_container}>
                 <div className={styles.create_header}>
                     <h1>{buttonTxt}</h1>
@@ -80,7 +72,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
                               right: '16px', 
                               top: '16px', 
                               cursor: 'pointer' }}
-                              onClick={handleClose}
+                              onClick={onClose}
                     />
                 </div>
                 <form className={styles.input_form} onSubmit={handleSubmit}>

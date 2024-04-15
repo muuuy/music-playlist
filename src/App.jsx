@@ -14,7 +14,6 @@ import CreatePlaylist from './Pages/CreatePlaylist/CreatePlaylist';
 import PlaylistTemplate from './Pages/PlaylistTemplate/PlaylistTemplate'
 
 function App() {
-  
   // const [data, setData] = useState(null);
 
   // useEffect(() => {
@@ -30,17 +29,19 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
           <Route path='/forgot' element={<ForgotForm />} />
           <Route path='/library' element={<Library />} />
+          {/* <Route path='/explore' element={<Explore />} /> */}
           <Route path='/results_by_song' element={<SongResults />} />
           <Route path='/results_by_artist' element={<ArtistResults />} />
           <Route path='/password' element={<Password />} />
           <Route path='/create_playlist' element={<CreatePlaylist />} />
           <Route path='/playlist_template' element={<PlaylistTemplate />} />
         </Routes>
-      </div>  
+      </div>
     </div>
   );
 }

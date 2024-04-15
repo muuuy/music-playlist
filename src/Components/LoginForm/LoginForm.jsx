@@ -1,6 +1,6 @@
-import React, { useState} from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './LoginForm.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Navbar from '../../Components/Navbar/Navbar';
 
@@ -8,6 +8,8 @@ const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorCredentials, setErrorCredentials] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,11 +37,13 @@ const LoginForm = () => {
 
                 // Store the JWT token in local storage
                 localStorage.setItem('jwtToken', accessToken);
-                console.log('Login successful');
+                localStorage.setItem('username', username);
+                
+                console.log('Login successful');                
                 
                 // Redirect user to their Library page
-                window.location.href = '/Library';
-                
+                //window.location.href = '/Library';
+                navigate('/Library');
             }
             // Incorrect login credentials
             else if (response.status === 401) {

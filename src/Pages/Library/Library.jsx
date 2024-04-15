@@ -8,7 +8,6 @@ import axios from 'axios';
 
 //TODO: Change the "DELETE LATER" when created the component
 
-
 const Library = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,80 +44,79 @@ const Library = () => {
 
     // render () {
 
-
-        const handleDeleteStudent = async () => {
-            //e.preventDefault();
-            console.log("test")
-          };
-        
-        useEffect(() => {
-            fetch("/get_all_playlists").then(
-              res=>res.json()
-            ).then(
-              data=> {
-                setPlaylist(data)
-              }
-            )
-          }, [])
+        const [create, setCreate] = useState(false);
+        const [visible, setVisible] = useState(false);
 
         const handleClick = () => {
             setVisible(true);
-            fetch("/get_all_playlists").then(
-                res=>res.json()
-              ).then(
-                data=> {
-                  setPlaylist(data)
-                }
-              )
-            console.log(playlist)
         }
 
         const handleEdit = () => {
             setCreate(!create);
-            handleClick()
-            console.log(playlist)
         }
-        // const fetchPlaylistsByUser = async () => {
-        //     try {
-        //         //userId = localStorage.getItem('username')
-        //         const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
-        //         setPlaylist(response.data);
-        //         console.log(response.data)
-        //     } catch (error) {
-        //         console.error('Error fetching playlists:', error);
-        //     }
-        // };
 
-        return (
-            <div className={styles.library_container}>
-                <Helmet>
-                    <title>Library | MusicPlaylists</title>
-                </Helmet>   
+  return (
+    <div className={styles.library_container}>
+      <HelmetProvider>
+        <Helmet>
+          <title>Library | MusicPlaylists</title>
+        </Helmet>
+      </HelmetProvider>
 
-                <div className={styles.library_header}>
-                    <h1>Library</h1>
-                    {isLoggedIn ? (
-                        <button className={styles.create_playlist} onClick={handleEdit}>Create Playlist</button>
-                    ) : (
-                        <p>Please log in to access your library. Don't have an account? <NavLink to='/signup'>Sign up</NavLink></p>
-                    )}
-                    {create && <CreatePlaylist edit={true} inputTitle={'DELETE LATER'} inputDesc='' inputVisible={create ? 'absolute' : 'none'} onClose={handleEdit} />}
-                </div>
-                {playlist.map((val, key) => {
-                    return (
-                    <tr key={key}>
-                        <td>{val.title}</td>
-                        <td>{val.description}</td>
-                        <button onClick={()=>handleDeleteSong()}>
-                            Delete
-                        </button>
-                    </tr>
-                    
-                    )
-                })}
-            </div>
-        )
-    // }
+      <div className={styles.library_header}>
+        <h1>Library</h1>
+        {isLoggedIn ? (
+          <button className={styles.create_playlist} onClick={handleEdit}>
+            Create Playlist
+          </button>
+        ) : (
+          <p className={styles.login_message}>
+            Please log in to access your library. Don&apos;t have an account?{" "}
+            <NavLink
+              to="/signup"
+              style={{ color: "var(--light-red)", cursor: "pointer", fontWeight: '700' }}
+            >
+              Sign up
+            </NavLink>
+          </p>
+        )}
+        {create === true && (
+          <CreatePlaylist
+            edit={true}
+            inputTitle={"DELETE LATER"}
+            inputDesc=""
+            inputVisible={create ? "absolute" : "none"}
+            onClose={handleEdit}
+          />
+        )}
+      </div>
+
+      {/*TODO: DELETE FOR LOGIC LATER */}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+      {populateLibrary()}
+    </div>
+  );
 };
 
 export default Library;
