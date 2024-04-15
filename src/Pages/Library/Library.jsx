@@ -15,6 +15,7 @@ const Library = () => {
     const [create, setCreate] = useState(false);
     const [visible, setVisible] = useState(false);
     const [playlist, setPlaylist] = useState([{}]);
+    let count = 0;
 
     useEffect(() => {
         // Check if JWT token exists in local storage
@@ -41,82 +42,96 @@ const Library = () => {
         //   // Call the function to fetch playlists when the component mounts
         fetchPlaylistsByUser();
     }, []);
+    const removePlaylist = () => {
+        //TODO: Remove playlist on click - need to connect to backend.
+    }
+    
+    const populateLibrary = () => {
+    count += 1;
 
-    // render () {
-
-        const [create, setCreate] = useState(false);
-        const [visible, setVisible] = useState(false);
-
-        const handleClick = () => {
-            setVisible(true);
+    return (
+        <div
+        className={styles.playlist_card}
+        style={
+            count % 2 == 1
+            ? { background: "var(--darker-gray" }
+            : { background: "var(--dark-gray)" }
         }
+        >
+        <p className={styles.playlist_title}>Place HolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolder</p>
+        <p className={styles.song_count}>777 Songs</p>
+        <p className={styles.remove_song} onClick={removePlaylist}>❌</p>
+        </div>
+    );
+    };
 
-        const handleEdit = () => {
-            setCreate(!create);
-        }
 
-  return (
+    const handleEdit = () => {
+    setCreate(create => !create);
+    };
+
+    return (
     <div className={styles.library_container}>
-      <HelmetProvider>
+        <HelmetProvider>
         <Helmet>
-          <title>Library | MusicPlaylists</title>
+            <title>Library | MusicPlaylists</title>
         </Helmet>
-      </HelmetProvider>
+        </HelmetProvider>
 
-      <div className={styles.library_header}>
+        <div className={styles.library_header}>
         <h1>Library</h1>
         {isLoggedIn ? (
-          <button className={styles.create_playlist} onClick={handleEdit}>
+            <button className={styles.create_playlist} onClick={handleEdit}>
             Create Playlist
-          </button>
+            </button>
         ) : (
-          <p className={styles.login_message}>
+            <p className={styles.login_message}>
             Please log in to access your library. Don&apos;t have an account?{" "}
             <NavLink
-              to="/signup"
-              style={{ color: "var(--light-red)", cursor: "pointer", fontWeight: '700' }}
+                to="/signup"
+                style={{ color: "var(--light-red)", cursor: "pointer", fontWeight: '700' }}
             >
-              Sign up
+                Sign up
             </NavLink>
-          </p>
+            </p>
         )}
         {create === true && (
-          <CreatePlaylist
+            <CreatePlaylist
             edit={true}
             inputTitle={"DELETE LATER"}
             inputDesc=""
             inputVisible={create ? "absolute" : "none"}
             onClose={handleEdit}
-          />
+            />
         )}
-      </div>
+        </div>
 
-      {/*TODO: DELETE FOR LOGIC LATER */}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
+        {/*TODO: DELETE FOR LOGIC LATER */}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
+        {populateLibrary()}
     </div>
-  );
+    );
 };
-
+    
 export default Library;
