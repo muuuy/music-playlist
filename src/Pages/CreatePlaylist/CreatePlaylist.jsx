@@ -25,7 +25,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
     const getUserId = async () => {
         try {
             console.log("getUserId ran")
-            temp = localStorage.getItem('username')
+            let temp = localStorage.getItem('username')
             const response = await axios.post('/getUserId', {temp});
             console.log("response below")
             console.log(response.data.msg)
@@ -82,7 +82,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
                     <label htmlFor={styles.description}>Description
                         <textarea name="description" id={styles.description} onChange={handleDescription} value={description} cols="100" rows="5"></textarea>
                     </label>
-                    <button id={styles.create_button}  type='submit' onClick={onClose}>{buttonTxt}</button>
+                    <button id={styles.create_button}  type='submit'>{buttonTxt}</button>
                 </form>
             </div>
             
