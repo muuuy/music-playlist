@@ -82,7 +82,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
                     <label htmlFor={styles.description}>Description
                         <textarea name="description" id={styles.description} onChange={handleDescription} value={description} cols="100" rows="5"></textarea>
                     </label>
-                    <button id={styles.create_button}  type='submit'>{buttonTxt}</button>
+                    <button id={styles.create_button}  type='submit' onClick={onClose}>{buttonTxt}</button>
                 </form>
             </div>
             
