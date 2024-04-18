@@ -20,8 +20,8 @@ const Navbar = ({iTitle='', iDesc=''}) => {
     const loginToken = localStorage.getItem('jwtToken');
     const username = localStorage.getItem('username');
 
-    const [searchInput, setSearchInput] = useState(iTitle);
-    const [searchType, setSearchType] = useState(iDesc);       
+    const [searchInput, setSearchInput] = useState("");
+    const [searchType, setSearchType] = useState("song");       
 
     const generateNav = navList.map((e) => (
       
