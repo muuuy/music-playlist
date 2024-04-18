@@ -32,6 +32,8 @@ const LoginForm = () => {
             if (response.ok) {
                 const data = await response.json();
                 const accessToken = data.access_token;
+                const username = data.username;
+
                 // Store the JWT token in local storage
                 localStorage.setItem('jwtToken', accessToken);
                 localStorage.setItem('username', username);
@@ -73,10 +75,10 @@ const LoginForm = () => {
                     <h2>Sign in to your account</h2>
                 </div>
                 {errorCredentials && <div className={styles.error}>{errorCredentials}</div>}
-                <label for="username">Username
+                <label htmlFor="username">Username
                     <input className='ui-input' name="username" type='username' autoComplete='username' value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </label>
-                <label for="password">Password
+                <label htmlFor="password">Password
                     <input className='ui-input' name="password" type='password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 </label>
                 <div className='form-button__container'>

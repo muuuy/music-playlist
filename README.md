@@ -25,9 +25,9 @@ npm install @mui/material @emotion/react @emotion/styled
 # Running the web application
 - create virtual environment: "python3 -m venv venv"
 
-- activate virtual enviornment with: /venv/bin/activate or /venv/Scripts/activate.bat (depending on your shell)
-- start the database server: "python3 server.py"
-- create database table: "python create_table.py"
+- activate virtual enviornment with: /venv/bin/activate or /venv/Scripts/activate.bat or ./venv/Scripts/activate (depending on your shell)
+- start the database server: "python3 server.py", may need to install dependencies (pip install flask , pip install flask_cors, pip install flask_login, pip install flask_sqlalchemy, pip install flask_jwt_extended, )
+- create database table: "python create_tables.py"
 - in the flask_server folder, start the flask backend: "flask run"
 - start the web application: "npm run dev"
 

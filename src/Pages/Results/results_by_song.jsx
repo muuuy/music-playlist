@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom"
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Navbar from '../../Components/Navbar/Navbar';
-import './results.css';
+import styles from './results.module.css';
 
 
 const ResultsBySong = () => {
