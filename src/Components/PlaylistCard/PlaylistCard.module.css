@@ -1,0 +1,26 @@
+.playlistcard_container {
+    display: flex;
+    position: relative;
+    top: 60px;
+    left: 60px;
+    height: 240px;
+    width: 240px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+}
+
+.playlistcard_img {
+    height: 200px;
+    width: 200px;
+    background-color: red;
+}
+
+.playlist_name {
+    color: black;
+    font-size: 20px;
+    margin-top: 6px;
+}
