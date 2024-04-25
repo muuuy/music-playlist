@@ -33,6 +33,7 @@ def get_token():
 
     return access_token
 
+
 # Get access token (Spotify)
 def get_spotify_token():
     auth_string = client_id + ":" + client_secret
@@ -50,30 +51,14 @@ def get_spotify_token():
     token = json_result["access_token"]
     return token
 
+
 def get_auth_header_spotify(spotify_token):
     return {"Authorization": "Bearer " + spotify_token}
 
+
 def get_auth_header(token):
     return {"Authorization": f"Bearer {token}"}
-
-'''
-def search_song(token, song_name):
-    empty_list = []
-    url = f"https://api.chartmetric.com/api/search"
-    headers = get_auth_header(token)
-    query = f"?q={song_name}&limit=5&type=tracks"
-
-    query_url = url + query
-    result = get(query_url, headers=headers)
-    if result.status_code != 200:
-        print("Error")
-        exit(1)
-    elif len(json.loads(result.content)["obj"]["tracks"]) == 0:
-        return empty_list
-    else:
-        json_result = json.loads(result.content)["obj"]["tracks"]
-        return json_result
-'''
+    
 
 def search_song(spotify_token, song_name):
     url = f"https://api.spotify.com/v1/search"
@@ -90,6 +75,7 @@ def search_song(spotify_token, song_name):
 
     json_result = json.loads(result.content)["tracks"]["items"]
     return json_result
+
 
 def get_artist_id(token, artist_name):
     url = f"https://api.chartmetric.com/api/search"
@@ -158,3 +144,31 @@ def search():
     else:
         results = search_songs_of_artist(token, cleaned_query)
         return jsonify(results=results)
+    
+
+@app.route('/top_tracks', methods=['POST'])
+def top_tracks():
+    headers = get_auth_header(token)
+    query_url = "https://api.chartmetric.com/api/city/6999/youtube/top-tracks"
+
+    result = get(query_url, headers=headers)
+    if result.status_code != 200:
+        print("Error")
+        exit(1)
+    json_tracks = json.loads(result.content)['obj']
+
+    return json_tracks
+
+
+@app.route('/top_artists', methods=['POST'])
+def top_artists():
+    headers = get_auth_header(token)
+    query_url = "https://api.chartmetric.com/api/city/6999/spotify/top-artists"
+
+    result = get(query_url, headers=headers)
+    if result.status_code != 200:
+        print("Error")
+        exit(1)
+    json_artists = json.loads(result.content)['obj']
+
+    return json_artists
