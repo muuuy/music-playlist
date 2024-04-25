@@ -2,11 +2,8 @@
 .library_container {
     display: flex;
     flex-direction: column;
-    flex: 1;    
-    background-color: var(--dark-gray);
-    margin: 40px;
-    border: 8px solid var(--dark-red);
-    border-radius: 20px;
+    flex: 1;
+    margin: 40px;  
 }
 
 .library_header {
@@ -15,7 +12,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 24px;
-    border-bottom: 8px solid var(--dark-red);
+    border: 6px solid var(--dark-red);
+    background-color: var(--dark-gray);
+    border-radius: 20px;
 }
 
 /*--------------------------------=CREATE PLAYLIST BUTTON=--------------------------------*/
@@ -95,4 +94,14 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+/*--------------------------------=PLAYLIST CARDS=--------------------------------*/
+.library_body {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
 }

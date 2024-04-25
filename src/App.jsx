@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import CreatePlaylist from './Pages/CreatePlaylist/CreatePlaylist';
 import PlaylistTemplate from './Pages/PlaylistTemplate/PlaylistTemplate'
+import PlaylistCard from './Components/PlaylistCard/PlaylistCard'
 
 function App() {
   // const [data, setData] = useState(null);
@@ -40,6 +41,7 @@ function App() {
           <Route path='/password' element={<Password />} />
           <Route path='/create_playlist' element={<CreatePlaylist />} />
           <Route path='/playlist_template' element={<PlaylistTemplate />} />
+          <Route path='/playlist_card' element={<PlaylistCard />} />
         </Routes>
       </div>
     </div>

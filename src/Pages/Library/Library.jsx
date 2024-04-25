@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
+import PlaylistCard from "../../Components/PlaylistCard/PlaylistCard";
 
 //TODO: Change the "DELETE LATER" when created the component
 
@@ -102,31 +103,26 @@ const Library = () => {
           />
         )}
       </div>
+      <div className={styles.library_body}>
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+      </div>
 
-      {/*TODO: DELETE FOR LOGIC LATER */}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
-      {populateLibrary()}
+      
     </div>
   );
 };
