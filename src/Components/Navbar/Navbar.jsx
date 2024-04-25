@@ -17,8 +17,8 @@ import { navList } from './NavbarData';
 const Navbar = ({iTitle='', iDesc=''}) => {
     const navigate = useNavigate();
     const currLoc = useLocation().pathname;
-    const loginToken = localStorage.getItem('jwtToken');
-    const username = localStorage.getItem('username');
+    const loginToken = sessionStorage.getItem('jwtToken');
+    const username = sessionStorage.getItem('username');
 
     const [searchInput, setSearchInput] = useState("");
     const [searchType, setSearchType] = useState("song");       
@@ -66,7 +66,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
 
       const handleLogout = () => {
         // Remove JWT token from local storage
-        localStorage.removeItem('jwtToken');
+        sessionStorage.removeItem('jwtToken');
         
         // Redirect user to the login page
         navigate("/login");
@@ -104,7 +104,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                 <ul className={styles.sign}>
                   {loginToken ?
                     <>
-                      <div className={styles.user}>
+                      <div className={styles.user}>                        
                         <p>Hello,</p>
                         <p>{username}</p>
                       </div>                      
@@ -130,7 +130,13 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                     <li id={styles.nav_item}><NavLink to="/library"><FaMusic /> Library</NavLink></li>
                     <li id={styles.nav_item}><NavLink to="#"><FaCompass /> Explore</NavLink></li>
                     {loginToken ?
-                      <button onClick={handleLogout}  id={styles.sign_in__button}>Log Out</button>
+                      <>
+                        <div className={styles.user}>
+                          <p>Hello,</p>
+                          <p>{username}</p>
+                        </div>
+                        <button onClick={handleLogout}  id={styles.sign_in__button}>Log Out</button>
+                      </>
                       :
                       <>
                         <NavLink to="/login">

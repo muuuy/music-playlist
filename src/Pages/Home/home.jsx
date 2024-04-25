@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 class Home extends Component {
     render () {
-        const loginToken = localStorage.getItem('jwtToken');
+        const loginToken = sessionStorage.getItem('jwtToken');
 
         return (
             <div className={styles.home_container}>

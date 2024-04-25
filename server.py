@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
@@ -16,7 +16,10 @@ CORS(app, supports_credentials=True)
 
 jwt = JWTManager(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Brandon/Documents/SchoolWork/MuicProj3/music-playlist/database.db'
+#base directory
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
 db = SQLAlchemy(app)
 
 

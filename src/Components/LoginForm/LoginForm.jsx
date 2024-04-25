@@ -35,8 +35,8 @@ const LoginForm = () => {
                 const username = data.username;
 
                 // Store the JWT token in local storage
-                localStorage.setItem('jwtToken', accessToken);
-                localStorage.setItem('username', username);
+                sessionStorage.setItem('jwtToken', accessToken);
+                sessionStorage.setItem('username', username);
                 
                 console.log('Login successful');                
                 

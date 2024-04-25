@@ -14,7 +14,7 @@ const Library = () => {
 
   useEffect(() => {
             // Check if JWT token exists in local storage
-            const jwtToken = localStorage.getItem('jwtToken');
+            const jwtToken = sessionStorage.getItem('jwtToken');
             if (jwtToken) {
                 // If token exists, set isLoggedIn to true
                 setIsLoggedIn(true);

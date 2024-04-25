@@ -7,7 +7,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
 
     const [title, setTitle] = useState(inputTitle);
     const [description, setDescription] = useState(inputDesc);
-    const [userId, setUserId] = useState(localStorage.getItem('username'));
+    const [userId, setUserId] = useState(sessionStorage.getItem('username'));
     const [buttonTxt, setButtonTxt] = useState('Create Playlist');
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
     const getUserId = async () => {
         try {
             console.log("getUserId ran")
-            let temp = localStorage.getItem('username')
+            let temp = sessionStorage.getItem('username')
             const response = await axios.post('/getUserId', {temp});
             console.log("response below")
             console.log(response.data.msg)
