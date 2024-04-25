@@ -2,13 +2,16 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    border: 1px solid white;
+    margin: 40px;
+    background-color: black;
+    border: 2px solid var(--dark-red);
+    border-radius: 20px;
 }
 
 .template_header {
     display: flex;
     flex-direction: row;
-    margin: 40px;
+    margin: 20px 40px;
     justify-content: space-between;
 }
 
@@ -31,68 +34,4 @@
 /*-------------------SONG CARDS-------------------*/
 .song_card {
     display: flex;
-}
-
-.song_title,
-.song_artist,
-.song_album,
-.song_time {
-    display: flex;
-    align-items: center;
-    margin-right: 5%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.song_title,
-.song_artist,
-.song_album {
-    width: 30%;
-    justify-content: flex-start;
-}
-
-.song_title {
-    margin-left: 5%;
-}
-
-.song_time {
-    display: flex;
-    width: 10%;
-    justify-content: flex-end;
-}
-
-.remove_song {
-    justify-self: center;
-    cursor: pointer;
-}
-
-.remove_container {
-    height: 30px;
-    width: 45px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    border-radius: 32px;
-    margin: 0;
-}
-
-.remove_container:hover {
-    background-color: var(--darker-gray);
-}
-
-.remove_song:hover {
-    transform: scale(1.4);
-    transition: transform 1s ease;
-    animation: rotate 5s infinite;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
 }

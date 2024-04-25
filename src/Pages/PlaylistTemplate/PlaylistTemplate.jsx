@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 
 import styles from "./PlaylistTemplate.module.css";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
+import SongCard from "../../Components/SongCard/SongCard";
 
 const PlaylistTemplate = () => {
   const testList = [
@@ -72,9 +73,11 @@ const PlaylistTemplate = () => {
             />
           )}
         </div>
-        <table className={styles.song_list}>
-          <tbody>{generateCards}</tbody>
-        </table>
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
       </div>
     </>
   );

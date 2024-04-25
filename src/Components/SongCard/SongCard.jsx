@@ -12,7 +12,6 @@ const SongCard = (song) => {
         <p className={styles.song_artist}>Artist</p>
         <p className={styles.song_album}>Album</p>
         <p className={styles.song_time}>9.99</p>
-        <p className={styles.song_artist}>Artist</p>
         <div className={styles.remove_container}>
           <p className={styles.remove_song} onClick={removeSong}>
             ❌
