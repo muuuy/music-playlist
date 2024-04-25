@@ -13,6 +13,8 @@ import React, { useEffect, useState } from 'react';
 import CreatePlaylist from './Pages/CreatePlaylist/CreatePlaylist';
 import PlaylistTemplate from './Pages/PlaylistTemplate/PlaylistTemplate'
 import PlaylistCard from './Components/PlaylistCard/PlaylistCard'
+import Explore from './Pages/Explore/Explore'
+import SongCard from './Components/SongCard/SongCard';
 
 function App() {
   // const [data, setData] = useState(null);
@@ -42,6 +44,9 @@ function App() {
           <Route path='/create_playlist' element={<CreatePlaylist />} />
           <Route path='/playlist_template' element={<PlaylistTemplate />} />
           <Route path='/playlist_card' element={<PlaylistCard />} />
+          <Route path='/explore' element={<Explore />} />
+          {/* <Route path='/playlist_card' element={<PlaylistCard />} /> */}
+          <Route path='/song_card' element={<SongCard />} />
         </Routes>
       </div>
     </div>

@@ -12,7 +12,8 @@ import PlaylistCard from "../../Components/PlaylistCard/PlaylistCard";
 const Library = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let count = 0;
-
+  const [playlists, setPlaylist] = useState([]);
+  const [userId, setUserId] = useState(localStorage.getItem('username'));
   useEffect(() => {
             // Check if JWT token exists in local storage
             const jwtToken = sessionStorage.getItem('jwtToken');
@@ -39,19 +40,20 @@ const Library = () => {
             fetchPlaylistsByUser();
         }, []);
 
-  const populateLibrary = () => {
+  const populateLibrary = (playlist) => {
     count += 1;
-
+  
     return (
       <div
+        key={playlist.id} // Make sure to set a unique key for each item when mapping
         className={styles.playlist_card}
         style={
-          count % 2 == 1
-            ? { background: "var(--darker-gray" }
+          count % 2 === 1
+            ? { background: "var(--darker-gray)" }
             : { background: "var(--dark-gray)" }
         }
       >
-        <p className={styles.playlist_title}>Place HolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolderHolder</p>
+        <p className={styles.playlist_title}>{playlist.title}</p>
         <p className={styles.song_count}>777 Songs</p>
       </div>
     );
@@ -103,26 +105,14 @@ const Library = () => {
           />
         )}
       </div>
-      <div className={styles.library_body}>
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
+      <div>
+        {playlists.map((playlist) => (
+          populateLibrary(playlist)
+        ))}
       </div>
+      {/*TODO: DELETE FOR LOGIC LATER */}
+      {/* {populateLibrary()} */}
 
-      
     </div>
   );
 };

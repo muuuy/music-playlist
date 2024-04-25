@@ -1,0 +1,11 @@
+.songcard_container {
+    display: flex;
+    position: relative;
+    height: 50px;
+    z-index: 1001;
+    width: 100%;
+    background-color: black;
+    align-items: center;
+
+    top: 60px;
+}
