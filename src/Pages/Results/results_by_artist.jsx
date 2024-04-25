@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import styles from "./results.module.css";
 
+import SongCard from "../../Components/SongCard/SongCard";
+
 const ResultsByArtist = () => {
   const { state } = useLocation();
   const { artistResults } = state;
@@ -18,13 +20,34 @@ const ResultsByArtist = () => {
   //     )
   // }
 
+  const populateSong = () => {
+    const resultsArray = artistResults.results;
+    const arrayLength = resultsArray.length;
+    console.log("!", resultsArray);
+
+    for (let i = 9; i < arrayLength; i++) {
+      if (arrayLength === 0) {
+        return <div>No Results Found</div>;
+      } else {
+        let name = `${resultsArray[i]["name"]}`;
+        let artistName = `${resultsArray[i]["artist_names"][0]}`;
+        let albumName = `${resultsArray[i]["album_names"][0]}`;
+        let releaseDate = `${resultsArray[i]["release_dates"][0].substring(
+          0,
+          10
+        )}`;
+
+        return <SongCard songName={name} artistName={artistName} albumName={albumName} releaseDate={releaseDate} />;
+      }
+    }
+  };
+
   function generateTable() {
     const resultsArray = artistResults.results;
     const arrayLength = resultsArray.length;
     console.log("!", resultsArray);
 
-    // If array length is 0, display "No Results Found" message
-    if (arrayLength === 0) {
+    if (arrayLength == 0) {
       return <div>No Results Found</div>;
     }
 
