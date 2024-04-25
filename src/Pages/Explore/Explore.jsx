@@ -68,7 +68,7 @@ const Explore = () => {
                 }
                 if (j == 1) {
                     const cellText = `${results[i]['artist_names'].join(', ')}`;
-                    cells.push(<td key={`${i}-${j}`}>{cellText} className={styles.column}</td>);
+                    cells.push(<td key={`${i}-${j}`} className={styles.column}>{cellText} </td>);
                 }
             }
         }
