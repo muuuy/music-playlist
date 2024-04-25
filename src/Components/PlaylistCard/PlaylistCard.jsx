@@ -1,6 +1,6 @@
 import styles from './PlaylistCard.module.css'
 
-const PlaylistCard = () => {
+const PlaylistCard = (id = null) => {
     return (
         <>
         <div className={styles.playlistcard_container}>
