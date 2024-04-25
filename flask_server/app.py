@@ -146,6 +146,7 @@ def search():
         return jsonify(results=results)
     
 
+# Return top tracks
 @app.route('/top_tracks', methods=['POST'])
 def top_tracks():
     headers = get_auth_header(token)
@@ -160,6 +161,7 @@ def top_tracks():
     return json_tracks
 
 
+# Return top artists
 @app.route('/top_artists', methods=['POST'])
 def top_artists():
     headers = get_auth_header(token)
