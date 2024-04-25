@@ -101,7 +101,7 @@ const Explore = () => {
         for (let i = 0; i < 20; i++) {
             rows.push(<tr key={i}>{cells.slice(i * 1, (i + 1) * 1)}</tr>);
         }
-        // Return the table
+        // Return table
         return (
             <table>{<thead>{generateArtistHeader()}</thead>}
               <tbody>{rows}</tbody>
