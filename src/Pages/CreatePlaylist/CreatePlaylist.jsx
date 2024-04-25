@@ -25,7 +25,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
     const getUserId = async () => {
         try {
             console.log("getUserId ran")
-            temp = localStorage.getItem('username')
+            let temp = localStorage.getItem('username')
             const response = await axios.post('/getUserId', {temp});
             console.log("response below")
             console.log(response.data.msg)

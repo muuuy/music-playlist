@@ -3,8 +3,10 @@ import styles from "./Library.module.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import axios from "axios";
 
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
+import PlaylistCard from "../../Components/PlaylistCard/PlaylistCard";
 
 //TODO: Change the "DELETE LATER" when created the component
 

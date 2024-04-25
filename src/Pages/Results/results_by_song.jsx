@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom"
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Navbar from '../../Components/Navbar/Navbar';
-import './results.css';
+import styles from './results.module.css';
 
 
 const ResultsBySong = () => {
@@ -44,15 +44,15 @@ const ResultsBySong = () => {
                     cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
                 }
                 if (j === 2) {
-                    const cellText = `${resultsArray[i]['artist_names'][0]}`;
+                    const cellText = `${resultsArray[i]['artists'][0]['name']}`;
                     cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
                 }
                 if (j === 3) {
-                    const cellText = `${resultsArray[i]['album'][0]['name']}`;
+                    const cellText = `${resultsArray[i]['album']['name']}`;
                     cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
                 }
                 if (j === 4) {
-                    const cellText = `${resultsArray[i]['album'][0]['release_date']}`;
+                    const cellText = `${resultsArray[i]['album']['release_date']}`;
                     cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
                 }
             }

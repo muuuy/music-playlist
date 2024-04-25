@@ -27,10 +27,6 @@
     background-color: var(--light-red);
 }
 
-.song_list {
-    margin: 0 20px;
-}
-
 
 /*-------------------SONG CARDS-------------------*/
 .song_card {

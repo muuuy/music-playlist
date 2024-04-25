@@ -116,7 +116,7 @@ def login():
             # Check if the user was found
             if row:
                 user_id = row[0]
-                return jsonify(access_token=access_token, username =user_id), 200
+                return jsonify(access_token=access_token, username =entered_username, userId = user_id), 200
 
             else:
                 return jsonify(access_token=access_token, username =entered_username), 200

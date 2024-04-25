@@ -5,6 +5,7 @@ from requests import post, get
 import json
 from flask_cors import CORS
 import traceback
+import base64
 
 load_dotenv()
 
@@ -13,11 +14,13 @@ CORS(app)
 
 # Store environment variables
 refresh_token = os.getenv("REFRESH_TOKEN")
+client_id = os.getenv("SPOTIFY_TOKEN")
+client_secret = os.getenv("SPOTIFY_SECRET")
 
 HOST = "https://api.chartmetric.com"
 TOKEN = refresh_token
 
-# Get Access token
+# Get access token (Chartmetric)
 def get_token():
     result = post(f'{HOST}/api/token', json={"refreshtoken": TOKEN})
     if result.status_code != 200:
@@ -30,11 +33,30 @@ def get_token():
 
     return access_token
 
+# Get access token (Spotify)
+def get_spotify_token():
+    auth_string = client_id + ":" + client_secret
+    auth_bytes = auth_string.encode("utf-8")
+    auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
+
+    url = "https://accounts.spotify.com/api/token"
+    headers = {
+        "Authorization": "Basic " + auth_base64,
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+    data = {"grant_type": "client_credentials"}
+    result = post(url, headers=headers, data=data)
+    json_result = json.loads(result.content)
+    token = json_result["access_token"]
+    return token
+
+def get_auth_header_spotify(spotify_token):
+    return {"Authorization": "Bearer " + spotify_token}
 
 def get_auth_header(token):
     return {"Authorization": f"Bearer {token}"}
 
-
+'''
 def search_song(token, song_name):
     empty_list = []
     url = f"https://api.chartmetric.com/api/search"
@@ -51,7 +73,23 @@ def search_song(token, song_name):
     else:
         json_result = json.loads(result.content)["obj"]["tracks"]
         return json_result
+'''
 
+def search_song(spotify_token, song_name):
+    url = f"https://api.spotify.com/v1/search"
+    headers = get_auth_header_spotify(spotify_token)
+    query = f"?q={song_name}&type=track&limit=5&market=US"
+
+    query_url = url + query
+    print("query url:", query_url)
+
+    result = get(query_url, headers=headers)
+    if result.status_code != 200:
+        print("Error", result.status_code)
+        exit(1)
+
+    json_result = json.loads(result.content)["tracks"]["items"]
+    return json_result
 
 def get_artist_id(token, artist_name):
     url = f"https://api.chartmetric.com/api/search"
@@ -92,6 +130,7 @@ def search_songs_of_artist(token, artist_name):
 
 
 token = get_token()
+spotify_token = get_spotify_token()
 
 
 @app.route('/')
@@ -114,7 +153,7 @@ def search():
     print("query_data:", query_data, "| query:", cleaned_query, "| query_type:", query_type)
 
     if query_type == "song":
-        results = search_song(token, cleaned_query)
+        results = search_song(spotify_token, cleaned_query)
         return jsonify(results=results)
     else:
         results = search_songs_of_artist(token, cleaned_query)
