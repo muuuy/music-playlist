@@ -20,12 +20,9 @@ const ResultsBySong = () => {
     const songCards = [];
     for (let i = 0; i < arrayLength; i++) {
         let name = `${resultsArray[i]["name"]}`;
-        let artistName = `${resultsArray[i]["artist_names"][0]}`;
-        let albumName = `${resultsArray[i]["album_names"][0]}`;
-        let releaseDate = `${resultsArray[i]["release_dates"][0].substring(
-          0,
-          10
-        )}`;
+        let artistName = `${resultsArray[i]["artists"][0]["name"]}`;
+        let albumName = `${resultsArray[i]["album"]["name"]}`;
+        let releaseDate = `${resultsArray[i]["album"]["release_date"]}`;
 
         songCards.push(
           <SongCard
@@ -42,67 +39,55 @@ const ResultsBySong = () => {
     return songCards;
   };
 
-//   function generateHeaderRow() {
-//     return (
-//       <tr>
-//         <th>Add</th>
-//         <th>Song Name</th>
-//         <th>Artist</th>
-//         <th>Album</th>
-//         <th>Release Year</th>
-//       </tr>
-//     );
-//   }
+  function generateTable() {
+    const resultsArray = songResults.results;
+    const arrayLength = resultsArray.length;
+    console.log("!", resultsArray);
 
-//   function generateTable() {
-//     const resultsArray = songResults.results;
-//     const arrayLength = resultsArray.length;
-//     console.log("!", resultsArray);
+    // If array length is 0, display "No Results Found" message
+    if (arrayLength === 0) {
+      return <div>No Results Found</div>;
+    }
 
-//     // If array length is 0, display "No Results Found" message
-//     if (arrayLength === 0) {
-//       return <div>No Results Found</div>;
-//     }
-
-//     // Create all cells in table
-//     const cells = [];
-//     for (let i = 0; i < arrayLength; i++) {
-//       for (let j = 0; j < 5; j++) {
-//         if (j === 0) {
-//           const cellText = `*`;
-//           cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-//         }
-//         if (j === 1) {
-//           const cellText = `${resultsArray[i]["name"]}`;
-//           cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-//         }
-//         if (j === 2) {
-//           const cellText = `${resultsArray[i]["artists"][0]["name"]}`;
-//           cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-//         }
-//         if (j === 3) {
-//           const cellText = `${resultsArray[i]["album"]["name"]}`;
-//           cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-//         }
-//         if (j === 4) {
-//           const cellText = `${resultsArray[i]["album"]["release_date"]}`;
-//           cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-//         }
-//       }
-//     }
-//     // Create all rows in table
-//     const rows = [];
-//     for (let i = 0; i < arrayLength; i++) {
-//       rows.push(<tr key={i}>{cells.slice(i * 5, (i + 1) * 5)}</tr>);
-//     }
-//     // Return the table
-//     return (
-//       <table>
-//         <thead>{generateHeaderRow()}</thead>
-//         <tbody>{rows}</tbody>
-//       </table>
-//     );
-//   }
+    // Create all cells in table
+    const cells = [];
+    for (let i = 0; i < arrayLength; i++) {
+      for (let j = 0; j < 5; j++) {
+        if (j === 0) {
+          const cellText = `*`;
+          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
+        }
+        if (j === 1) {
+          const cellText = `${resultsArray[i]["name"]}`;
+          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
+        }
+        if (j === 2) {
+          const cellText = `${resultsArray[i]["artists"][0]["name"]}`;
+          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
+        }
+        if (j === 3) {
+          const cellText = `${resultsArray[i]["album"]["name"]}`;
+          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
+        }
+        if (j === 4) {
+          const cellText = `${resultsArray[i]["album"]["release_date"]}`;
+          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
+        }
+      }
+    }
+    // Create all rows in table
+    const rows = [];
+    for (let i = 0; i < arrayLength; i++) {
+      rows.push(<tr key={i}>{cells.slice(i * 5, (i + 1) * 5)}</tr>);
+    }
+    // Return the table
+    return (
+      <table>
+        <thead>{generateHeaderRow()}</thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
 
   return (
     <>
