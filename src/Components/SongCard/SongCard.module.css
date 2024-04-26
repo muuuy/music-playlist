@@ -7,6 +7,12 @@
     background-color: black;
     align-items: center;
     border-bottom: 2px solid var(--dark-gray);
+    cursor: pointer;
+}
+
+.songcard_container:hover {
+    background-color: var(--dark-gray);
+    transition: background-color 0.2s ease;
 }
 
 .song_title,
@@ -54,8 +60,6 @@
 }
 
 .remove_song:hover {
-    transform: scale(1.4);
-    transition: transform 1s ease;
     animation: rotate 5s infinite;
 }
 

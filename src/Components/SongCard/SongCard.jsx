@@ -1,6 +1,6 @@
 import styles from "./SongCard.module.css";
 
-const SongCard = ({songName='None', artistName='None', albumName='None', releaseDate=null}) => {
+const SongCard = ({songName='None', artistName='None', albumName='None', buttonSymbol='❌', releaseDate=null}) => {
   const removeSong = () => {
     //TODO: Add code to connect to backend
   };
@@ -14,7 +14,7 @@ const SongCard = ({songName='None', artistName='None', albumName='None', release
         <p className={styles.song_time}>9.99</p>
         <div className={styles.remove_container}>
           <p className={styles.remove_song} onClick={removeSong}>
-            ❌
+            {buttonSymbol}
           </p>
         </div>
       </div>
