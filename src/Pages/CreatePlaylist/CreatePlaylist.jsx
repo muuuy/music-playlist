@@ -7,7 +7,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
 
     const [title, setTitle] = useState(inputTitle);
     const [description, setDescription] = useState(inputDesc);
-    const [userId, setUserId] = useState(sessionStorage.getItem('username'));
+    const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
     const [buttonTxt, setButtonTxt] = useState('Create Playlist');
 
     useEffect(() => {
@@ -58,6 +58,8 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
             console.log(err);
         }
         console.log(userId)
+        console.log("TITLE:", title)
+        console.log("DESC:", description)
         //navigate('/');
     };
 

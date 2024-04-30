@@ -152,18 +152,19 @@ def delete():
             # ont-end
             return jsonify({'message': msg})
 
-@app.route('/get_playlists_by_user/<int:user_id>', methods=['GET'])
+@app.route('/get_playlists_by_user/<user_id>', methods=['GET'])
 def get_playlists_by_user(user_id):
-    print("getting playlist from user")
+    print("getting playlist from", user_id)
     try:
         with sqlite3.connect('database.db') as con:
             cursor = con.cursor()
             cursor.execute("SELECT * FROM playlist WHERE userId=?", (user_id,))
             playlists = cursor.fetchall()
-            playlists_data = [{'playlistId': row[0], 'userId': row[1], 'title': row[2], 'description': row[3], 'created_at': row[4]} for row in playlists]
+            playlists_data = [{'playlistId': row[0], 'title': row[1], 'description': row[2], 'created_at': row[3], 'userId': row[4]} for row in playlists]
             return jsonify(playlists_data)
     except Exception as e:
         return jsonify({'error': str(e)})
+    
     
 @app.route('/create_playlist', methods=['POST', 'OPTIONS'])
 def create_playlist():
@@ -175,7 +176,7 @@ def create_playlist():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            print(data)
+            # print(data)
             userId = data['userId']
             title = data['title']
             description = data['description']

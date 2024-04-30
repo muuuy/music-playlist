@@ -13,7 +13,8 @@ const Library = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let count = 0;
   const [playlists, setPlaylist] = useState([]);
-  const [userId, setUserId] = useState(localStorage.getItem('username'));
+  const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
+  console.log('ID:', userId);
   useEffect(() => {
             // Check if JWT token exists in local storage
             const jwtToken = sessionStorage.getItem('jwtToken');
@@ -30,7 +31,7 @@ const Library = () => {
                     //userId = localStorage.getItem('username')
                     const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
                     setPlaylist(response.data);
-                    console.log(response.data)
+                    console.log("!", response.data);
                 } catch (error) {
                     console.error('Error fetching playlists:', error);
                 }
@@ -86,7 +87,7 @@ const Library = () => {
           </button>
         ) : (
           <p className={styles.login_message}>
-            Please log in to access your library. Don&apos;t have an account?{" "}
+            Please <NavLink to="/login" style={{ color: "var(--light-red)", cursor: "pointer", fontWeight: '700' }}>log in</NavLink> to access your library. Don&apos;t have an account?{" "}
             <NavLink
               to="/signup"
               style={{ color: "var(--light-red)", cursor: "pointer", fontWeight: '700' }}
@@ -106,7 +107,7 @@ const Library = () => {
         )}
       </div>
       <div>
-        {playlists.map((playlist) => (
+        {isLoggedIn && playlists.map((playlist) => (
           populateLibrary(playlist)
         ))}
       </div>
