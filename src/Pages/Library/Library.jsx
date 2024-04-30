@@ -106,7 +106,9 @@ const Library = () => {
       </div>
       <div className={styles.library_body}>
       {isLoggedIn && playlists.map((playlist) => (
-        <PlaylistCard playlist_ID={playlist.playlistId} title={playlist.title} userID={playlist.userID} />
+        <div className={styles.library_body}>
+          <PlaylistCard playlist_ID={playlist.playlistId} title={playlist.title} userID={playlist.userID} />
+        </div>
       ))}
       </div>
     </div>
