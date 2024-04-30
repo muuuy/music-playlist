@@ -1,7 +1,7 @@
 .playlistcard_container {
     display: flex;
     position: relative;
-    height: 260px;
+    height: 280px;
     width: 260px;
     border-radius: 40px;
     align-items: center;
@@ -9,11 +9,28 @@
     flex-direction: column;
     text-align: center;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 .playlistcard_container:hover {
     background-color: var(--dark-gray);
     transition: background-color 0.4s ease;
+}
+
+.playlistcard_container:hover .close {
+    visibility: visible;
+}
+
+.close {
+    display: flex;
+    visibility: hidden;
+    font-weight: 800;
+    font-style: italic;
+    color: var(--light-gray)
+}
+
+.close:hover {
+    color: var(--light-red);
 }
 
 .playlistcard_img {
