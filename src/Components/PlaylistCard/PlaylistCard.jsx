@@ -1,6 +1,6 @@
 import styles from './PlaylistCard.module.css'
 
-const PlaylistCard = ({ title, userID }) => {
+const PlaylistCard = ({ playlist_ID, title, userID }) => {
     return (
         <>
         <div className={styles.playlistcard_container}>

@@ -12,9 +12,7 @@ const Library = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let count = 0;
   const [playlists, setPlaylist] = useState([]);
-  const [playlistID, setPlaylistID] = useState([]);
   const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
-  console.log('ID:', userId);
   useEffect(() => {
             // Check if JWT token exists in local storage
             const jwtToken = sessionStorage.getItem('jwtToken');
@@ -106,11 +104,11 @@ const Library = () => {
           />
         )}
       </div>
-      {/*TODO: DELETE FOR LOGIC LATER */}
-      {/* {populateLibrary()} */}
+      <div className={styles.library_body}>
       {isLoggedIn && playlists.map((playlist) => (
-        <PlaylistCard title={playlist.title} userID={playlist.userID} />
+        <PlaylistCard playlist_ID={playlist.playlistId} title={playlist.title} userID={playlist.userID} />
       ))}
+      </div>
     </div>
   );
 };

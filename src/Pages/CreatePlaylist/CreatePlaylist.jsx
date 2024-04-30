@@ -9,6 +9,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
     const [description, setDescription] = useState(inputDesc);
     const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
     const [buttonTxt, setButtonTxt] = useState('Create Playlist');
+    const [playlistID, setPlaylistID] = useState();
 
     useEffect(() => {
         if(edit) { setButtonTxt('Edit'); } 
@@ -53,13 +54,18 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
             
             // // Handle the userId returned from the backend
             // setUserId(user);
-            await axios.post("http://127.0.0.1:5001/create_playlist", {userId, title, description});
+            const response = await axios.post("http://127.0.0.1:5001/create_playlist", {userId, title, description});
+            const playlistId = response.data;
+            console.log("!!!!!!!!!!!", playlistId)
+            setPlaylistID(playlistId);
+            
         } catch (err) {
             console.log(err);
         }
         console.log(userId)
         console.log("TITLE:", title)
         console.log("DESC:", description)
+        
         //navigate('/');
     };
 

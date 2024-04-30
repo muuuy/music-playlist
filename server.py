@@ -10,6 +10,7 @@ from sqlalchemy import or_
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 import os
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '522df36e51694f0012cc55f3b640088b82c2806e6a957eca'
 CORS(app, supports_credentials=True)
