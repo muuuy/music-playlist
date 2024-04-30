@@ -38,57 +38,7 @@ const ResultsBySong = () => {
 
     return songCards;
   };
-
-  function generateTable() {
-    const resultsArray = songResults.results;
-    const arrayLength = resultsArray.length;
-    console.log("!", resultsArray);
-
-    // If array length is 0, display "No Results Found" message
-    if (arrayLength === 0) {
-      return <div>No Results Found</div>;
-    }
-
-    // Create all cells in table
-    const cells = [];
-    for (let i = 0; i < arrayLength; i++) {
-      for (let j = 0; j < 5; j++) {
-        if (j === 0) {
-          const cellText = `*`;
-          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-        }
-        if (j === 1) {
-          const cellText = `${resultsArray[i]["name"]}`;
-          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-        }
-        if (j === 2) {
-          const cellText = `${resultsArray[i]["artists"][0]["name"]}`;
-          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-        }
-        if (j === 3) {
-          const cellText = `${resultsArray[i]["album"]["name"]}`;
-          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-        }
-        if (j === 4) {
-          const cellText = `${resultsArray[i]["album"]["release_date"]}`;
-          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
-        }
-      }
-    }
-    // Create all rows in table
-    const rows = [];
-    for (let i = 0; i < arrayLength; i++) {
-      rows.push(<tr key={i}>{cells.slice(i * 5, (i + 1) * 5)}</tr>);
-    }
-    // Return the table
-    return (
-      <table>
-        <thead>{generateHeaderRow()}</thead>
-        <tbody>{rows}</tbody>
-      </table>
-    );
-  }
-
+  
   return (
     <>
       <HelmetProvider>
