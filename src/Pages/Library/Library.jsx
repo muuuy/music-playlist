@@ -12,6 +12,7 @@ const Library = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let count = 0;
   const [playlists, setPlaylist] = useState([]);
+  const [playlistID, setPlaylistID] = useState([]);
   const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
   console.log('ID:', userId);
   useEffect(() => {
@@ -105,14 +106,11 @@ const Library = () => {
           />
         )}
       </div>
-      <div>
-        {isLoggedIn && playlists.map((playlist) => (
-          populateLibrary(playlist)
-        ))}
-      </div>
       {/*TODO: DELETE FOR LOGIC LATER */}
       {/* {populateLibrary()} */}
-      <PlaylistCard />
+      {isLoggedIn && playlists.map((playlist) => (
+        <PlaylistCard title={playlist.title} userID={playlist.userID} />
+      ))}
     </div>
   );
 };
