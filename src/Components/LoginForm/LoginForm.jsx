@@ -33,12 +33,15 @@ const LoginForm = () => {
                 const data = await response.json();
                 const accessToken = data.access_token;
                 const username = data.username;
+                const userID = data.userId;
 
                 // Store the JWT token in local storage
                 sessionStorage.setItem('jwtToken', accessToken);
                 sessionStorage.setItem('username', username);
+                sessionStorage.setItem('userID', userID);
                 
-                console.log('Login successful');                
+                console.log('Login successful');
+                console.log('USER ID', userID);            
                 
                 // Redirect user to their Library page
                 //window.location.href = '/Library';

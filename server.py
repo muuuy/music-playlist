@@ -152,7 +152,7 @@ def delete():
             # ont-end
             return jsonify({'message': msg})
 
-@app.route('/get_playlists_by_user/<int:user_id>', methods=['GET'])
+@app.route('/get_playlists_by_user/<user_id>', methods=['GET'])
 def get_playlists_by_user(user_id):
     print("getting playlist from user")
     try:

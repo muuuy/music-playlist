@@ -13,7 +13,8 @@ const Library = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let count = 0;
   const [playlists, setPlaylist] = useState([]);
-  const [userId, setUserId] = useState(localStorage.getItem('username'));
+  const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
+  console.log('ID:', userId);
   useEffect(() => {
             // Check if JWT token exists in local storage
             const jwtToken = sessionStorage.getItem('jwtToken');
