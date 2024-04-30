@@ -109,7 +109,9 @@ const Library = () => {
       {/*TODO: DELETE FOR LOGIC LATER */}
       {/* {populateLibrary()} */}
       {isLoggedIn && playlists.map((playlist) => (
-        <PlaylistCard title={playlist.title} userID={playlist.userID} />
+        <div className={styles.library_body}>
+          <PlaylistCard title={playlist.title} userID={playlist.userID} />
+        </div>
       ))}
     </div>
   );
