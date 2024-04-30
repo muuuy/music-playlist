@@ -6,7 +6,6 @@ import axios from "axios";
 
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
 import PlaylistCard from "../../Components/PlaylistCard/PlaylistCard";
-
 //TODO: Change the "DELETE LATER" when created the component
 
 const Library = () => {
