@@ -1,7 +1,7 @@
 .playlistcard_container {
     display: flex;
     position: relative;
-    height: 280px;
+    height: 300px;
     width: 260px;
     border-radius: 40px;
     align-items: center;
@@ -44,4 +44,8 @@
 .playlist_name {
     font-size: 20px;
     margin-top: 8px;
+}
+
+.track_num {
+    font-size: 20px;
 }

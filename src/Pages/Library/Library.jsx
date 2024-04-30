@@ -113,7 +113,6 @@ const Library = () => {
       </div>
       {/*TODO: DELETE FOR LOGIC LATER */}
       {/* {populateLibrary()} */}
-      <PlaylistCard />
     </div>
   );
 };

@@ -7,6 +7,7 @@ const PlaylistCard = (userId = null, id = null) => {
             <p className={styles.close}>DELETE</p>
             <img className={styles.playlistcard_img}></img>
             <h1 className={styles.playlist_name}>Test</h1>
+            <h1 className={styles.track_num}>Tracks: </h1>
         </div>
         </>
     )
