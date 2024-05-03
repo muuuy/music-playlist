@@ -21,9 +21,7 @@ conn.execute('''
         title TEXT NOT NULL,
         artist TEXT NOT NULL,
         album TEXT NOT NULL,
-        genre TEXT,
         releaseDate TEXT,
-        duration INTEGER,
         userId INTEGER,
         FOREIGN KEY (userId) REFERENCES user(userId)
     )
