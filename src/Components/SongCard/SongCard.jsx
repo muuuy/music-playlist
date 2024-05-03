@@ -1,8 +1,13 @@
 import styles from "./SongCard.module.css";
 
 const SongCard = ({songName='None', artistName='None', albumName='None', buttonSymbol='❌', releaseDate=null}) => {
-  const removeSong = () => {
+  const handleSong = () => {
     //TODO: Add code to connect to backend
+    if(buttonSymbol === '❌') {
+      console.log('if user wants to remove a song')
+    } else {
+      console.log('if user wants to add a song')
+    }
   };
 
   return (
@@ -13,9 +18,18 @@ const SongCard = ({songName='None', artistName='None', albumName='None', buttonS
         <p className={styles.song_album}>{albumName}</p>
         <p className={styles.song_time}>9.99</p>
         <div className={styles.remove_container}>
-          <p className={styles.remove_song} onClick={removeSong}>
+          <p className={styles.remove_song} onClick={handleSong}>
             {buttonSymbol}
           </p>
+          <div className={styles.dropdown}>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p> 
+          </div>
         </div>
       </div>
     </>

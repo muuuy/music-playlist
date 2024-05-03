@@ -63,6 +63,17 @@
     animation: rotate 5s infinite;
 }
 
+.remove_song:hover .dropdown {
+    display: block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    z-index: 10001;
+}
+
 @keyframes rotate {
     from {
         transform: rotate(0);
