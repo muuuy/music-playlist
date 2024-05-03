@@ -16,7 +16,7 @@ const SongCard = ({songName='None', artistName='None', albumName='None', buttonS
         <span className={styles.song_title}>{songName}</span>
         <p className={styles.song_artist}>{artistName}</p>
         <p className={styles.song_album}>{albumName}</p>
-        <p className={styles.song_time}>9.99</p>
+        <p className={styles.release_date}>{releaseDate}</p>
         <div className={styles.remove_container}>
           <p className={styles.remove_song} onClick={handleSong}>
             {buttonSymbol}
