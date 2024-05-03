@@ -22,8 +22,8 @@ conn.execute('''
         artist TEXT NOT NULL,
         album TEXT NOT NULL,
         releaseDate TEXT,
-        userId INTEGER,
-        FOREIGN KEY (userId) REFERENCES user(userId)
+        playlistId INTEGER,
+        FOREIGN KEY (playlistId) REFERENCES playlist(playlistId)
     )
 ''')
 print("Created table music successfully!")

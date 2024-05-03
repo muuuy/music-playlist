@@ -227,7 +227,7 @@ def delete_playlist():
             return jsonify({'message': msg})
         
 # Route to add a track to a playlist
-@app.route('/add_to_playlist', methods=['POST', 'OPTIONS'])
+@app.route('/add_to_playlist', methods=['POST'])
 def add_to_playlist():
     if request.method == "OPTIONS":
         res = Response()
@@ -236,16 +236,16 @@ def add_to_playlist():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            user_id = data['userId']
+            print("DATA!!!!!!!!!!!!!!!!!!", data)
+            title = data['songName']
             playlist_id = data['playlistId']
-            track_id = data['trackId']
-            artist = data['artist']
-            album = data['album']
-            genre = data['genre']
+            artist = data['artistName']
+            album = data['albumName']
+            release_date = data['releaseDate']
 
             with sqlite3.connect('database.db') as con:
                 cursor = con.cursor()
-                cursor.execute('INSERT INTO user_playlist (userId, playlistId) VALUES (?, ?)', (user_id, playlist_id))
+                cursor.execute('INSERT INTO music (playlistId, title, artist, album, releaseDate) VALUES (?, ?, ?, ?, ?)', (playlist_id, title, artist, album, release_date))
                 con.commit()
             
         except Exception as e:
