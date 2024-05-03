@@ -63,15 +63,23 @@
     animation: rotate 5s infinite;
 }
 
-.remove_song:hover .dropdown {
+.dropdown_container {
+    z-index: 1002;
+}
+
+.burger {
+    /* margin-right: 20px; */
+}
+
+.dropdown_container:hover .dropdown {
     display: block;
 }
 
 .dropdown {
     display: none;
     position: absolute;
-    background-color: white;
-    z-index: 10001;
+    z-index: 1003;
+    background-color: black;
 }
 
 @keyframes rotate {
