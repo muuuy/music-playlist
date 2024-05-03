@@ -1,51 +1,38 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { v4 as uuid } from "uuid";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import styles from "./PlaylistTemplate.module.css";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
 import SongCard from "../../Components/SongCard/SongCard";
 
 const PlaylistTemplate = () => {
-  const testList = [
-    "aaaaaa",
-    "aaa",
-    "abbbb",
-    "accccccccc",
-    "addddddddd",
-    "aeeeeeeeeeeeeeee",
-    "affffffffff",
-    "agggggggggggg",
-    "ahhhhhhhhh",
-  ];
+  const { playlistId, title } = useParams();
+  const [songs, setSongs] = useState([]);
 
-  const [title, setTitle] = useState("test");
+  useEffect(() => {
+    const fetchSongs = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:5001/get_music_from_playlist/${playlistId}`);
+        setSongs(response.data);
+      } catch (error) {
+        console.error("Error fetching songs:", error);
+      }
+    };
+  
+    fetchSongs();
+  }, [playlistId]);
+
+
+  //const [title, setTitle] = useState("test");
   const [description, setDescription] = useState("test");
   const [create, setCreate] = useState(false);
 
   const removeSong = () => {
     //TODO: Add code to connect to backend
   };
-
-  const generateCards = testList.map((song) => {
-    let id = uuid();
-
-    return (
-      <tr key={id}>
-        <td className={styles.song_card}>
-          <span className={styles.song_title}>{song}</span>
-          <p className={styles.song_artist}>artist</p>
-          <p className={styles.song_album}>album</p>
-          <p className={styles.song_time}>9:99</p>
-          <div className={styles.remove_container}>
-            <p className={styles.remove_song} onClick={removeSong}>
-              ❌
-            </p>
-          </div>
-        </td>
-      </tr>
-    );
-  });
 
   const handleEdit = () => {
     setCreate((create) => !create);
@@ -73,11 +60,17 @@ const PlaylistTemplate = () => {
             />
           )}
         </div>
-        <SongCard />
-        <SongCard />
-        <SongCard />
-        <SongCard />
-        <SongCard />
+        {songs.map((song) => (
+          <SongCard
+            key={song.trackId}
+            songName={song.title}
+            artistName={song.artist}
+            albumName={song.album}
+            releaseDate={song.releaseDate}
+            buttonSymbol="❌"
+            removeSong={removeSong}
+          />
+        ))}
       </div>
     </>
   );

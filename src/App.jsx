@@ -43,7 +43,7 @@ function App() {
           <Route path='/results_by_artist' element={<ArtistResults />} />
           <Route path='/password' element={<Password />} />
           <Route path='/create_playlist' element={<CreatePlaylist />} />
-          <Route path='/playlist_template' element={<PlaylistTemplate />} />
+          <Route path='/playlist_template/:playlistId/:title' element={<PlaylistTemplate />} />
           <Route path='/playlist_card' element={<PlaylistCard />} />
           <Route path='/explore' element={<Explore />} />
           {/* <Route path='/playlist_card' element={<PlaylistCard />} /> */}

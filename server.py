@@ -236,7 +236,6 @@ def add_to_playlist():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            print("DATA!!!!!!!!!!!!!!!!!!", data)
             title = data['songName']
             playlist_id = data['playlistId']
             artist = data['artistName']
@@ -302,20 +301,17 @@ def get_music_from_playlist(playlist_id):
     try:
         with sqlite3.connect('database.db') as con:
             cursor = con.cursor()
-            cursor.execute("SELECT * FROM playlist_track WHERE playlistId=?", (playlist_id,))
+            cursor.execute("SELECT * FROM music WHERE playlistId=?", (playlist_id,))
             playlist_music = cursor.fetchall()
             music_data = []
             for row in playlist_music:
-                cursor.execute("SELECT * FROM track WHERE trackId=?", (row[1],))
-                track_info = cursor.fetchone()
-                if track_info:
-                    music_data.append({
-                        'trackId': track_info[0],
-                        'title': track_info[1],
-                        'artist': track_info[2],
-                        'album': track_info[3],
-                        'genre': track_info[4]
-                    })
+                music_data.append({
+                    'trackId': row[0],
+                    'title': row[1],
+                    'artist': row[2],
+                    'album': row[3],
+                    'releaseDate': row[4]
+                })
             return jsonify(music_data)
     except Exception as e:
         return jsonify({'error': str(e)})
