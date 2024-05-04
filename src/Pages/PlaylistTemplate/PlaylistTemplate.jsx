@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { v4 as uuid } from "uuid";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -16,7 +16,7 @@ const PlaylistTemplate = () => {
     const fetchSongs = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:5001/get_music_from_playlist/${playlistId}`);
-        setSongs(response.data);
+        setSongs(Array.from(response.data));
       } catch (error) {
         console.error("Error fetching songs:", error);
       }
@@ -40,9 +40,12 @@ const PlaylistTemplate = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Playlist | {title}</title>
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <title>Playlist | {title}</title>
+        </Helmet>
+      </HelmetProvider>
+      
 
       <div className={styles.template_container}>
         <div className={styles.template_header}>
