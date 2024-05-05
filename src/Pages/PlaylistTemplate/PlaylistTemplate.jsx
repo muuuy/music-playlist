@@ -65,11 +65,12 @@ const PlaylistTemplate = () => {
         </div>
         {songs.map((song) => (
           <SongCard
-            key={song.trackId}
+            trackId={song.trackId}
             songName={song.title}
             artistName={song.artist}
             albumName={song.album}
             releaseDate={song.releaseDate}
+            playlistId={song.playlistId}
             buttonSymbol="❌"
             removeSong={removeSong}
           />

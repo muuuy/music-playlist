@@ -2,12 +2,29 @@ import styles from "./SongCard.module.css";
 import React, { useState } from "react";
 import axios from "axios";
 
-const SongCard = ({songName='None', artistName='None', albumName='None', buttonSymbol='❌', releaseDate=null}) => {
+const SongCard = ({trackId=null, songName='None', artistName='None', albumName='None', buttonSymbol='❌', releaseDate=null, playlistId=null}) => {
   const handleSong = () => {
-    //TODO: Add code to connect to backend
-    if(buttonSymbol === '❌') {
+    //remove a song from a playlist
+    if(buttonSymbol === '❌') { 
       console.log('if user wants to remove a song')
-    } else {
+      console.log('trackId ' + trackId)
+      console.log('playlistId ' + playlistId)
+      const data = {
+        playlistId: playlistId,
+        trackId: trackId
+      };
+
+      axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
+        .then(response => {
+          window.location.reload();
+          console.log('Data sent. Response:', response.data)
+        })
+        .catch(error => {
+          console.error('Error sending data to backend')
+        })
+    } 
+    // add a song to a playlist
+    else {
       const playlistId = 1  // Hardecoded for testing
       console.log('if user wants to add a song')
       // Data sent to backend
