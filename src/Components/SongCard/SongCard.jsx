@@ -31,18 +31,25 @@ const SongCard = ({
             {buttonSymbol}
           </p>
         </div>
-        <div className={styles.dropdown_container}>
+        {buttonSymbol !== "❌" && <div className={styles.dropdown_container}>
           <BsThreeDotsVertical className={styles.burger} />
           <div className={styles.dropdown}>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
+            <p
+              style={{
+                textAlign: "center",
+                borderBottom: "2px solid var(--dark-red)",
+                fontWeight: "800",
+              }}
+            >
+              Add to:
+            </p>
+            <p className={styles.dropdown_item}>test</p>
+            <p className={styles.dropdown_item}>test</p>
+            <p className={styles.dropdown_item}>test</p>
+            <p className={styles.dropdown_item}>test</p>
+            <p className={styles.dropdown_item}>test</p>
           </div>
-        </div>
+        </div>}
       </div>
     </>
   );
