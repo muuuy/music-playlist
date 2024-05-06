@@ -4,6 +4,33 @@ import axios from "axios";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
+const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
+  useEffect(() => {
+            // Check if JWT token exists in local storage
+            const jwtToken = sessionStorage.getItem('jwtToken');
+            if (jwtToken) {
+                // If token exists, set isLoggedIn to true
+                setIsLoggedIn(true);
+                
+            } else {
+                // If token doesn't exist, set isLoggedIn to false
+                setIsLoggedIn(false);
+            }
+            const fetchPlaylistsByUser = async () => {
+                try {
+                    //userId = localStorage.getItem('username')
+                    const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
+                    setPlaylist(response.data);
+                    console.log("!", response.data);
+                } catch (error) {
+                    console.error('Error fetching playlists:', error);
+                }
+            };
+          
+            //   // Call the function to fetch playlists when the component mounts
+            fetchPlaylistsByUser();
+        }, []);
+
 const SongCard = ({
   songName = "None",
   artistName = "None",
