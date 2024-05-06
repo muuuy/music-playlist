@@ -1,35 +1,10 @@
 import styles from "./SongCard.module.css";
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
-  useEffect(() => {
-            // Check if JWT token exists in local storage
-            const jwtToken = sessionStorage.getItem('jwtToken');
-            if (jwtToken) {
-                // If token exists, set isLoggedIn to true
-                setIsLoggedIn(true);
-                
-            } else {
-                // If token doesn't exist, set isLoggedIn to false
-                setIsLoggedIn(false);
-            }
-            const fetchPlaylistsByUser = async () => {
-                try {
-                    //userId = localStorage.getItem('username')
-                    const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
-                    setPlaylist(response.data);
-                    console.log("!", response.data);
-                } catch (error) {
-                    console.error('Error fetching playlists:', error);
-                }
-            };
-          
-            //   // Call the function to fetch playlists when the component mounts
-            fetchPlaylistsByUser();
-        }, []);
+
 
 const SongCard = ({
   songName = "None",
@@ -38,12 +13,60 @@ const SongCard = ({
   buttonSymbol = "❌",
   releaseDate = null,
 }) => {
+
+  const [playlists, setPlaylist] = useState([]);
+  const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
+  useEffect(() => {
+
+          const fetchPlaylistsByUser = async () => {
+              try {
+                  //userId = localStorage.getItem('username')
+                  const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
+                  setPlaylist(response.data);
+                  console.log("!", response.data);
+              } catch (error) {
+                  console.error('Error fetching playlists:', error);
+              }
+          };
+          // Check if JWT token exists in local storage
+          const jwtToken = sessionStorage.getItem('jwtToken');
+          if (jwtToken) {
+              // If token exists, set isLoggedIn to true
+              fetchPlaylistsByUser();  
+          }
+          //   // Call the function to fetch playlists when the component mounts
+      }, []);
+
+
   const handleSong = () => {
     //TODO: Add code to connect to backend
     if (buttonSymbol === "❌") {
       console.log("if user wants to remove a song");
-    } else {
-      const playlistId = 1  // Hardecoded for testing
+    } 
+    //else {
+    //   const playlistId = 1  // Hardecoded for testing
+    //   console.log('if user wants to add a song')
+    //   // Data sent to backend
+    //   const data = {
+    //     playlistId: playlistId,
+    //     songName: songName,
+    //     artistName: artistName,
+    //     albumName: albumName,
+    //     releaseDate: releaseDate
+    //   };
+    //   console.log("SENDING:", data)
+    //   // Backend request
+    //   axios.post('http://127.0.0.1:5001/add_to_playlist', data)
+    //     .then(response => {
+    //       console.log('Data sent. Response:', response.data)
+    //     })
+    //     .catch(error => {
+    //       console.error('Error sending data to backend')
+    //     })
+    // }
+  };
+
+  const handlePlaylistClicked = (playlistId) => {
       console.log('if user wants to add a song')
       // Data sent to backend
       const data = {
@@ -62,7 +85,6 @@ const SongCard = ({
         .catch(error => {
           console.error('Error sending data to backend')
         })
-    }
   };
 
   return (
@@ -89,11 +111,15 @@ const SongCard = ({
             >
               Add to:
             </p>
-            <p className={styles.dropdown_item}>test</p>
-            <p className={styles.dropdown_item}>test</p>
-            <p className={styles.dropdown_item}>test</p>
-            <p className={styles.dropdown_item}>test</p>
-            <p className={styles.dropdown_item}>test</p>
+            {playlists.map((playlist) => (
+                <p
+                  key={playlist.playlistId} // Use a unique key for each element
+                  className={styles.dropdown_item}
+                  onClick={() => handlePlaylistClicked(playlist.playlistId)}
+                >
+                  {playlist.title}
+                </p>
+            ))}
           </div>
         </div>}
       </div>
