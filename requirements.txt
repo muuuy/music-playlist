@@ -1,0 +1,7 @@
+flask
+flask-cors
+flask-login
+flask-sqlalchemy
+flask-jwt-extended
+load-dotenv
+requests
