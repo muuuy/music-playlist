@@ -106,9 +106,9 @@ const Library = () => {
       </div>
       <div className={styles.library_body}>
       {isLoggedIn && playlists.map((playlist) => (
-        <div className={styles.library_body}>
+        <NavLink to={`/playlist_template/${playlist.playlistId}/${encodeURIComponent(playlist.title)}`} key={playlist.playlistId}>
           <PlaylistCard playlist_ID={playlist.playlistId} title={playlist.title} userID={playlist.userID} />
-        </div>
+        </NavLink>
       ))}
       </div>
     </div>

@@ -56,8 +56,8 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
             // setUserId(user);
             const response = await axios.post("http://127.0.0.1:5001/create_playlist", {userId, title, description});
             const playlistId = response.data;
-            console.log("!!!!!!!!!!!", playlistId)
             setPlaylistID(playlistId);
+            console.log("ID:", playlistID)
             
         } catch (err) {
             console.log(err);
