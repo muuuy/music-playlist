@@ -45,11 +45,11 @@ const SongCard = ({
         <p className={styles.song_artist}>{artistName}</p>
         <p className={styles.song_album}>{albumName}</p>
         <p className={styles.release_date}>{releaseDate}</p>
-        <div className={styles.remove_container}>
+        {buttonSymbol !== "⭕️" && <div className={styles.remove_container}>
           <p className={styles.remove_song} onClick={handleSong}>
             {buttonSymbol}
           </p>
-        </div>
+        </div>}
         {buttonSymbol !== "❌" && <div className={styles.dropdown_container}>
           <BsThreeDotsVertical className={styles.burger} />
           <div className={styles.dropdown}>

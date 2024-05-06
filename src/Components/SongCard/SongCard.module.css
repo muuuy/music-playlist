@@ -20,7 +20,7 @@
 .song_time {
     display: flex;
     align-items: center;
-    margin-right: 5%;
+    margin-right: 2.5%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -41,6 +41,10 @@
     display: flex;
     width: 10%;
     justify-content: flex-end;
+}
+
+.release_date {
+    width: 5%;
 }
 
 .remove_song {
