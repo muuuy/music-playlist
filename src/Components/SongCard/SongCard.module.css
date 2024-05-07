@@ -2,7 +2,6 @@
     display: flex;
     position: relative;
     height: 50px;
-    z-index: 1001;
     width: 100%;
     background-color: black;
     align-items: center;
@@ -21,7 +20,7 @@
 .song_time {
     display: flex;
     align-items: center;
-    margin-right: 5%;
+    margin-right: 2.5%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -44,6 +43,10 @@
     justify-content: flex-end;
 }
 
+.release_date {
+    width: 5%;
+}
+
 .remove_song {
     justify-self: center;
     cursor: pointer;
@@ -56,22 +59,37 @@
     align-items: center;
     display: flex;
     border-radius: 32px;
-    margin-right: 2.5%;
+    margin-right: 1.5%;
 }
 
 .remove_song:hover {
     animation: rotate 5s infinite;
 }
 
-.remove_song:hover .dropdown {
+.burger {
+    margin-right: 8px;
+}
+
+.dropdown_container:hover .dropdown {
     display: block;
 }
 
 .dropdown {
+    width: 100px;
+    border: 2px solid var(--dark-red);
     display: none;
     position: absolute;
-    background-color: white;
-    z-index: 10001;
+    z-index: 1;
+    background-color: black;
+    font-size: 16px;
+}
+
+.dropdown_item {
+    padding: 8px;
+}
+
+.dropdown_item:hover {
+    background-color: var(--dark-gray);
 }
 
 @keyframes rotate {
