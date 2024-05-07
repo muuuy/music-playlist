@@ -12,6 +12,8 @@ const SongCard = ({
   albumName = "None",
   buttonSymbol = "❌",
   releaseDate = null,
+  trackId = null,
+  playlistId = null
 }) => {
 
   const [playlists, setPlaylist] = useState([]);
@@ -39,31 +41,47 @@ const SongCard = ({
 
 
   const handleSong = () => {
-    //TODO: Add code to connect to backend
-    if (buttonSymbol === "❌") {
-      console.log("if user wants to remove a song");
+    //remove a song from a playlist
+    if(buttonSymbol === '❌') { 
+      console.log('if user wants to remove a song')
+      console.log('trackId ' + trackId)
+      console.log('playlistId ' + playlistId)
+      const data = {
+        playlistId: playlistId,
+        trackId: trackId
+      };
+
+      axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
+        .then(response => {
+          window.location.reload();
+          console.log('Data sent. Response:', response.data)
+        })
+        .catch(error => {
+          console.error('Error sending data to backend')
+        })
     } 
-    //else {
-    //   const playlistId = 1  // Hardecoded for testing
-    //   console.log('if user wants to add a song')
-    //   // Data sent to backend
-    //   const data = {
-    //     playlistId: playlistId,
-    //     songName: songName,
-    //     artistName: artistName,
-    //     albumName: albumName,
-    //     releaseDate: releaseDate
-    //   };
-    //   console.log("SENDING:", data)
-    //   // Backend request
-    //   axios.post('http://127.0.0.1:5001/add_to_playlist', data)
-    //     .then(response => {
-    //       console.log('Data sent. Response:', response.data)
-    //     })
-    //     .catch(error => {
-    //       console.error('Error sending data to backend')
-    //     })
-    // }
+    // add a song to a playlist
+    else {
+      const playlistId = 1  // Hardecoded for testing
+      console.log('if user wants to add a song')
+      // Data sent to backend
+      const data = {
+        playlistId: playlistId,
+        songName: songName,
+        artistName: artistName,
+        albumName: albumName,
+        releaseDate: releaseDate
+      };
+      console.log("SENDING:", data)
+      // Backend request
+      axios.post('http://127.0.0.1:5001/add_to_playlist', data)
+        .then(response => {
+          console.log('Data sent. Response:', response.data)
+        })
+        .catch(error => {
+          console.error('Error sending data to backend')
+        })
+    }
   };
 
   const handlePlaylistClicked = (playlistId) => {

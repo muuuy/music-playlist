@@ -262,25 +262,26 @@ def delete_from_playlist():
         res = Response()
         res.headers['X-Content-Type-Options'] = '*'
         return res
-    try:
-        data = request.get_json()
-        playlist_id = data['playlistId']
-        track_id = data['trackId']
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            playlist_id = data['playlistId']
+            track_id = data['trackId']
 
-        with sqlite3.connect('database.db') as con:
-            cur = con.cursor()
-            # Delete entry from the playlist_track table
-            cur.execute("DELETE FROM playlist_track WHERE playlistId=? AND trackId=?", (playlist_id, track_id))
-            con.commit()
-            msg = "Song successfully removed from the playlist"
-    except Exception as e:
-        con.rollback()
-        msg = f"Error in removing song from playlist: {str(e)}"
-    finally:
-        con.close()
-        response = jsonify({'message': msg})
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                # Delete entry from the playlist_track table
+                cur.execute("DELETE FROM music WHERE playlistId=? AND trackId=?", (playlist_id, track_id))
+                con.commit()
+                msg = "Song successfully removed from the playlist"
+        except Exception as e:
+            con.rollback()
+            msg = f"Error in removing song from playlist: {str(e)}"
+        finally:
+            con.close()
+            response = jsonify({'message': msg})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
 @app.route('/get_all_playlists', methods=['GET'])
 def get_all_playlists():
@@ -310,7 +311,8 @@ def get_music_from_playlist(playlist_id):
                     'title': row[1],
                     'artist': row[2],
                     'album': row[3],
-                    'releaseDate': row[4]
+                    'releaseDate': row[4],
+                    'playlistId': row[5],
                 })
             return jsonify(music_data)
     except Exception as e:

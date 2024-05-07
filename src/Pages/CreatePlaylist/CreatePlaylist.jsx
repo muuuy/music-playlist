@@ -58,6 +58,7 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
             const playlistId = response.data;
             setPlaylistID(playlistId);
             console.log("ID:", playlistID)
+            window.location.reload();
             
         } catch (err) {
             console.log(err);
