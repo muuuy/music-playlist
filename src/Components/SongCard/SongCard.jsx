@@ -76,7 +76,7 @@ const SongCard = ({
       // Backend request
       axios.post('http://127.0.0.1:5001/add_to_playlist', data)
         .then(response => {
-          console.log('Data sent. Response:', response.data)
+          alert(`Data sent. Response: ${response.data}`);
         })
         .catch(error => {
           console.error('Error sending data to backend')
