@@ -93,22 +93,22 @@ const Explore = () => {
   function generateArtistsTable() {
     // Create cells in table
     const cells = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 1; j++) {
         if (j == 0) {
           const cellText = `${results[i]["name"]}`;
-          cells.push(<td key={`${i}-${j}`}>{cellText}</td>);
+          cells.push(<td key={`${i}-${j}`} className={styles.column} style={{borderRight: '1px solid var(--dark-red)'}}>{cellText}</td>);
         }
       }
     }
     // Create rows
     const rows = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
       rows.push(<tr key={i}>{cells.slice(i * 1, (i + 1) * 1)}</tr>);
     }
     // Return table
     return (
-      <table>
+      <table className={styles.explore_table}>
         {<thead>{generateArtistHeader()}</thead>}
         <tbody>{rows}</tbody>
       </table>
