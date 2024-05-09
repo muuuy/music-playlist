@@ -32,7 +32,6 @@ const SignupForm = () => {
             const response = await axios.post("http://127.0.0.1:5001/addUser", formData);
             const signupStatus = parseInt(response.data.message.status);
             setSignupResponse(response.data.message.message);
-            console.log("RESPONSE!!!!", signupResponse)
             // Navigate to home page if sign in is successful
             if (signupStatus === 1) {
                 navigate('/');
