@@ -24,3 +24,9 @@
     font-size: 12px;
     font-weight: 900;
 }
+
+.invalid {
+    font-size: 12px;
+    font-weight: 900;
+    text-align: center;
+}

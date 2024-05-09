@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SignupForm.module.css';
 import { Helmet } from 'react-helmet'
 import axios from "axios";
@@ -6,6 +6,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const navigate = useNavigate();
+    const [signupResponse, setSignupResponse] = useState();
+    const [invalidSignup, setInvalidSignup] = useState(false);
 
     const [formData, setFormData] = useState({
         'email': '',
@@ -27,12 +29,26 @@ const SignupForm = () => {
 
         }
         try {
-        await axios.post("http://127.0.0.1:5001/addUser", formData);
+            const response = await axios.post("http://127.0.0.1:5001/addUser", formData);
+            const signupStatus = parseInt(response.data.message.status);
+            setSignupResponse(response.data.message.message);
+            console.log("RESPONSE!!!!", signupResponse)
+            // Navigate to home page if sign in is successful
+            if (signupStatus === 1) {
+                navigate('/');
+            }
+            // If email or username is already associated with an account, notify user
+            else if (signupStatus === 0) {
+                setInvalidSignup(true);
+            }
         } catch (err) {
         console.log(err);
         }
-        navigate('/');
     };
+
+    useEffect(() => {
+        console.log("RESPONSE", signupResponse);
+    }, [signupResponse]);
 
     return (
         <div className='ui-container'>
@@ -44,6 +60,9 @@ const SignupForm = () => {
                 <div className='sliver'></div>
                 <div className='ui-text'>
                     <h2>Sign up for an account</h2>
+                </div>
+                <div className={styles.invalid}>
+                    {invalidSignup && <h3>{signupResponse}</h3>}
                 </div>
                 <div>
                     <label for="email">Email</label>
