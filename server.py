@@ -106,7 +106,7 @@ def addrec():
             else:
                 message = {'status': 0, 'message': (msg)}
                 response = jsonify({'message': message})
-            #response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add('Access-Control-Allow-Origin', '*')
             return response
 
 
