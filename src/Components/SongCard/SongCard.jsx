@@ -12,6 +12,8 @@ const SongCard = ({
   albumName = "None",
   buttonSymbol = "❌",
   releaseDate = null,
+  playlisttemplateplaylistid = "None"
+
 }) => {
 
   const [playlists, setPlaylist] = useState([]);
@@ -23,7 +25,6 @@ const SongCard = ({
                   //userId = localStorage.getItem('username')
                   const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
                   setPlaylist(response.data);
-                  console.log("!", response.data);
               } catch (error) {
                   console.error('Error fetching playlists:', error);
               }
@@ -41,7 +42,21 @@ const SongCard = ({
   const handleSong = () => {
     //TODO: Add code to connect to backend
     if (buttonSymbol === "❌") {
-      console.log("if user wants to remove a song");
+      const data = {
+        playlistId: playlisttemplateplaylistid,
+        songName: songName,
+        artistName: artistName,
+        albumName: albumName,
+        releaseDate: releaseDate
+      };
+      print("removing song from playlist")
+      axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
+      .then(response => {
+        console.log('Data sent. Response:', response.data)
+      })
+      .catch(error => {
+        console.error('Error sending data to backend')
+      })
     } 
     //else {
     //   const playlistId = 1  // Hardecoded for testing
@@ -66,7 +81,7 @@ const SongCard = ({
     // }
   };
 
-  const handlePlaylistClicked = (playlistId) => {
+const handlePlaylistClicked = (playlistId) => {
       console.log('if user wants to add a song')
       // Data sent to backend
       const data = {
@@ -95,7 +110,7 @@ const SongCard = ({
         <p className={styles.song_album}>{albumName}</p>
         <p className={styles.release_date}>{releaseDate}</p>
         {buttonSymbol !== "⭕️" && <div className={styles.remove_container}>
-          <p className={styles.remove_song} onClick={handleSong}>
+          <p className={styles.remove_song} onClick={() => handleSong()}>
             {buttonSymbol}
           </p>
         </div>}

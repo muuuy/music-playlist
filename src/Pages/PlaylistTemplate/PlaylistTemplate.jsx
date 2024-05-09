@@ -31,8 +31,10 @@ const PlaylistTemplate = () => {
   const [create, setCreate] = useState(false);
 
   const removeSong = () => {
-    //TODO: Add code to connect to backend
+    print("remove song?")
   };
+
+  
 
   const handleEdit = () => {
     setCreate((create) => !create);
@@ -69,6 +71,7 @@ const PlaylistTemplate = () => {
             releaseDate={song.releaseDate}
             buttonSymbol="❌"
             removeSong={removeSong}
+            playlisttemplateplaylistid = {playlistId}
           />
         ))}
       </div>

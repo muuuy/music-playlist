@@ -283,14 +283,24 @@ def delete_from_playlist():
     try:
         data = request.get_json()
         playlist_id = data['playlistId']
-        track_id = data['trackId']
+        song_name = data['songName']
+        artist_name = data['artistName']
+        album_name = data['albumName']
+        release_date = data['releaseDate']
 
         with sqlite3.connect('database.db') as con:
             cur = con.cursor()
-            # Delete entry from the music_playlist table
-            cur.execute("DELETE FROM music_playlist WHERE playlistId=? AND musicId=?", (playlist_id, track_id))
-            con.commit()
-            msg = "Song successfully removed from the playlist"
+            # Retrieve trackId based on song information
+            cur.execute("SELECT trackId FROM music WHERE title=? AND artist=? AND album=? AND releaseDate=?", 
+                        (song_name, artist_name, album_name, release_date))
+            track_id = cur.fetchone()
+            if track_id:
+                # Delete entry from the music_playlist table
+                cur.execute("DELETE FROM music_playlist WHERE playlistId=? AND musicId=?", (playlist_id, track_id[0]))
+                con.commit()
+                msg = "Song successfully removed from the playlist"
+            else:
+                msg = "Song not found in the playlist"
     except Exception as e:
         con.rollback()
         msg = f"Error in removing song from playlist: {str(e)}"
