@@ -33,8 +33,7 @@ conn.execute('''
         title TEXT NOT NULL,
         description TEXT,
         created_at TEXT,
-        userId INTEGER,
-        FOREIGN KEY (userId) REFERENCES user(userId)
+        userId INTEGER
     )
 ''')
 print("Created table playlist successfully!")

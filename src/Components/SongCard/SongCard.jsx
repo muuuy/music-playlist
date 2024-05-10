@@ -13,11 +13,10 @@ const SongCard = ({
   buttonSymbol = "❌",
   releaseDate = null,
   playlisttemplateplaylistid = "None"
-
 }) => {
 
   const [playlists, setPlaylist] = useState([]);
-  const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
+ const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
   useEffect(() => {
 
           const fetchPlaylistsByUser = async () => {

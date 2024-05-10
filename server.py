@@ -356,7 +356,6 @@ def get_music_from_playlist(playlist_id):
                     'artist': row[2],
                     'album': row[3],
                     'releaseDate': row[4],
-                    'playlistId': row[5],
                 })
             return jsonify(music_data)
     except Exception as e:
