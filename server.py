@@ -211,7 +211,7 @@ def create_playlist():
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
         
-@app.route("/delete_playlist", methods=['POST','GET', 'OPTIONS'])
+@app.route("/delete_playlist", methods=['POST', 'OPTIONS'])
 def delete_playlist():
     if request.method == "OPTIONS":
         res = Response()
@@ -221,14 +221,15 @@ def delete_playlist():
         try:
             data = request.get_json()
             playlist_id = data.get('playlistId')
+            print("!!!!! ID", playlist_id)
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 # Delete playlist from the playlist table
                 cur.execute("DELETE FROM playlist WHERE playlistId=?", (playlist_id,))
                 # Also delete entries from user_playlist and playlist_track tables if any
-                cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
-                cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
+                #cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
+                #cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
                 con.commit()
                 msg = "Playlist successfully deleted"
         except Exception as e:
