@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaRegTimesCircle } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import styles from './EditPlaylist.module.css'
 
@@ -16,10 +17,7 @@ const EditPlaylist = ({
     const [description, setDescription] = useState(inputDesc);
     const [buttonTxt, setButtonTxt] = useState('Edit Playlist');
     const [playlistID, setPlaylistID] = useState(playlistId);
-
-    // useEffect(() => {
-    //     if(edit) { setButtonTxt('Edit'); } 
-    // }, [])
+    const navigate = useNavigate();
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -37,6 +35,7 @@ const EditPlaylist = ({
         axios.post("http://127.0.0.1:5001/edit_playlist", {title, description, playlistID})
             .then(response => {
                 console.log('Seccessfully updated playlist')
+                navigate(`/playlist_template/${playlistId}/${encodeURIComponent(title)}`)
                 window.location.reload();
             })
             .catch(error => {

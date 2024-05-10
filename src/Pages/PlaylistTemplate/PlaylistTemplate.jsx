@@ -7,7 +7,7 @@ import axios from "axios";
 import styles from "./PlaylistTemplate.module.css";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import SongCard from "../../Components/SongCard/SongCard";
-//playlistId = null, title = ''
+
 const PlaylistTemplate = ({}) => {
   const { playlistId, title } = useParams();
   const [songs, setSongs] = useState([]);
