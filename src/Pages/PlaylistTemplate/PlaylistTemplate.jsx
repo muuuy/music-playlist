@@ -5,10 +5,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import styles from "./PlaylistTemplate.module.css";
-import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
+import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import SongCard from "../../Components/SongCard/SongCard";
-
-const PlaylistTemplate = () => {
+//playlistId = null, title = ''
+const PlaylistTemplate = ({}) => {
   const { playlistId, title } = useParams();
   const [songs, setSongs] = useState([]);
 
@@ -20,22 +20,17 @@ const PlaylistTemplate = () => {
       } catch (error) {
         console.error("Error fetching songs:", error);
       }
-    };
-  
+    };  
     fetchSongs();
   }, [playlistId]);
 
 
   //const [title, setTitle] = useState("test");
   const [description, setDescription] = useState("test");
-  const [create, setCreate] = useState(false);
-
-  const removeSong = () => {
-    //TODO: Add code to connect to backend
-  };
+  const [edit, setEdit] = useState(false);
 
   const handleEdit = () => {
-    setCreate((create) => !create);
+    setEdit((edit) => !edit);
   };
 
   return (
@@ -53,12 +48,13 @@ const PlaylistTemplate = () => {
           <button id={styles.edit_button} onClick={handleEdit}>
             Edit Playlist
           </button>
-          {create && (
-            <CreatePlaylist
+          {edit && (
+            <EditPlaylist
+              playlistId={playlistId}
               edit={true}
               inputTitle={title}
               inputDesc={description}
-              inputVisible={create ? "absolute" : "none"}
+              inputVisible={edit ? "absolute" : "none"}
               onClose={handleEdit}
             />
           )}
@@ -72,7 +68,6 @@ const PlaylistTemplate = () => {
             releaseDate={song.releaseDate}
             playlistId={song.playlistId}
             buttonSymbol="❌"
-            removeSong={removeSong}
           />
         ))}
       </div>

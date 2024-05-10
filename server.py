@@ -197,7 +197,7 @@ def create_playlist():
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
         
-@app.route("/delete_playlist", methods=['POST','GET', 'OPTIONS'])
+@app.route("/delete_playlist", methods=['POST', 'OPTIONS'])
 def delete_playlist():
     if request.method == "OPTIONS":
         res = Response()
@@ -225,6 +225,30 @@ def delete_playlist():
             # Send the transaction message to the f
             # ont-end
             return jsonify({'message': msg})
+        
+@app.route('/edit_playlist', methods=['POST'])
+def edit_playlist():
+    update = 'UPDATE playlist SET title = ?, description = ? WHERE playlistId = ?'
+    try:
+        data = request.get_json()
+        playlist_id = data.get('playlistID')
+        playlist_title = data.get('title')
+        playlilst_desc = data.get('description')            
+
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
+            # Update playlist from the playlist table
+            cur.execute(update, (playlist_title, playlilst_desc, playlist_id,))
+            con.commit()
+            msg = "Playlist successfully updated."
+    except Exception as e:
+        con.rollback()
+        msg = f"Error in editing playlist: {str(e)}"
+    finally:
+        con.close()
+        # Send the transaction message to the f
+        # ont-end
+        return jsonify({'message': msg})
         
 # Route to add a track to a playlist
 @app.route('/add_to_playlist', methods=['POST'])

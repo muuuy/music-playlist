@@ -59,11 +59,11 @@ const Library = () => {
   };
 
   const [create, setCreate] = useState(false);
-  const [visible, setVisible] = useState(false);
+  // const [visible, setVisible] = useState(false);
 
-  const handleClick = () => {
-    setVisible(true);
-  };
+  // const handleClick = () => {
+  //   setVisible(true);
+  // };
 
   const handleEdit = () => {
     setCreate(!create);
