@@ -55,6 +55,7 @@ def home():
 # Route to add a new record (INSERT) student data to the database
 @app.route("/addUser", methods=['POST', 'GET', 'OPTIONS'])
 def addrec():
+    unique_signin = True;
     if request.method == "OPTIONS":
         res = Response()
         res.headers['X-Content-Type-Options'] = '*'
@@ -76,9 +77,17 @@ def addrec():
                 cur = con.cursor()
                 cur.execute("SELECT userName FROM user WHERE userName=?", (userName,))
                 existing_id = cur.fetchone()
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("SELECT email FROM user WHERE email=?", (email,))
+                existing_email = cur.fetchone()
 
                 if existing_id:
-                    msg = f"Record with userName {userName} already exists in the database"
+                    msg = f"An account with that username ({userName}) already exists"
+                    unique_signin = False
+                elif existing_email:
+                    msg = f"An account with that email ({email}) already exists"
+                    unique_signin = False
                 else:
                     # Perform the INSERT operation only if the ID doesn't exist
                     cur.execute("INSERT INTO user (userName, email, password) VALUES (?,?,?)", (userName, email, hashed_password))
@@ -91,7 +100,12 @@ def addrec():
             con.close()
             #get_data()  # Refresh the data after adding or rejecting the entry
             # Send the transaction message to the front-end
-            response = jsonify({'message': msg})
+            if unique_signin:
+                message = {'status': 1, 'message': (msg)}
+                response = jsonify({'message': message})
+            else:
+                message = {'status': 0, 'message': (msg)}
+                response = jsonify({'message': message})
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
 

@@ -54,9 +54,10 @@ const SongCard = ({
       axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
         .then(response => {
           window.location.reload();
+          alert(`Data sent. Response: ${response.data}`);
         })
         .catch(error => {
-          console.error('Error sending data to backend')
+          alert('Error removing song from playlist')
         })
     } 
     // add a song to a playlist
@@ -97,10 +98,10 @@ const SongCard = ({
       // Backend request
       axios.post('http://127.0.0.1:5001/add_to_playlist', data)
         .then(response => {
-          alert(`Data sent. Response: ${response.data}`);
+          alert(`Song added to playlist.`);
         })
         .catch(error => {
-          console.error('Error sending data to backend')
+          console.error('Error adding song to playlist.')
         })
   };
 

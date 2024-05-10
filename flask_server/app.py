@@ -172,5 +172,4 @@ def top_artists():
         print("Error")
         exit(1)
     json_artists = json.loads(result.content)['obj']
-
     return json_artists
