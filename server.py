@@ -55,6 +55,7 @@ def home():
 # Route to add a new record (INSERT) student data to the database
 @app.route("/addUser", methods=['POST', 'GET', 'OPTIONS'])
 def addrec():
+    unique_signin = True;
     if request.method == "OPTIONS":
         res = Response()
         res.headers['X-Content-Type-Options'] = '*'
@@ -76,9 +77,17 @@ def addrec():
                 cur = con.cursor()
                 cur.execute("SELECT userName FROM user WHERE userName=?", (userName,))
                 existing_id = cur.fetchone()
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("SELECT email FROM user WHERE email=?", (email,))
+                existing_email = cur.fetchone()
 
                 if existing_id:
-                    msg = f"Record with userName {userName} already exists in the database"
+                    msg = f"An account with that username ({userName}) already exists"
+                    unique_signin = False
+                elif existing_email:
+                    msg = f"An account with that email ({email}) already exists"
+                    unique_signin = False
                 else:
                     # Perform the INSERT operation only if the ID doesn't exist
                     cur.execute("INSERT INTO user (userName, email, password) VALUES (?,?,?)", (userName, email, hashed_password))
@@ -91,7 +100,12 @@ def addrec():
             con.close()
             #get_data()  # Refresh the data after adding or rejecting the entry
             # Send the transaction message to the front-end
-            response = jsonify({'message': msg})
+            if unique_signin:
+                message = {'status': 1, 'message': (msg)}
+                response = jsonify({'message': message})
+            else:
+                message = {'status': 0, 'message': (msg)}
+                response = jsonify({'message': message})
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
 
@@ -197,7 +211,7 @@ def create_playlist():
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
         
-@app.route("/delete_playlist", methods=['POST','GET', 'OPTIONS'])
+@app.route("/delete_playlist", methods=['POST', 'OPTIONS'])
 def delete_playlist():
     if request.method == "OPTIONS":
         res = Response()
@@ -207,14 +221,15 @@ def delete_playlist():
         try:
             data = request.get_json()
             playlist_id = data.get('playlistId')
+            print("!!!!! ID", playlist_id)
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 # Delete playlist from the playlist table
                 cur.execute("DELETE FROM playlist WHERE playlistId=?", (playlist_id,))
                 # Also delete entries from user_playlist and playlist_track tables if any
-                cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
-                cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
+                #cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
+                #cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
                 con.commit()
                 msg = "Playlist successfully deleted"
         except Exception as e:
@@ -280,35 +295,36 @@ def delete_from_playlist():
         res = Response()
         res.headers['X-Content-Type-Options'] = '*'
         return res
-    try:
-        data = request.get_json()
-        playlist_id = data['playlistId']
-        song_name = data['songName']
-        artist_name = data['artistName']
-        album_name = data['albumName']
-        release_date = data['releaseDate']
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            playlist_id = data['playlistId']
+            song_name = data['songName']
+            artist_name = data['artistName']
+            album_name = data['albumName']
+            release_date = data['releaseDate']
 
-        with sqlite3.connect('database.db') as con:
-            cur = con.cursor()
-            # Retrieve trackId based on song information
-            cur.execute("SELECT trackId FROM music WHERE title=? AND artist=? AND album=? AND releaseDate=?", 
-                        (song_name, artist_name, album_name, release_date))
-            track_id = cur.fetchone()
-            if track_id:
-                # Delete entry from the music_playlist table
-                cur.execute("DELETE FROM music_playlist WHERE playlistId=? AND musicId=?", (playlist_id, track_id[0]))
-                con.commit()
-                msg = "Song successfully removed from the playlist"
-            else:
-                msg = "Song not found in the playlist"
-    except Exception as e:
-        con.rollback()
-        msg = f"Error in removing song from playlist: {str(e)}"
-    finally:
-        con.close()
-        response = jsonify({'message': msg})
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                # Retrieve trackId based on song information
+                cur.execute("SELECT trackId FROM music WHERE title=? AND artist=? AND album=? AND releaseDate=?", 
+                            (song_name, artist_name, album_name, release_date))
+                track_id = cur.fetchone()
+                if track_id:
+                    # Delete entry from the music_playlist table
+                    cur.execute("DELETE FROM music_playlist WHERE playlistId=? AND musicId=?", (playlist_id, track_id[0]))
+                    con.commit()
+                    msg = "Song successfully removed from the playlist"
+                else:
+                    msg = "Song not found in the playlist"
+        except Exception as e:
+            con.rollback()
+            msg = f"Error in removing song from playlist: {str(e)}"
+        finally:
+            con.close()
+            response = jsonify({'message': msg})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
 
 @app.route('/get_all_playlists', methods=['GET'])
@@ -339,7 +355,8 @@ def get_music_from_playlist(playlist_id):
                     'title': row[1],
                     'artist': row[2],
                     'album': row[3],
-                    'releaseDate': row[4]
+                    'releaseDate': row[4],
+                    'playlistId': row[5],
                 })
             return jsonify(music_data)
     except Exception as e:

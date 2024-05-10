@@ -58,27 +58,6 @@ const SongCard = ({
         console.error('Error sending data to backend')
       })
     } 
-    //else {
-    //   const playlistId = 1  // Hardecoded for testing
-    //   console.log('if user wants to add a song')
-    //   // Data sent to backend
-    //   const data = {
-    //     playlistId: playlistId,
-    //     songName: songName,
-    //     artistName: artistName,
-    //     albumName: albumName,
-    //     releaseDate: releaseDate
-    //   };
-    //   console.log("SENDING:", data)
-    //   // Backend request
-    //   axios.post('http://127.0.0.1:5001/add_to_playlist', data)
-    //     .then(response => {
-    //       console.log('Data sent. Response:', response.data)
-    //     })
-    //     .catch(error => {
-    //       console.error('Error sending data to backend')
-    //     })
-    // }
   };
 
 const handlePlaylistClicked = (playlistId) => {
@@ -95,12 +74,13 @@ const handlePlaylistClicked = (playlistId) => {
       // Backend request
       axios.post('http://127.0.0.1:5001/add_to_playlist', data)
         .then(response => {
-          console.log('Data sent. Response:', response.data)
+          alert(`Song added to playlist.`);
         })
         .catch(error => {
-          console.error('Error sending data to backend')
+          console.error('Error adding song to playlist.')
         })
   };
+
 
   return (
     <>
