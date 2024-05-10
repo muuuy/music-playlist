@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Password = () => {
     return (
         <div className="ui-container">
-            <h1>Logo / Image Place Holder</h1>
+            <h1>Bakim Music</h1>
             <form className="ui-form">
                 <div className='sliver'></div>
                 <div className="ui-text">

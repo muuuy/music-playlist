@@ -3,6 +3,7 @@ import styles from './SignupForm.module.css';
 import { Helmet } from 'react-helmet'
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import logo from '../../Components/assets/bakimmusic_logo.png'
 
 const SignupForm = () => {
     const navigate = useNavigate();
@@ -37,9 +38,9 @@ const SignupForm = () => {
     return (
         <div className='ui-container'>
             <Helmet>
-                <title>Signup | MusicPlaylists</title>
+                <title>Signup | BakimMusic</title>
             </Helmet>
-            <h1>Logo / Image Place Holder</h1>
+            <img src={logo} alt='logo' className={styles.logo}/>
             <form onSubmit={handleSubmit} className='ui-form'>
                 <div className='sliver'></div>
                 <div className='ui-text'>

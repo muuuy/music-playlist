@@ -73,7 +73,7 @@ const Library = () => {
     <div className={styles.library_container}>
       <HelmetProvider>
         <Helmet>
-          <title>Library | MusicPlaylists</title>
+          <title>Library | BakimMusic</title>
         </Helmet>
       </HelmetProvider>
 

@@ -2,17 +2,17 @@ import React from 'react';
 import styles from './ForgotForm.module.css';
 import { NavLink } from 'react-router-dom';
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import logo from '../../Components/assets/bakimmusic_logo.png'
 
 const ForgotForm = () => {
     return (
         <div className='ui-container'>
             <HelmetProvider>
                 <Helmet>
-                    <title>Forgot Password | MusicPlaylists</title>
+                    <title>Forgot Password | BakimMusic</title>
                 </Helmet> 
             </HelmetProvider>            
-            
-            <h1>Logo / Image Place Holder</h1>
+            <img src={logo} alt='logo' className={styles.logo}/>
             <form className='ui-form'>
                 <div className='sliver'></div>
                 <h2 className='ui-text'>Forgot Your Password?</h2>

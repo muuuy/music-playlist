@@ -85,7 +85,7 @@ const Navbar = ({iTitle='', iDesc=''}) => {
             <nav id={styles.nav_container}>
                 {/* <a className={styles.logo} href="/">MusicPlaylists</a> */}
                 <ul className={styles.logo}>
-                  <NavLink to="/">MusicPlaylists</NavLink>
+                  <NavLink to="/">BakimMusic</NavLink>
                 </ul>
                 <ul className={styles.nav_menu}>
                   {generateNav}
