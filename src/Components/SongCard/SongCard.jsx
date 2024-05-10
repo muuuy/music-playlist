@@ -49,9 +49,9 @@ const SongCard = ({
         albumName: albumName,
         releaseDate: releaseDate
       };
-      print("removing song from playlist")
       axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
       .then(response => {
+        window.location.reload();
         console.log('Data sent. Response:', response.data)
       })
       .catch(error => {
