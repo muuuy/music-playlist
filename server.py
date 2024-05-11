@@ -221,14 +221,15 @@ def delete_playlist():
         try:
             data = request.get_json()
             playlist_id = data.get('playlistId')
+            print("!!!!! ID", playlist_id)
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 # Delete playlist from the playlist table
                 cur.execute("DELETE FROM playlist WHERE playlistId=?", (playlist_id,))
                 # Also delete entries from user_playlist and playlist_track tables if any
-                cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
-                cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
+                #cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
+                #cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
                 con.commit()
                 msg = "Playlist successfully deleted"
         except Exception as e:
@@ -300,8 +301,26 @@ def add_to_playlist():
 
             with sqlite3.connect('database.db') as con:
                 cursor = con.cursor()
-                cursor.execute('INSERT INTO music (playlistId, title, artist, album, releaseDate) VALUES (?, ?, ?, ?, ?)', (playlist_id, title, artist, album, release_date))
-                con.commit()
+                
+                # Check if the song already exists in the music table
+                cursor.execute('SELECT trackId FROM music WHERE title = ? AND artist = ?', (title, artist))
+                existing_song = cursor.fetchone()
+                
+                if existing_song:
+                    # Song exists, now check if the relationship exists
+                    cursor.execute('SELECT * FROM music_playlist WHERE musicId = ? AND playlistId = ?', (existing_song[0], playlist_id))
+                    existing_relationship = cursor.fetchone()
+                    
+                    if not existing_relationship:
+                        # Relationship doesn't exist, create it
+                        cursor.execute('INSERT INTO music_playlist (musicId, playlistId) VALUES (?, ?)', (existing_song[0], playlist_id))
+                        con.commit()
+                else:
+                    # Song doesn't exist, insert it into the music table and create the relationship
+                    cursor.execute('INSERT INTO music (title, artist, album, releaseDate) VALUES (?, ?, ?, ?)', (title, artist, album, release_date))
+                    new_song_id = cursor.lastrowid
+                    cursor.execute('INSERT INTO music_playlist (musicId, playlistId) VALUES (?, ?)', (new_song_id, playlist_id))
+                    con.commit()
             
         except Exception as e:
             con.rollback()
@@ -322,14 +341,24 @@ def delete_from_playlist():
         try:
             data = request.get_json()
             playlist_id = data['playlistId']
-            track_id = data['trackId']
+            song_name = data['songName']
+            artist_name = data['artistName']
+            album_name = data['albumName']
+            release_date = data['releaseDate']
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                # Delete entry from the playlist_track table
-                cur.execute("DELETE FROM music WHERE playlistId=? AND trackId=?", (playlist_id, track_id))
-                con.commit()
-                msg = "Song successfully removed from the playlist"
+                # Retrieve trackId based on song information
+                cur.execute("SELECT trackId FROM music WHERE title=? AND artist=? AND album=? AND releaseDate=?", 
+                            (song_name, artist_name, album_name, release_date))
+                track_id = cur.fetchone()
+                if track_id:
+                    # Delete entry from the music_playlist table
+                    cur.execute("DELETE FROM music_playlist WHERE playlistId=? AND musicId=?", (playlist_id, track_id[0]))
+                    con.commit()
+                    msg = "Song successfully removed from the playlist"
+                else:
+                    msg = "Song not found in the playlist"
         except Exception as e:
             con.rollback()
             msg = f"Error in removing song from playlist: {str(e)}"
@@ -338,6 +367,7 @@ def delete_from_playlist():
             response = jsonify({'message': msg})
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
+
 
 @app.route('/get_all_playlists', methods=['GET'])
 def get_all_playlists():
@@ -358,7 +388,7 @@ def get_music_from_playlist(playlist_id):
     try:
         with sqlite3.connect('database.db') as con:
             cursor = con.cursor()
-            cursor.execute("SELECT * FROM music WHERE playlistId=?", (playlist_id,))
+            cursor.execute("SELECT m.trackId, m.title, m.artist, m.album, m.releaseDate FROM music_playlist mp JOIN music m ON mp.musicId = m.trackId WHERE mp.playlistId=?", (playlist_id,))
             playlist_music = cursor.fetchall()
             music_data = []
             for row in playlist_music:
@@ -368,11 +398,11 @@ def get_music_from_playlist(playlist_id):
                     'artist': row[2],
                     'album': row[3],
                     'releaseDate': row[4],
-                    'playlistId': row[5],
                 })
             return jsonify(music_data)
     except Exception as e:
         return jsonify({'error': str(e)})
+
 
 
 @jwt.invalid_token_loader

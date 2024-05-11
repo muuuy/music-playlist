@@ -29,7 +29,6 @@ const Library = () => {
                     //userId = localStorage.getItem('username')
                     const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
                     setPlaylist(response.data);
-                    console.log("!", response.data);
                 } catch (error) {
                     console.error('Error fetching playlists:', error);
                 }
@@ -97,7 +96,7 @@ const Library = () => {
         {create && (
           <CreatePlaylist
             edit={false}
-            inputTitle={"DELETE LATER"}
+            inputTitle=""
             inputDesc=""
             inputVisible={create ? "absolute" : "none"}
             onClose={handleEdit}
@@ -106,9 +105,7 @@ const Library = () => {
       </div>
       <div className={styles.library_body}>
       {isLoggedIn && playlists.map((playlist) => (
-        <NavLink to={`/playlist_template/${playlist.playlistId}/${encodeURIComponent(playlist.title)}`} key={playlist.playlistId}>
-          <PlaylistCard playlist_ID={playlist.playlistId} title={playlist.title} userID={playlist.userID} />
-        </NavLink>
+          <PlaylistCard key={playlist.playlistId} playlist_ID={playlist.playlistId} title={playlist.title} userID={playlist.userID} />
       ))}
       </div>
     </div>

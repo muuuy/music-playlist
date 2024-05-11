@@ -19,7 +19,9 @@ const PlaylistTemplate = ({}) => {
     const fetchSongs = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:5001/get_music_from_playlist/${playlistId}`);
-        setSongs(Array.from(response.data));
+        setSongs(response.data);
+        console.log(response.data)
+        console.log(songs)
       } catch (error) {
         console.error("Error fetching songs:", error);
       }
@@ -69,15 +71,16 @@ const PlaylistTemplate = ({}) => {
             />
           )}
         </div>
-        {songs.map((song, index) => (
-          <SongCard key={index}
-            trackId={song.trackId}
+        {songs.map((song) => (
+          <SongCard
+            key={song.trackId}
             songName={song.title}
             artistName={song.artist}
             albumName={song.album}
             releaseDate={song.releaseDate}
-            playlistId={song.playlistId}
             buttonSymbol="❌"
+            //removeSong={removeSong}
+            playlisttemplateplaylistid = {playlistId}
           />
         ))}
       </div>

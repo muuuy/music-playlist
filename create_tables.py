@@ -21,9 +21,7 @@ conn.execute('''
         title TEXT NOT NULL,
         artist TEXT NOT NULL,
         album TEXT NOT NULL,
-        releaseDate TEXT,
-        playlistId INTEGER,
-        FOREIGN KEY (playlistId) REFERENCES playlist(playlistId)
+        releaseDate TEXT
     )
 ''')
 print("Created table music successfully!")
@@ -35,11 +33,22 @@ conn.execute('''
         title TEXT NOT NULL,
         description TEXT,
         created_at TEXT,
-        userId INTEGER,
-        FOREIGN KEY (userId) REFERENCES user(userId)
+        userId INTEGER
     )
 ''')
 print("Created table playlist successfully!")
+
+# Create Junction Table for Many-to-Many Relationship between Music and Playlist
+conn.execute('''
+    CREATE TABLE IF NOT EXISTS music_playlist (
+        musicId INTEGER,
+        playlistId INTEGER,
+        FOREIGN KEY (musicId) REFERENCES music(trackId),
+        FOREIGN KEY (playlistId) REFERENCES playlist(playlistId),
+        PRIMARY KEY (musicId, playlistId)
+    )
+''')
+print("Created junction table music_playlist successfully!")
 
 # Create Artist Table
 conn.execute('''

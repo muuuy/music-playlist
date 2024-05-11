@@ -12,12 +12,11 @@ const SongCard = ({
   albumName = "None",
   buttonSymbol = "❌",
   releaseDate = null,
-  trackId = null,
-  playlistId = null
+  playlisttemplateplaylistid = "None"
 }) => {
 
   const [playlists, setPlaylist] = useState([]);
-  const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
+ const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
   useEffect(() => {
 
           const fetchPlaylistsByUser = async () => {
@@ -25,7 +24,6 @@ const SongCard = ({
                   //userId = localStorage.getItem('username')
                   const response = await axios.get(`http://127.0.0.1:5001/get_playlists_by_user/${userId}`);
                   setPlaylist(response.data);
-                  console.log("!", response.data);
               } catch (error) {
                   console.error('Error fetching playlists:', error);
               }
@@ -41,50 +39,27 @@ const SongCard = ({
 
 
   const handleSong = () => {
-    //remove a song from a playlist
-    if(buttonSymbol === '❌') { 
-      console.log('if user wants to remove a song')
-      console.log('trackId ' + trackId)
-      console.log('playlistId ' + playlistId)
+    //TODO: Add code to connect to backend
+    if (buttonSymbol === "❌") {
       const data = {
-        playlistId: playlistId,
-        trackId: trackId
-      };
-
-      axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
-        .then(response => {
-          window.location.reload();
-          alert(`Data sent. Response: ${response.data}`);
-        })
-        .catch(error => {
-          alert('Error removing song from playlist')
-        })
-    } 
-    // add a song to a playlist
-    else {
-      const playlistId = 1  // Hardecoded for testing
-      console.log('if user wants to add a song')
-      // Data sent to backend
-      const data = {
-        playlistId: playlistId,
+        playlistId: playlisttemplateplaylistid,
         songName: songName,
         artistName: artistName,
         albumName: albumName,
         releaseDate: releaseDate
       };
-      console.log("SENDING:", data)
-      // Backend request
-      axios.post('http://127.0.0.1:5001/add_to_playlist', data)
-        .then(response => {
-          alert(`Data sent. Response: ${response.data}`);
-        })
-        .catch(error => {
-          console.error('Error sending data to backend')
-        })
-    }
+      axios.post('http://127.0.0.1:5001/delete_from_playlist', data)
+      .then(response => {
+        window.location.reload();
+        console.log('Data sent. Response:', response.data)
+      })
+      .catch(error => {
+        console.error('Error sending data to backend')
+      })
+    } 
   };
 
-  const handlePlaylistClicked = (playlistId) => {
+const handlePlaylistClicked = (playlistId) => {
       console.log('if user wants to add a song')
       // Data sent to backend
       const data = {
@@ -114,7 +89,7 @@ const SongCard = ({
         <p className={styles.song_album}>{albumName}</p>
         <p className={styles.release_date}>{releaseDate}</p>
         {buttonSymbol !== "⭕️" && <div className={styles.remove_container}>
-          <p className={styles.remove_song} onClick={handleSong}>
+          <p className={styles.remove_song} onClick={() => handleSong()}>
             {buttonSymbol}
           </p>
         </div>}
