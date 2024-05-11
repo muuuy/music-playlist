@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { v4 as uuid } from "uuid";
+import { stringify, v4 as uuid } from "uuid";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -11,6 +11,9 @@ import SongCard from "../../Components/SongCard/SongCard";
 const PlaylistTemplate = ({}) => {
   const { playlistId, title } = useParams();
   const [songs, setSongs] = useState([]);
+  //const [title, setTitle] = useState("test");
+  const [description, setDescription] = useState("test");
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -24,10 +27,17 @@ const PlaylistTemplate = ({}) => {
     fetchSongs();
   }, [playlistId]);
 
-
-  //const [title, setTitle] = useState("test");
-  const [description, setDescription] = useState("test");
-  const [edit, setEdit] = useState(false);
+  useEffect(() => {
+    const fetchDesc = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:5001/get_playlist_desc/${playlistId}`);
+        setDescription(response.data.description);
+      } catch (error) {
+        console.error("Error fetching description:", error);
+      }
+    };  
+    fetchDesc();
+  }, [edit]);
 
   const handleEdit = () => {
     setEdit((edit) => !edit);
@@ -59,8 +69,8 @@ const PlaylistTemplate = ({}) => {
             />
           )}
         </div>
-        {songs.map((song) => (
-          <SongCard
+        {songs.map((song, index) => (
+          <SongCard key={index}
             trackId={song.trackId}
             songName={song.title}
             artistName={song.artist}

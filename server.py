@@ -169,7 +169,7 @@ def delete():
 
 @app.route('/get_playlists_by_user/<user_id>', methods=['GET'])
 def get_playlists_by_user(user_id):
-    print("getting playlist from", user_id)
+    print("getting playlist from userId ", user_id)
     try:
         with sqlite3.connect('database.db') as con:
             cursor = con.cursor()
@@ -263,6 +263,24 @@ def edit_playlist():
         # Send the transaction message to the f
         # ont-end
         return jsonify({'message': msg})
+
+# Function to get a playlist's title
+@app.route('/get_playlist_desc/<int:playlist_id>', methods=['GET'])
+def get_playlist_desc(playlist_id):    
+    try:        
+        with sqlite3.connect('database.db') as con:
+            print("getting playlist description from playlistId ", playlist_id)
+            cursor = con.cursor()
+            cursor.execute("SELECT description FROM playlist WHERE playlistId=?", (playlist_id,))
+            description = cursor.fetchone()
+            
+            if description and len(description) > 0:
+                print(description[0])
+                return jsonify({'description': description[0]})
+            else:
+                return jsonify({'description': '-'})
+    except Exception as e:
+        return jsonify({'error': str(e)})
         
 # Route to add a track to a playlist
 @app.route('/add_to_playlist', methods=['POST'])
