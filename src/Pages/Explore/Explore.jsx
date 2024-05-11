@@ -24,8 +24,8 @@ const Explore = () => {
   function generateSongHeader() {
     return (
       <tr>
-        <th className={styles.header} style={{borderRight: '1px solid var(--dark-red)'}}>Song</th>
-        <th className={styles.header} style={{borderLeft: '1px solid var(--dark-red)'}}>Artist</th>
+        <th className={styles.header} style={{borderRight: '1px solid var(--dark-red)'}}>Songs</th>
+        <th className={styles.header} style={{borderLeft: '1px solid var(--dark-red)'}}>Artists</th>
       </tr>
     );
   }
@@ -33,7 +33,7 @@ const Explore = () => {
   function generateArtistHeader() {
     return (
       <tr>
-        <th className={styles.header}>Artist</th>
+        <th className={styles.header}>Artists</th>
       </tr>
     );
   }
@@ -127,6 +127,7 @@ const Explore = () => {
         <div className={styles.explore_dropdown}>
           <select
             onChange={(e) => setSelectedOption(e.target.value)}
+            className= {styles.dropdown_select}
             value={selectedOption}
           >
             <option className={styles.dropdown_content} value="topTracks">
