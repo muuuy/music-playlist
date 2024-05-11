@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+.logo {
+    width: 275px;
+    height: 275px;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
 #bottom {
     display: flex;
     flex-direction: row;

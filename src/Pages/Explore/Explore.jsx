@@ -119,7 +119,7 @@ const Explore = () => {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>Explore | MusicPlaylists</title>
+          <title>Explore | BakimMusic</title>
         </Helmet>
       </HelmetProvider>
       
