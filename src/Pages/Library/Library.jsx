@@ -96,7 +96,7 @@ const Library = () => {
         {create && (
           <CreatePlaylist
             edit={false}
-            inputTitle={"DELETE LATER"}
+            inputTitle=""
             inputDesc=""
             inputVisible={create ? "absolute" : "none"}
             onClose={handleEdit}
