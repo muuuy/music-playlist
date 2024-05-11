@@ -28,7 +28,7 @@ const ResultsByArtist = () => {
       )}`;
 
       songCards.push(
-        <SongCard
+        <SongCard key={i}
           songName={name}
           artistName={artistName}
           albumName={albumName}

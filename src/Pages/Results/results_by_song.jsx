@@ -25,7 +25,7 @@ const ResultsBySong = () => {
         let releaseDate = `${resultsArray[i]["album"]["release_date"]}`;
 
         songCards.push(
-          <SongCard
+          <SongCard key={i}
             songName={name}
             artistName={artistName}
             albumName={albumName}
