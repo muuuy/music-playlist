@@ -5,6 +5,13 @@
     text-align: center;
 }
 
+.logo {
+    width: 275px;
+    height: 275px;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
 #bottom {
     display: flex;
     justify-content: space-between !important;
