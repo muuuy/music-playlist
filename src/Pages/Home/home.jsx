@@ -3,6 +3,7 @@ import styles from './home.module.css';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Navbar from '../../Components/Navbar/Navbar';
 import { NavLink } from "react-router-dom";
+import logo from '../../Components/assets/bakimmusic_logo.png'
 
 class Home extends Component {
     render () {
@@ -12,13 +13,14 @@ class Home extends Component {
             <div className={styles.home_container}>
                 <HelmetProvider>
                     <Helmet>
-                        <title>Home | MusicPlaylists</title>
+                        <title>Home | BakimMusic</title>
                     </Helmet>   
                 </HelmetProvider>
 
                 <div className={styles.home_content}>
                     <div className={styles.headline}>
-                        <h1>Discover, Create, and Share.</h1>
+                    <img src={logo} alt='logo' className={styles.logo}/>
+                        <h2>Discover, Create, and Share.</h2>
                         <p>Archive your favorite music in your own playlists!</p>
                     </div>
 

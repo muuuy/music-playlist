@@ -3,6 +3,7 @@ import styles from './LoginForm.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Navbar from '../../Components/Navbar/Navbar';
+import logo from '../../Components/assets/bakimmusic_logo.png'
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -68,10 +69,10 @@ const LoginForm = () => {
         <div className='ui-container'>
             <HelmetProvider>
                 <Helmet>
-                    <title>Sign In | MusicPlaylists</title>
+                    <title>Sign In | BakimMusic</title>
                 </Helmet>
             </HelmetProvider>       
-            <h1>Logo / Image Place Holder</h1>
+            <img src={logo} alt='logo' className={styles.logo}/>
             <form onSubmit={handleSubmit} className='ui-form'>
                 <div className='sliver'></div>
                 <div className='ui-text'>
