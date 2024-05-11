@@ -227,8 +227,8 @@ def delete_playlist():
                 cur = con.cursor()
                 # Delete playlist from the playlist table
                 cur.execute("DELETE FROM playlist WHERE playlistId=?", (playlist_id,))
-                # Also delete entries from user_playlist and playlist_track tables if any
-                #cur.execute("DELETE FROM user_playlist WHERE playlistId=?", (playlist_id,))
+                # Also delete entries from music_playlist
+                cur.execute("DELETE FROM music_playlist WHERE playlistId=?", (playlist_id,))
                 #cur.execute("DELETE FROM playlist_track WHERE playlistId=?", (playlist_id,))
                 con.commit()
                 msg = "Playlist successfully deleted"
