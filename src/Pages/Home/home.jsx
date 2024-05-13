@@ -28,7 +28,7 @@ class Home extends Component {
                         {!loginToken ?
                             <>
                                 <p>Join us today!</p>
-                                <NavLink to='/signup' id="join_us_text">Click Here!</NavLink>
+                                <NavLink to='/signup' id="join_us_text" className={styles.join_txt}>Click Here!</NavLink>
                             </>                            
                             :
                             <></>

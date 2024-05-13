@@ -56,7 +56,11 @@ body{
 .join_us{
     font-weight: bold;
     padding-bottom: 130px;
-    text-decoration: underline;
+}
+
+.join_txt:hover {
+    color: var(--dark-red);
+    transition: color 1s ease;
 }
 
 .features{
