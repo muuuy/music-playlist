@@ -6,11 +6,9 @@ import axios from "axios";
 
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
 import PlaylistCard from "../../Components/PlaylistCard/PlaylistCard";
-//TODO: Change the "DELETE LATER" when created the component
 
 const Library = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  let count = 0;
   const [playlists, setPlaylist] = useState([]);
   const [userId, setUserId] = useState(sessionStorage.getItem('userID'));
   useEffect(() => {
@@ -38,31 +36,7 @@ const Library = () => {
             fetchPlaylistsByUser();
         }, []);
 
-  const populateLibrary = (playlist) => {
-    count += 1;
-  
-    return (
-      <div
-        key={playlist.id} // Make sure to set a unique key for each item when mapping
-        className={styles.playlist_card}
-        style={
-          count % 2 === 1
-            ? { background: "var(--darker-gray)" }
-            : { background: "var(--dark-gray)" }
-        }
-      >
-        <p className={styles.playlist_title}>{playlist.title}</p>
-        <p className={styles.song_count}>777 Songs</p>
-      </div>
-    );
-  };
-
   const [create, setCreate] = useState(false);
-  // const [visible, setVisible] = useState(false);
-
-  // const handleClick = () => {
-  //   setVisible(true);
-  // };
 
   const handleEdit = () => {
     setCreate(!create);
