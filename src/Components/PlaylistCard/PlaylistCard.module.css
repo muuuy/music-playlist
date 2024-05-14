@@ -9,7 +9,6 @@
     flex-direction: column;
     text-align: center;
     cursor: pointer;
-    border: 1px solid black;
 }
 
 .playlistcard_container:hover {
