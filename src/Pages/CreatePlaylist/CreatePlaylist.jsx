@@ -42,7 +42,6 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
         console.log("DESC:", description)
     };
 
-
     return (
         <div className={styles.form_container} style={{ display: inputVisible }}>
             <div className={styles.input_container}>
