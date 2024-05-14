@@ -63,7 +63,7 @@ def get_auth_header(token):
 def search_song(spotify_token, song_name):
     url = f"https://api.spotify.com/v1/search"
     headers = get_auth_header_spotify(spotify_token)
-    query = f"?q={song_name}&type=track&limit=5&market=US"
+    query = f"?q={song_name}&type=track&limit=20&market=US"
 
     query_url = url + query
     print("query url:", query_url)
