@@ -45,6 +45,7 @@
 .playlist_name {
     font-size: 20px;
     margin-top: 8px;
+    color: var(--light-red);
 }
 
 .track_num {
