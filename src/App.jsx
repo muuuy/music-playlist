@@ -18,14 +18,6 @@ import SongCard from './Components/SongCard/SongCard';
 
 
 function App() {
-  // const [data, setData] = useState(null);
-
-  // useEffect(() => {
-  //   fetch('https://localhost:5173/')
-  //   .then (res => res.json()) 
-  //   .then (res => console.log(res))
-  //   .catch (error => console.log(error))
-  // }, [])
   
   return (
     <div id="app-container">
@@ -38,7 +30,6 @@ function App() {
           <Route path='/signup' element={<SignupForm />} />
           <Route path='/forgot' element={<ForgotForm />} />
           <Route path='/library' element={<Library />} />
-          {/* <Route path='/explore' element={<Explore />} /> */}
           <Route path='/results_by_song' element={<SongResults />} />
           <Route path='/results_by_artist' element={<ArtistResults />} />
           <Route path='/password' element={<Password />} />
@@ -46,7 +37,6 @@ function App() {
           <Route path='/playlist_template/:playlistId/:title' element={<PlaylistTemplate />} />
           <Route path='/playlist_card' element={<PlaylistCard />} />
           <Route path='/explore' element={<Explore />} />
-          {/* <Route path='/playlist_card' element={<PlaylistCard />} /> */}
           <Route path='/song_card' element={<SongCard />} />
         </Routes>
       </div>

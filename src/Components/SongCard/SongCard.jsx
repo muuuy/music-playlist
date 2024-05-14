@@ -4,8 +4,6 @@ import axios from "axios";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-
-
 const SongCard = ({
   songName = "None",
   artistName = "None",

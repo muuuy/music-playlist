@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
-
 import React, { useState } from "react";
 import styles from './Navbar.module.css';
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
@@ -10,9 +8,6 @@ import { FaBars } from "react-icons/fa";
 import axios from "axios";
 import { navList } from './NavbarData';
 
-// function ButtonLink({ to, children }) {
-//       return <Link to={to}><button>{children}</button></Link>
-// }
 
 const Navbar = ({iTitle='', iDesc=''}) => {
     const navigate = useNavigate();
