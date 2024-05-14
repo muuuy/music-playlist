@@ -4,7 +4,6 @@ body{
 }
 
 .home_container{
-    /* border: 1px purple solid; */
     display: flex;
     flex-direction: column;
     flex: 1;  
@@ -18,7 +17,6 @@ body{
 }
 
 .home_content{
-    /* border: 1px purple solid; */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -31,7 +29,6 @@ body{
     align-items: center;
 }
 .headline{
-    /* border: 1px purple solid; */
     padding-top: 10px;
     margin: 20px;
 }
@@ -64,7 +61,6 @@ body{
 }
 
 .features{
-    /* border: 1px purple solid; */
     max-width: 800px;
 }
 
@@ -88,7 +84,6 @@ body{
 
 @media (max-width: 1000px) {
     .home_column{
-        /* border: 1px purple solid; */
         float: none;
         width: auto;
     }

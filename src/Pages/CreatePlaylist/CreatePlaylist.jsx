@@ -23,37 +23,11 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
     const handleDescription = (e) => {
         setDescription(e.target.value);
     }
-    const getUserId = async () => {
-        try {
-            console.log("getUserId ran")
-            let temp = sessionStorage.getItem('username')
-            const response = await axios.post('/getUserId', {temp});
-            console.log("response below")
-            console.log(response.data.msg)
-            return response.data.msg;
-        } catch (error) {
-            console.error('Error:', error);
-            return null;
-        }
-    };
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // getUserId()
-        // .then(user => {
-        //     // Handle the userId returned from the backend
-        //     console.log('User ID:', user);
-        //     setUserId(user)
-        // })
-        // .catch(error => {
-        //     // Handle any errors
-        //     console.error('Error:', error);
-        // });
+       
         try {
-            // const user = await getUserId(); // Wait for getUserId to complete
-            // console.log('User ID:', userId);
-            
-            // // Handle the userId returned from the backend
-            // setUserId(user);
             const response = await axios.post("http://127.0.0.1:5001/create_playlist", {userId, title, description});
             const playlistId = response.data;
             setPlaylistID(playlistId);
@@ -66,8 +40,6 @@ const CreatePlaylist = ({edit = false, inputTitle = '', inputDesc = '', inputVis
         console.log(userId)
         console.log("TITLE:", title)
         console.log("DESC:", description)
-        
-        //navigate('/');
     };
 
 

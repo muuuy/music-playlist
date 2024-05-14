@@ -78,7 +78,6 @@ const Navbar = ({iTitle='', iDesc=''}) => {
     return (
         <div id={styles.main_container}>
             <nav id={styles.nav_container}>
-                {/* <a className={styles.logo} href="/">MusicPlaylists</a> */}
                 <ul className={styles.logo}>
                   <NavLink to="/">BakimMusic</NavLink>
                 </ul>
@@ -93,7 +92,6 @@ const Navbar = ({iTitle='', iDesc=''}) => {
                             <option value="artist">Artist</option>
                         </select>
                         <button type="submit">Go</button>
-                        {/* <ButtonLink to="/results_by_song">Go</ButtonLink> */}
                     </form>
                 </div>
                 <ul className={styles.sign}>
