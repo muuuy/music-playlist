@@ -78,7 +78,6 @@ const PlaylistTemplate = ({}) => {
             albumName={song.album}
             releaseDate={song.releaseDate}
             buttonSymbol="❌"
-            //removeSong={removeSong}
             playlisttemplateplaylistid = {playlistId}
           />
         ))}
