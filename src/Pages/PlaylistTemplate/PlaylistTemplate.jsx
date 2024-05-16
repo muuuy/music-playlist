@@ -10,6 +10,7 @@ import SongCard from "../../Components/SongCard/SongCard";
 
 const PlaylistTemplate = ({}) => {
   const { playlistId, title } = useParams();
+  // const { playlistIdDesc, decription } = useParams();
   const [songs, setSongs] = useState([]);
   const [description, setDescription] = useState("test");
   const [edit, setEdit] = useState(false);
@@ -56,6 +57,7 @@ const PlaylistTemplate = ({}) => {
       <div className={styles.template_container}>
         <div className={styles.template_header}>
           <h1>{title}</h1>
+          <p className={styles.playlist_description}>Description Placerholder</p>
           <button id={styles.edit_button} onClick={handleEdit}>
             Edit Playlist
           </button>
