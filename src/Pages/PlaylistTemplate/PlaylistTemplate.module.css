@@ -17,8 +17,8 @@
 
 .playlist_header {
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: column;
+
 }
 
 #edit_button {
