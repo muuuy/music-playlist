@@ -10,7 +10,6 @@ import SongCard from "../../Components/SongCard/SongCard";
 
 const PlaylistTemplate = ({}) => {
   const { playlistId, title } = useParams();
-  // const { playlistIdDesc, decription } = useParams();
   const [songs, setSongs] = useState([]);
   const [description, setDescription] = useState("test");
   const [edit, setEdit] = useState(false);
