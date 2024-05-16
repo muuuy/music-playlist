@@ -15,6 +15,12 @@
     justify-content: space-between;
 }
 
+.playlist_header {
+    display: flex;
+    flex-direction: row;
+    
+}
+
 #edit_button {
     height: 40px;
     width: 120px;

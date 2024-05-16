@@ -56,8 +56,10 @@ const PlaylistTemplate = ({}) => {
 
       <div className={styles.template_container}>
         <div className={styles.template_header}>
-          <h1>{title}</h1>
-          <p className={styles.playlist_description}>Description Placerholder</p>
+          <div className={styles.playlist_header}>
+            <h1>{title}</h1>
+            <p className={styles.playlist_description}>Description Placerholder</p>
+          </div>
           <button id={styles.edit_button} onClick={handleEdit}>
             Edit Playlist
           </button>
