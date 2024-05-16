@@ -18,8 +18,9 @@
 .playlist_header {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 760px;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .playlist_description {
