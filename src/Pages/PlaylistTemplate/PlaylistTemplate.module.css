@@ -18,6 +18,9 @@
 .playlist_header {
     display: flex;
     flex-direction: column;
+}
+
+.playlist_description {
     margin-top: 12px;
 }
 
