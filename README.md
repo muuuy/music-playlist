@@ -46,3 +46,8 @@ npm install @mui/material @emotion/react @emotion/styled
     - npm install uuid
     - pip install flask-login
     -pip install Flask-JWT-Extended
+
+# Link to DOCS:
+UI/UX: https://docs.google.com/document/d/1FolhLnCEGEiE2PVdBlQQkOOfHaSxZ0-4l1mX4lK3PM8/edit?usp=sharing
+
+Manual: https://docs.google.com/document/d/1FolhLnCEGEiE2PVdBlQQkOOfHaSxZ0-4l1mX4lK3PM8/edit?usp=sharing
